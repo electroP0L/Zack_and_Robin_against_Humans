@@ -7,7 +7,6 @@ class Obstacle : public Entity
 {
   public:
     Obstacle(){}; //Constructeur par défaut
-    
 };  
 
 

@@ -9,7 +9,7 @@ class Region
 {
 
   private:
-    SDL_Texture* background;
+    SDL_Texture* texbackground;
     SDL_Renderer* renderer;
     int nb_obstacles;
     //int nb_entities; ?
@@ -17,13 +17,13 @@ class Region
     //std::vector<Entity> entities; ?
 
   public:
-    Region(SDL_Texture* background, SDL_Renderer* renderer, std::vector<Obstacle> obstacles){
-      this->background = background;
+    Region(SDL_Texture* texbackground, SDL_Renderer* renderer, std::vector<Obstacle> obstacles){
+      this->texbackground = texbackground;
       this->renderer = renderer;
       this->obstacles = obstacles;
       this->nb_obstacles = obstacles.size();
     }
-    SDL_Texture* getBackground() {return background;}
+    SDL_Texture* getTexBackground() {return texbackground;}
     SDL_Renderer* getRenderer() {return renderer;}
     std::vector<Obstacle> getObstacles() {return obstacles;}
 

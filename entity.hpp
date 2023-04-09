@@ -15,12 +15,11 @@ class Entity
     SDL_Rect rect;
     SDL_Rect hitbox;
     SDL_Texture* texture;
-    SDL_Renderer* renderer;
   
   public:
+    SDL_Rect getRect() {return rect;}
     SDL_Rect getHitbox() {return hitbox;}
     SDL_Texture* getTexture() {return texture;}
-    SDL_Renderer* getRenderer() {return renderer;}
     
     void setpos(int x, int y) {rect.x = x; rect.y = y;}
 };

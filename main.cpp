@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 
 #include "zombie.hpp"
 #include "region.hpp"
@@ -11,6 +12,8 @@
 
 int main(int argc, char** argv)
 {
+  srand(time(NULL));
+
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		return 0;
 	}
@@ -20,48 +23,43 @@ int main(int argc, char** argv)
 									SDL_WINDOWPOS_CENTERED,
 									SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
-  SDL_Renderer* movingrend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
-  SDL_Renderer* staticrend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+  SDL_Renderer* rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+
 
   SDL_Surface *surfacezombie, *surfacebackground, *surfacetree, *surfacerock;
   surfacezombie = IMG_Load("zombie.png");
-  surfacebackground = IMG_Load("BG.png");
+  surfacebackground = IMG_Load("BG.jpg");
   surfacetree = IMG_Load("tree.png");
   surfacerock = IMG_Load("rock.png");
 
   SDL_Texture *texzombie, *texbackground, *textree, *texrock;
-  texzombie = SDL_CreateTextureFromSurface(movingrend, surfacezombie);
-  texbackground = SDL_CreateTextureFromSurface(staticrend, surfacebackground);
-  textree = SDL_CreateTextureFromSurface(staticrend, surfacetree);
-  texrock = SDL_CreateTextureFromSurface(staticrend, surfacerock);
+  texzombie = SDL_CreateTextureFromSurface(rend, surfacezombie);
+  texbackground = SDL_CreateTextureFromSurface(rend, surfacebackground);
+  textree = SDL_CreateTextureFromSurface(rend, surfacetree);
+  texrock = SDL_CreateTextureFromSurface(rend, surfacerock);
 
   SDL_FreeSurface(surfacezombie);
   SDL_FreeSurface(surfacebackground);
   SDL_FreeSurface(surfacetree);
   SDL_FreeSurface(surfacerock);
 
-  Zombie zombie = Zombie(texzombie, movingrend);
+  Zombie zombie = Zombie(texzombie);
 
   std::vector<Obstacle> obstacles;
-  for (int i = 0; i < 10; i++){
-    if (i % 2 == 0){
-      obstacles.push_back(Tree(texrock, staticrend, 100 + i * 100, 100 + i * 100));
-    }
-    else{
-      obstacles.push_back(Rock(textree, staticrend, 100 + i * 100, 100 + i * 100));
-    }
+  for (int i = 0; i < 5; i++){
+    obstacles.push_back(Rock(texrock, rand() % (SCREEN_WIDTH - 61), rand() % (SCREEN_HEIGHT - 60)));
+  }
+  for (int i = 0; i < 5; i++){
+    obstacles.push_back(Tree(textree, rand() % (SCREEN_WIDTH - 115), rand() % (SCREEN_HEIGHT - 127)));
   }
 
-  Region region = Region(texbackground, staticrend, obstacles);
+
+  Command cmd = Command(obstacles);
+  Region region = Region(texbackground, rend, obstacles);
 
 
   //Game loop
   int close = 0;
-  SDL_RenderClear(staticrend);
-  SDL_RenderCopy(region.getRenderer(), region.getBackground(), NULL, NULL);
-
-  SDL_RenderPresent(staticrend);
-  
 
   while(!close){
     SDL_Event event;
@@ -71,24 +69,40 @@ int main(int argc, char** argv)
 		while (SDL_PollEvent(&event)) { //Tant qu'il y a des évènements à traiter
       switch (event.type) {
 
-        case SDL_QUIT:
-          // handling of close button
-            close = 1;
-            break;
+        case SDL_QUIT: // handling of close button  
+        {
+          close = 1;
+          break;
+          //std::cout << "quit" << std::endl;
+        }
  
         case SDL_KEYDOWN: //Si une touche est enfoncée
-          Command cmd = Command(keyboard_state);
+        {
+          //std::cout << "keydown" << std::endl;
+          cmd.SetKeyboardState(keyboard_state);
           zombie.bouger(cmd);
+        }
         
         default:
+          //std::cout << "default" << std::endl;
           break;
       }
     }
-    SDL_RenderClear(movingrend);
 
-    SDL_RenderCopy(zombie.getRenderer(), zombie.getTexture(), NULL, &zombie.getHitbox());
+    SDL_RenderClear(rend);
+    
+    SDL_RenderCopy(region.getRenderer(), region.getTexBackground(), NULL, NULL);
+    
+    SDL_Rect rectz = zombie.getRect();
+    SDL_RenderCopy(rend, texzombie, NULL, &rectz);
 
-    SDL_RenderPresent(movingrend);
+    for (int i = 0; i < region.getObstacles().size(); i++){
+      SDL_Rect rect = region.getObstacles()[i].getRect();
+      SDL_RenderCopy(rend, region.getObstacles()[i].getTexture(), NULL, &rect);
+    }
+
+
+    SDL_RenderPresent(rend);
 
     SDL_Delay(1000/60);
   }
@@ -98,10 +112,11 @@ int main(int argc, char** argv)
   SDL_DestroyTexture(textree);
   SDL_DestroyTexture(texrock);
 
-  SDL_DestroyRenderer(movingrend);
-  SDL_DestroyRenderer(staticrend);
+  SDL_DestroyRenderer(rend);
 
   SDL_DestroyWindow(win);
 
   SDL_Quit();
+
+  return 0;
 }
