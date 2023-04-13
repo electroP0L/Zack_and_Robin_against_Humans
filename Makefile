@@ -4,7 +4,7 @@ LD=g++
 
 
 CPPFLAGS= -Ideps/include -std=c++14 -g
-LDFLAGS= -Ldeps/lib -lSDL2main -lSDL2 -lSDL2_image
+LDFLAGS= -Ldeps/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio
 
 
 OBJECTS = main.o zombie.o
@@ -42,59 +42,143 @@ clean:
 
 main.o: /usr/include/stdlib.h /usr/include/time.h /usr/include/features.h
 main.o: /usr/include/features-time64.h /usr/include/stdc-predef.h zombie.hpp
-main.o: living.hpp entity.hpp /usr/include/SDL2/SDL.h
-main.o: /usr/include/SDL2/SDL_main.h /usr/include/SDL2/SDL_stdinc.h
-main.o: /usr/include/SDL2/SDL_config.h /usr/include/SDL2/begin_code.h
-main.o: /usr/include/SDL2/close_code.h /usr/include/SDL2/SDL_assert.h
-main.o: /usr/include/SDL2/SDL_atomic.h /usr/include/SDL2/SDL_platform.h
-main.o: /usr/include/SDL2/SDL_audio.h /usr/include/SDL2/SDL_error.h
-main.o: /usr/include/SDL2/SDL_endian.h /usr/include/SDL2/SDL_mutex.h
-main.o: /usr/include/SDL2/SDL_thread.h /usr/include/SDL2/SDL_rwops.h
-main.o: /usr/include/SDL2/SDL_clipboard.h /usr/include/SDL2/SDL_cpuinfo.h
-main.o: /usr/include/SDL2/SDL_events.h /usr/include/SDL2/SDL_video.h
-main.o: /usr/include/SDL2/SDL_pixels.h /usr/include/SDL2/SDL_rect.h
-main.o: /usr/include/SDL2/SDL_surface.h /usr/include/SDL2/SDL_blendmode.h
-main.o: /usr/include/SDL2/SDL_keyboard.h /usr/include/SDL2/SDL_keycode.h
-main.o: /usr/include/SDL2/SDL_scancode.h /usr/include/SDL2/SDL_mouse.h
-main.o: /usr/include/SDL2/SDL_joystick.h
-main.o: /usr/include/SDL2/SDL_gamecontroller.h /usr/include/SDL2/SDL_sensor.h
-main.o: /usr/include/SDL2/SDL_quit.h /usr/include/SDL2/SDL_gesture.h
-main.o: /usr/include/SDL2/SDL_touch.h /usr/include/SDL2/SDL_filesystem.h
-main.o: /usr/include/SDL2/SDL_haptic.h /usr/include/SDL2/SDL_hidapi.h
-main.o: /usr/include/SDL2/SDL_hints.h /usr/include/SDL2/SDL_loadso.h
-main.o: /usr/include/SDL2/SDL_log.h /usr/include/SDL2/SDL_messagebox.h
-main.o: /usr/include/SDL2/SDL_metal.h /usr/include/SDL2/SDL_power.h
-main.o: /usr/include/SDL2/SDL_render.h /usr/include/SDL2/SDL_shape.h
-main.o: /usr/include/SDL2/SDL_system.h /usr/include/SDL2/SDL_timer.h
-main.o: /usr/include/SDL2/SDL_version.h /usr/include/SDL2/SDL_locale.h
-main.o: /usr/include/SDL2/SDL_misc.h /usr/include/SDL2/SDL_image.h
-main.o: /usr/include/SDL2/SDL.h /usr/include/SDL2/SDL_timer.h command.hpp
-main.o: obstacle.hpp region.hpp tree.hpp rock.hpp
-zombie.o: zombie.hpp living.hpp entity.hpp /usr/include/SDL2/SDL.h
-zombie.o: /usr/include/SDL2/SDL_main.h /usr/include/SDL2/SDL_stdinc.h
-zombie.o: /usr/include/SDL2/SDL_config.h /usr/include/SDL2/begin_code.h
-zombie.o: /usr/include/SDL2/close_code.h /usr/include/SDL2/SDL_assert.h
-zombie.o: /usr/include/SDL2/SDL_atomic.h /usr/include/SDL2/SDL_platform.h
-zombie.o: /usr/include/SDL2/SDL_audio.h /usr/include/SDL2/SDL_error.h
-zombie.o: /usr/include/SDL2/SDL_endian.h /usr/include/SDL2/SDL_mutex.h
-zombie.o: /usr/include/SDL2/SDL_thread.h /usr/include/SDL2/SDL_rwops.h
-zombie.o: /usr/include/SDL2/SDL_clipboard.h /usr/include/SDL2/SDL_cpuinfo.h
-zombie.o: /usr/include/SDL2/SDL_events.h /usr/include/SDL2/SDL_video.h
-zombie.o: /usr/include/SDL2/SDL_pixels.h /usr/include/SDL2/SDL_rect.h
-zombie.o: /usr/include/SDL2/SDL_surface.h /usr/include/SDL2/SDL_blendmode.h
-zombie.o: /usr/include/SDL2/SDL_keyboard.h /usr/include/SDL2/SDL_keycode.h
-zombie.o: /usr/include/SDL2/SDL_scancode.h /usr/include/SDL2/SDL_mouse.h
-zombie.o: /usr/include/SDL2/SDL_joystick.h
-zombie.o: /usr/include/SDL2/SDL_gamecontroller.h
-zombie.o: /usr/include/SDL2/SDL_sensor.h /usr/include/SDL2/SDL_quit.h
-zombie.o: /usr/include/SDL2/SDL_gesture.h /usr/include/SDL2/SDL_touch.h
-zombie.o: /usr/include/SDL2/SDL_filesystem.h /usr/include/SDL2/SDL_haptic.h
-zombie.o: /usr/include/SDL2/SDL_hidapi.h /usr/include/SDL2/SDL_hints.h
-zombie.o: /usr/include/SDL2/SDL_loadso.h /usr/include/SDL2/SDL_log.h
-zombie.o: /usr/include/SDL2/SDL_messagebox.h /usr/include/SDL2/SDL_metal.h
-zombie.o: /usr/include/SDL2/SDL_power.h /usr/include/SDL2/SDL_render.h
-zombie.o: /usr/include/SDL2/SDL_shape.h /usr/include/SDL2/SDL_system.h
-zombie.o: /usr/include/SDL2/SDL_timer.h /usr/include/SDL2/SDL_version.h
-zombie.o: /usr/include/SDL2/SDL_locale.h /usr/include/SDL2/SDL_misc.h
-zombie.o: /usr/include/SDL2/SDL_image.h /usr/include/SDL2/SDL.h
-zombie.o: /usr/include/SDL2/SDL_timer.h command.hpp obstacle.hpp
+main.o: living.hpp entity.hpp /usr/include/SFML/Graphics.hpp
+main.o: /usr/include/SFML/Window.hpp /usr/include/SFML/System.hpp
+main.o: /usr/include/SFML/Config.hpp /usr/include/SFML/System/Clock.hpp
+main.o: /usr/include/SFML/System/Export.hpp /usr/include/SFML/System/Time.hpp
+main.o: /usr/include/SFML/System/Err.hpp
+main.o: /usr/include/SFML/System/FileInputStream.hpp
+main.o: /usr/include/SFML/System/InputStream.hpp
+main.o: /usr/include/SFML/System/NonCopyable.hpp
+main.o: /usr/include/SFML/System/Lock.hpp
+main.o: /usr/include/SFML/System/MemoryInputStream.hpp
+main.o: /usr/include/SFML/System/Mutex.hpp /usr/include/SFML/System/Sleep.hpp
+main.o: /usr/include/SFML/System/String.hpp /usr/include/SFML/System/Utf.hpp
+main.o: /usr/include/SFML/System/Utf.inl /usr/include/SFML/System/String.inl
+main.o: /usr/include/SFML/System/Thread.hpp
+main.o: /usr/include/SFML/System/Thread.inl
+main.o: /usr/include/SFML/System/ThreadLocal.hpp
+main.o: /usr/include/SFML/System/ThreadLocalPtr.hpp
+main.o: /usr/include/SFML/System/ThreadLocalPtr.inl
+main.o: /usr/include/SFML/System/Vector2.hpp
+main.o: /usr/include/SFML/System/Vector2.inl
+main.o: /usr/include/SFML/System/Vector3.hpp
+main.o: /usr/include/SFML/System/Vector3.inl
+main.o: /usr/include/SFML/Window/Clipboard.hpp
+main.o: /usr/include/SFML/Window/Export.hpp
+main.o: /usr/include/SFML/Window/Context.hpp
+main.o: /usr/include/SFML/Window/GlResource.hpp
+main.o: /usr/include/SFML/Window/ContextSettings.hpp
+main.o: /usr/include/SFML/Window/Cursor.hpp
+main.o: /usr/include/SFML/Window/Event.hpp
+main.o: /usr/include/SFML/Window/Joystick.hpp
+main.o: /usr/include/SFML/Window/Keyboard.hpp
+main.o: /usr/include/SFML/Window/Mouse.hpp
+main.o: /usr/include/SFML/Window/Sensor.hpp
+main.o: /usr/include/SFML/Window/Touch.hpp
+main.o: /usr/include/SFML/Window/VideoMode.hpp
+main.o: /usr/include/SFML/Window/Window.hpp
+main.o: /usr/include/SFML/Window/WindowHandle.hpp
+main.o: /usr/include/SFML/Window/WindowStyle.hpp
+main.o: /usr/include/SFML/Graphics/BlendMode.hpp
+main.o: /usr/include/SFML/Graphics/Export.hpp
+main.o: /usr/include/SFML/Graphics/CircleShape.hpp
+main.o: /usr/include/SFML/Graphics/Shape.hpp
+main.o: /usr/include/SFML/Graphics/Drawable.hpp
+main.o: /usr/include/SFML/Graphics/RenderStates.hpp
+main.o: /usr/include/SFML/Graphics/Transform.hpp
+main.o: /usr/include/SFML/Graphics/Rect.hpp
+main.o: /usr/include/SFML/Graphics/Rect.inl
+main.o: /usr/include/SFML/Graphics/Transformable.hpp
+main.o: /usr/include/SFML/Graphics/VertexArray.hpp
+main.o: /usr/include/SFML/Graphics/Vertex.hpp
+main.o: /usr/include/SFML/Graphics/Color.hpp
+main.o: /usr/include/SFML/Graphics/PrimitiveType.hpp
+main.o: /usr/include/SFML/Graphics/ConvexShape.hpp
+main.o: /usr/include/SFML/Graphics/Font.hpp
+main.o: /usr/include/SFML/Graphics/Glyph.hpp
+main.o: /usr/include/SFML/Graphics/Texture.hpp
+main.o: /usr/include/SFML/Graphics/Image.hpp
+main.o: /usr/include/SFML/Graphics/RectangleShape.hpp
+main.o: /usr/include/SFML/Graphics/RenderTarget.hpp
+main.o: /usr/include/SFML/Graphics/View.hpp
+main.o: /usr/include/SFML/Graphics/RenderTexture.hpp
+main.o: /usr/include/SFML/Graphics/RenderWindow.hpp
+main.o: /usr/include/SFML/Graphics/Shader.hpp
+main.o: /usr/include/SFML/Graphics/Glsl.hpp
+main.o: /usr/include/SFML/Graphics/Glsl.inl
+main.o: /usr/include/SFML/Graphics/Sprite.hpp
+main.o: /usr/include/SFML/Graphics/Text.hpp
+main.o: /usr/include/SFML/Graphics/VertexBuffer.hpp command.hpp obstacle.hpp
+main.o: region.hpp tree.hpp rock.hpp
+zombie.o: zombie.hpp living.hpp entity.hpp /usr/include/SFML/Graphics.hpp
+zombie.o: /usr/include/SFML/Window.hpp /usr/include/SFML/System.hpp
+zombie.o: /usr/include/SFML/Config.hpp /usr/include/SFML/System/Clock.hpp
+zombie.o: /usr/include/SFML/System/Export.hpp
+zombie.o: /usr/include/SFML/System/Time.hpp /usr/include/SFML/System/Err.hpp
+zombie.o: /usr/include/SFML/System/FileInputStream.hpp
+zombie.o: /usr/include/SFML/System/InputStream.hpp
+zombie.o: /usr/include/SFML/System/NonCopyable.hpp
+zombie.o: /usr/include/SFML/System/Lock.hpp
+zombie.o: /usr/include/SFML/System/MemoryInputStream.hpp
+zombie.o: /usr/include/SFML/System/Mutex.hpp
+zombie.o: /usr/include/SFML/System/Sleep.hpp
+zombie.o: /usr/include/SFML/System/String.hpp
+zombie.o: /usr/include/SFML/System/Utf.hpp /usr/include/SFML/System/Utf.inl
+zombie.o: /usr/include/SFML/System/String.inl
+zombie.o: /usr/include/SFML/System/Thread.hpp
+zombie.o: /usr/include/SFML/System/Thread.inl
+zombie.o: /usr/include/SFML/System/ThreadLocal.hpp
+zombie.o: /usr/include/SFML/System/ThreadLocalPtr.hpp
+zombie.o: /usr/include/SFML/System/ThreadLocalPtr.inl
+zombie.o: /usr/include/SFML/System/Vector2.hpp
+zombie.o: /usr/include/SFML/System/Vector2.inl
+zombie.o: /usr/include/SFML/System/Vector3.hpp
+zombie.o: /usr/include/SFML/System/Vector3.inl
+zombie.o: /usr/include/SFML/Window/Clipboard.hpp
+zombie.o: /usr/include/SFML/Window/Export.hpp
+zombie.o: /usr/include/SFML/Window/Context.hpp
+zombie.o: /usr/include/SFML/Window/GlResource.hpp
+zombie.o: /usr/include/SFML/Window/ContextSettings.hpp
+zombie.o: /usr/include/SFML/Window/Cursor.hpp
+zombie.o: /usr/include/SFML/Window/Event.hpp
+zombie.o: /usr/include/SFML/Window/Joystick.hpp
+zombie.o: /usr/include/SFML/Window/Keyboard.hpp
+zombie.o: /usr/include/SFML/Window/Mouse.hpp
+zombie.o: /usr/include/SFML/Window/Sensor.hpp
+zombie.o: /usr/include/SFML/Window/Touch.hpp
+zombie.o: /usr/include/SFML/Window/VideoMode.hpp
+zombie.o: /usr/include/SFML/Window/Window.hpp
+zombie.o: /usr/include/SFML/Window/WindowHandle.hpp
+zombie.o: /usr/include/SFML/Window/WindowStyle.hpp
+zombie.o: /usr/include/SFML/Graphics/BlendMode.hpp
+zombie.o: /usr/include/SFML/Graphics/Export.hpp
+zombie.o: /usr/include/SFML/Graphics/CircleShape.hpp
+zombie.o: /usr/include/SFML/Graphics/Shape.hpp
+zombie.o: /usr/include/SFML/Graphics/Drawable.hpp
+zombie.o: /usr/include/SFML/Graphics/RenderStates.hpp
+zombie.o: /usr/include/SFML/Graphics/Transform.hpp
+zombie.o: /usr/include/SFML/Graphics/Rect.hpp
+zombie.o: /usr/include/SFML/Graphics/Rect.inl
+zombie.o: /usr/include/SFML/Graphics/Transformable.hpp
+zombie.o: /usr/include/SFML/Graphics/VertexArray.hpp
+zombie.o: /usr/include/SFML/Graphics/Vertex.hpp
+zombie.o: /usr/include/SFML/Graphics/Color.hpp
+zombie.o: /usr/include/SFML/Graphics/PrimitiveType.hpp
+zombie.o: /usr/include/SFML/Graphics/ConvexShape.hpp
+zombie.o: /usr/include/SFML/Graphics/Font.hpp
+zombie.o: /usr/include/SFML/Graphics/Glyph.hpp
+zombie.o: /usr/include/SFML/Graphics/Texture.hpp
+zombie.o: /usr/include/SFML/Graphics/Image.hpp
+zombie.o: /usr/include/SFML/Graphics/RectangleShape.hpp
+zombie.o: /usr/include/SFML/Graphics/RenderTarget.hpp
+zombie.o: /usr/include/SFML/Graphics/View.hpp
+zombie.o: /usr/include/SFML/Graphics/RenderTexture.hpp
+zombie.o: /usr/include/SFML/Graphics/RenderWindow.hpp
+zombie.o: /usr/include/SFML/Graphics/Shader.hpp
+zombie.o: /usr/include/SFML/Graphics/Glsl.hpp
+zombie.o: /usr/include/SFML/Graphics/Glsl.inl
+zombie.o: /usr/include/SFML/Graphics/Sprite.hpp
+zombie.o: /usr/include/SFML/Graphics/Text.hpp
+zombie.o: /usr/include/SFML/Graphics/VertexBuffer.hpp command.hpp
+zombie.o: obstacle.hpp

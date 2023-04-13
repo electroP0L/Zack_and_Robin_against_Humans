@@ -8,44 +8,27 @@
 #include "rock.hpp"
 #include "command.hpp"
 
-
+using namespace std;
 
 int main(int argc, char** argv)
 {
   srand(time(NULL));
 
-  if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		return 0;
-	}
-
-	SDL_Window* win = SDL_CreateWindow("Zack and Robin against Humans", // creates a window
-									SDL_WINDOWPOS_CENTERED,
-									SDL_WINDOWPOS_CENTERED,
-									SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-
-  SDL_Renderer* rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+	RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Zack & Robin VS. Humans");
 
 
-  SDL_Surface *surfacezombie, *surfacebackground, *surfacetree, *surfacerock;
-  surfacezombie = IMG_Load("zombie.png");
-  surfacebackground = IMG_Load("BG.jpg");
-  surfacetree = IMG_Load("tree.png");
-  surfacerock = IMG_Load("rock.png");
+  Texture texzombie, texbackground, textree, texrock;
+  
+  texzombie.loadFromFile("zombie.png");
+  texbackground.loadFromFile("BG.jpg");
+  textree.loadFromFile("tree.png");
+  texrock.loadFromFile("rock.png");
+  //cout << "Textures loaded" << endl;
 
-  SDL_Texture *texzombie, *texbackground, *textree, *texrock;
-  texzombie = SDL_CreateTextureFromSurface(rend, surfacezombie);
-  texbackground = SDL_CreateTextureFromSurface(rend, surfacebackground);
-  textree = SDL_CreateTextureFromSurface(rend, surfacetree);
-  texrock = SDL_CreateTextureFromSurface(rend, surfacerock);
-
-  SDL_FreeSurface(surfacezombie);
-  SDL_FreeSurface(surfacebackground);
-  SDL_FreeSurface(surfacetree);
-  SDL_FreeSurface(surfacerock);
 
   Zombie zombie = Zombie(texzombie);
 
-  std::vector<Obstacle> obstacles;
+  vector<Obstacle> obstacles;
   for (int i = 0; i < 5; i++){
     obstacles.push_back(Rock(texrock, rand() % (SCREEN_WIDTH - 61), rand() % (SCREEN_HEIGHT - 60)));
   }
@@ -53,70 +36,60 @@ int main(int argc, char** argv)
     obstacles.push_back(Tree(textree, rand() % (SCREEN_WIDTH - 115), rand() % (SCREEN_HEIGHT - 127)));
   }
 
+  //cout << "Obstacles created" << endl;
+
 
   Command cmd = Command(obstacles);
-  Region region = Region(texbackground, rend, obstacles);
+  Region region = Region(texbackground, obstacles);
 
 
   //Game loop
-  int close = 0;
+  window.setFramerateLimit(60);
 
-  while(!close){
-    SDL_Event event;
+  while(window.isOpen()){
 
-    const Uint8 *keyboard_state = SDL_GetKeyboardState(NULL);
+    Event event;
+
 		// Events management
-		while (SDL_PollEvent(&event)) { //Tant qu'il y a des évènements à traiter
+    while (window.pollEvent(event)) { //Tant qu'il y a des évènements à traiter
+      
       switch (event.type) {
 
-        case SDL_QUIT: // handling of close button  
+        case Event::Closed : // handling of close button  
         {
-          close = 1;
+          window.close();
           break;
-          //std::cout << "quit" << std::endl;
+          //cout << "quit" << endl;
         }
  
-        case SDL_KEYDOWN: //Si une touche est enfoncée
+        case Event::KeyPressed : //Si une touche est enfoncée
         {
-          //std::cout << "keydown" << std::endl;
-          cmd.SetKeyboardState(keyboard_state);
+          //cout << "keydown" << endl;
           zombie.bouger(cmd);
         }
         
         default:
-          //std::cout << "default" << std::endl;
+          //cout << "default" << endl;
           break;
       }
     }
+    //Effement de la fenêtre
+    window.clear();
 
-    SDL_RenderClear(rend);
-    
-    SDL_RenderCopy(region.getRenderer(), region.getTexBackground(), NULL, NULL);
-    
-    SDL_Rect rectz = zombie.getRect();
-    SDL_RenderCopy(rend, texzombie, NULL, &rectz);
-
+    //Affichage des sprites
+    window.draw(region.getBackgroundSprite());
+      
+    window.draw(zombie.getSprite());
     for (int i = 0; i < region.getObstacles().size(); i++){
-      SDL_Rect rect = region.getObstacles()[i].getRect();
-      SDL_RenderCopy(rend, region.getObstacles()[i].getTexture(), NULL, &rect);
+      window.draw(region.getObstacles()[i].getSprite());
     }
 
-
-    SDL_RenderPresent(rend);
-
-    SDL_Delay(1000/60);
+    window.display();
   }
 
-  SDL_DestroyTexture(texzombie);
-  SDL_DestroyTexture(texbackground);
-  SDL_DestroyTexture(textree);
-  SDL_DestroyTexture(texrock);
+  //On détruit tous les objets :
 
-  SDL_DestroyRenderer(rend);
-
-  SDL_DestroyWindow(win);
-
-  SDL_Quit();
+  window.close();
 
   return 0;
 }

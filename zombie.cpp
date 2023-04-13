@@ -1,70 +1,54 @@
 #include "zombie.hpp"
 
-Zombie::Zombie(SDL_Texture* texture){
-  SDL_QueryTexture(texture, NULL, NULL, &this->rect.w, &this->rect.h);
-  rect.w /= 6;
-  rect.h /= 6;
-  setpos(0 + 10, SCREEN_HEIGHT - rect.h);
-  hitbox = rect;
+Zombie::Zombie(Texture& texture){
+  sprite.setTexture(texture);
+  float scale = 1.0f / 6.0f;
+  sprite.scale(scale, scale);
+  setpos(0 + 10, SCREEN_HEIGHT - sprite.getGlobalBounds().height);
+  hitbox = sprite.getGlobalBounds();
 }
 
 void Zombie::bouger(Command& cmd){
-  const Uint8 *keyboard_state = cmd.getKeyboardState();
-  if (keyboard_state[SDL_SCANCODE_W]) {this->rect.y -= 300 / 70;}
-  if (keyboard_state[SDL_SCANCODE_S]) {this->rect.y += 300 / 70;}
-  if (keyboard_state[SDL_SCANCODE_A]) {this->rect.x -= 300 / 70;}
-  if (keyboard_state[SDL_SCANCODE_D]) {this->rect.x += 300 / 70;}
-  // Gestion des déplacements diagonaux
-  if (keyboard_state[SDL_SCANCODE_W] && keyboard_state[SDL_SCANCODE_A]) {
-    this->rect.y -= 300 / 500;
-    this->rect.x -= 300 / 500;
-  }
-  if (keyboard_state[SDL_SCANCODE_W] && keyboard_state[SDL_SCANCODE_D]) {
-    this->rect.y -= 300 / 500;
-    this->rect.x += 300 / 500;
-  }
-  if (keyboard_state[SDL_SCANCODE_S] && keyboard_state[SDL_SCANCODE_A]) {
-    this->rect.y += 300 / 500;
-    this->rect.x -= 300 / 500;
-  }
-  if (keyboard_state[SDL_SCANCODE_S] && keyboard_state[SDL_SCANCODE_D]) {
-    this->rect.y += 300 / 500;
-    this->rect.x += 300 / 500;
-  }
+  //Déplacement : On bouge le zombie en fonction des touches appuyées
+  float speed = 300.0f/70;
+  if (Keyboard::isKeyPressed(Keyboard::Z)) {this->sprite.move(0, -speed);}
+  if (Keyboard::isKeyPressed(Keyboard::S)) {this->sprite.move(0, speed);}
+  if (Keyboard::isKeyPressed(Keyboard::Q)) {this->sprite.move(-speed, 0);}
+  if (Keyboard::isKeyPressed(Keyboard::D)) {this->sprite.move(speed, 0);}
 
+  //Constantes
+  const sf::Vector2f pos = sprite.getPosition(); //La position du sprite zombie
+  const sf::FloatRect bounds = sprite.getGlobalBounds(); //La hitbox du sprite zombie
 
-  // Screen bounds
-  if (this->rect.x + this->rect.w > SCREEN_WIDTH){this->rect.x = SCREEN_WIDTH - this->rect.w;}
-  if (this->rect.x < 0){this->rect.x = 0;}
-  if (this->rect.y + this->rect.h > SCREEN_HEIGHT){this->rect.y = SCREEN_HEIGHT - this->rect.h;}
-  if (this->rect.y < 0){this->rect.y = 0;}
-
+  //Traitement des bords de l'écran
+  const float screen_width = SCREEN_WIDTH - bounds.width; 
+  const float screen_height = SCREEN_HEIGHT - bounds.height;
+  if(pos.x < 0) {sprite.setPosition(0, pos.y);} //Si le zombie sort de l'écran à gauche, on le replace 
+  if(pos.x > screen_width) {sprite.setPosition(screen_width, pos.y);} //Si le zombie sort de l'écran à droite, on le replace
+  if(pos.y < 0) {sprite.setPosition(pos.x, 0);} //Si le zombie sort de l'écran en haut, on le replace
+  if(pos.y > screen_height) {sprite.setPosition(pos.x, screen_height);} //Si le zombie sort de l'écran en bas, on le replace
 
   //Traitement des obstacles
-  
-  std::vector<Obstacle> obstacles = cmd.getObstacles();
-  for(int i=0; i<obstacles.size(); i++){
-    if (this->rect.x + this->rect.w > obstacles[i].getHitbox().x && this->rect.x < obstacles[i].getHitbox().x + obstacles[i].getHitbox().w && this->rect.y + this->rect.h > obstacles[i].getHitbox().y && this->rect.y < obstacles[i].getHitbox().y + obstacles[i].getHitbox().h){
-      int overlapX = std::min(this->rect.x + this->rect.w, obstacles[i].getHitbox().x + obstacles[i].getHitbox().w) - std::max(this->rect.x, obstacles[i].getHitbox().x);
-      int overlapY = std::min(this->rect.y + this->rect.h, obstacles[i].getHitbox().y + obstacles[i].getHitbox().h) - std::max(this->rect.y, obstacles[i].getHitbox().y);
-      if (overlapX < overlapY) {
-        if (this->rect.x < obstacles[i].getHitbox().x) {
-          this->rect.x = obstacles[i].getHitbox().x - this->rect.w;
-        }
-        else {
-          this->rect.x = obstacles[i].getHitbox().x + obstacles[i].getHitbox().w;
-        }
+  std::vector<Obstacle>& obstacles = cmd.getObstacles(); //Référence à la variable existante
+
+  for (int i = 0; i < obstacles.size(); ++i) {
+    const sf::FloatRect obstacleBounds = obstacles[i].getHitbox(); //On récupère la hitbox de l'obstacle
+    const sf::Vector2f obstaclePos(obstacleBounds.left, obstacleBounds.top); //Ses coordonnées
+    const sf::Vector2f obstacleSize(obstacleBounds.width, obstacleBounds.height); //Ses dimensions
+
+    const bool overlaps = bounds.intersects(obstacleBounds); //Si le zombie et l'obstacle se chevauchent
+
+    if (overlaps) {
+      const float overlapX = std::min(pos.x + bounds.width, obstaclePos.x + obstacleSize.x) - std::max(pos.x, obstaclePos.x); //On calcule la longueur de l'intersection
+      const float overlapY = std::min(pos.y + bounds.height, obstaclePos.y + obstacleSize.y) - std::max(pos.y, obstaclePos.y); //On calcule la largeur de l'intersection
+
+      if (overlapX < overlapY) { //Si l'intersection est plus longue que large, on déplace le zombie sur l'axe des X
+        const float new_x = (pos.x < obstaclePos.x) ? obstaclePos.x - bounds.width : obstaclePos.x + obstacleSize.x; //On calcule la nouvelle position du zombie
+        setpos(new_x, pos.y); //On déplace le zombie
       }
-      else {
-        if (this->rect.y < obstacles[i].getHitbox().y) {
-          this->rect.y = obstacles[i].getHitbox().y - this->rect.h;
-        }
-        else if (this->rect.y + this->rect.h > obstacles[i].getHitbox().y + obstacles[i].getHitbox().h) {
-          this->rect.y = obstacles[i].getHitbox().y + obstacles[i].getHitbox().h;
-        }
-        else {
-          this->rect.y = obstacles[i].getHitbox().y - this->rect.h;
-        }
+      else { //Si l'intersection est plus large que longue, on déplace le zombie sur l'axe des Y
+        const float new_y = (pos.y < obstaclePos.y) ? obstaclePos.y - bounds.height : obstaclePos.y + obstacleSize.y; //On calcule la nouvelle position du zombie
+        setpos(pos.x, new_y); //On déplace le zombie
       }
     }
   }

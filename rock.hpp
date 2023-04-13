@@ -8,13 +8,12 @@ class Rock : public Obstacle
   private:
     
   public:
-    Rock(SDL_Texture* texture, int x, int y){
-      this->texture = texture;
-      SDL_QueryTexture(texture, NULL, NULL, &this->rect.w, &this->rect.h);
-      rect.w /= 20;
-      rect.h /= 20;
+    Rock(Texture& texture, int x, int y){
+      sprite.setTexture(texture);
+      float scale = 1.0f / 20.0f;
+      sprite.scale(scale, scale);
       setpos(x, y);
-      hitbox = rect;
+      hitbox = sprite.getGlobalBounds();
     }
 };  
 

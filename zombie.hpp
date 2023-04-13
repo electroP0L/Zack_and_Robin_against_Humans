@@ -8,7 +8,7 @@ class Zombie : public Living
   private:
     int nb_membres;
   public:
-    Zombie(SDL_Texture* texture);
+    Zombie(Texture& texture);
     void bouger(Command& cmd) override;
     //void attaquer();
 };  

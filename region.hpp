@@ -9,22 +9,18 @@ class Region
 {
 
   private:
-    SDL_Texture* texbackground;
-    SDL_Renderer* renderer;
+    Sprite background;
     int nb_obstacles;
-    //int nb_entities; ?
     std::vector<Obstacle> obstacles;
     //std::vector<Entity> entities; ?
 
   public:
-    Region(SDL_Texture* texbackground, SDL_Renderer* renderer, std::vector<Obstacle> obstacles){
-      this->texbackground = texbackground;
-      this->renderer = renderer;
+    Region(Texture& texbackground, std::vector<Obstacle> obstacles){
+      background.setTexture(texbackground);
       this->obstacles = obstacles;
       this->nb_obstacles = obstacles.size();
     }
-    SDL_Texture* getTexBackground() {return texbackground;}
-    SDL_Renderer* getRenderer() {return renderer;}
+    Sprite getBackgroundSprite() {return background;}
     std::vector<Obstacle> getObstacles() {return obstacles;}
 
     

@@ -8,17 +8,16 @@ class Tree : public Obstacle
   private:
     
   public:
-    Tree(SDL_Texture* texture, int x, int y){
-      this->texture = texture;
-      SDL_QueryTexture(texture, NULL, NULL, &this->rect.w, &this->rect.h);
-      rect.w /= 6;
-      rect.h /= 6;
+    Tree(Texture& texture, int x, int y){
+      sprite.setTexture(texture);
+      float scale = 1.0f / 6.0f;
+      sprite.scale(scale, scale);
       setpos(x, y);
-      hitbox = rect;
-      hitbox.h /=3;
-      hitbox.w /=3;
-      hitbox.y += 2*hitbox.h;
-      hitbox.x += hitbox.w;
+      hitbox = sprite.getGlobalBounds();
+      hitbox.height /=3;
+      hitbox.width /=3;
+      hitbox.top += 2*hitbox.height;
+      hitbox.left += hitbox.width;
     }
 };  
 
