@@ -14,6 +14,8 @@ class Rock : public Obstacle
       sprite.scale(scale, scale);
       setpos(x, y);
       hitbox = sprite.getGlobalBounds();
+      hitbox.height /=2;
+      hitbox.top += hitbox.height;
     }
 };  
 
