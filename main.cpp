@@ -1,7 +1,3 @@
-#include <stdlib.h>
-#include <time.h>
-#include <iostream>
-
 #include "zombie.hpp"
 #include "region.hpp"
 #include "tree.hpp"
@@ -14,15 +10,15 @@ int main(int argc, char** argv)
 {
   srand(time(NULL));
 
-	RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Zack & Robin VS. Humans");
+	RenderWindow window(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Zack & Robin VS. Humans");
 
 
   Texture texzombie, texbackground, textree, texrock;
   
-  texzombie.loadFromFile("zombie.png");
-  texbackground.loadFromFile("BG.jpg");
-  textree.loadFromFile("tree.png");
-  texrock.loadFromFile("rock.png");
+  texzombie.loadFromFile("full_zombie1.png");
+  texbackground.loadFromFile("BG1.png");
+  textree.loadFromFile("tree1.png");
+  texrock.loadFromFile("rock3.png");
   //cout << "Textures loaded" << endl;
 
 
@@ -77,6 +73,7 @@ int main(int argc, char** argv)
     window.clear();
 
     //Affichage des sprites
+    // Le background rempli toute la fenêtre
     window.draw(region.getBackgroundSprite());
       
     window.draw(zombie.getSprite());

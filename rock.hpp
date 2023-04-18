@@ -10,7 +10,7 @@ class Rock : public Obstacle
   public:
     Rock(Texture& texture, int x, int y){
       sprite.setTexture(texture);
-      float scale = 1.0f / 20.0f;
+      float scale = 1.0f / 12.0f;
       sprite.scale(scale, scale);
       setpos(x, y);
       hitbox = sprite.getGlobalBounds();

@@ -1,8 +1,12 @@
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
-#define SCREEN_WIDTH 851  //ÇA DEVRAIT ALLER DANS REGION_HPP
-#define SCREEN_HEIGHT 666
+#define SCREEN_WIDTH 1000  //ÇA DEVRAIT ALLER DANS REGION_HPP
+#define SCREEN_HEIGHT 1000
+
+#include <stdlib.h>
+#include <time.h>
+#include <iostream>
 
 #include <SFML/Graphics.hpp>
 using namespace sf;
@@ -12,6 +16,7 @@ class Entity
 
   protected:
     Sprite sprite;
+
     FloatRect hitbox;
   
   public:

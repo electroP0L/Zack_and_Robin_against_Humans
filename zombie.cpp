@@ -2,8 +2,8 @@
 
 Zombie::Zombie(Texture& texture){
   sprite.setTexture(texture);
-  float scale = 1.0f / 6.0f;
   sprite.scale(scale, scale);
+  //sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height/2);
   setpos(0 + 10, SCREEN_HEIGHT - sprite.getGlobalBounds().height);
   hitbox = sprite.getGlobalBounds();
 }
@@ -13,8 +13,14 @@ void Zombie::bouger(Command& cmd){
   float speed = 300.0f/70;
   if (Keyboard::isKeyPressed(Keyboard::Z)) {this->sprite.move(0, -speed);}
   if (Keyboard::isKeyPressed(Keyboard::S)) {this->sprite.move(0, speed);}
-  if (Keyboard::isKeyPressed(Keyboard::Q)) {this->sprite.move(-speed, 0);}
-  if (Keyboard::isKeyPressed(Keyboard::D)) {this->sprite.move(speed, 0);}
+  if (Keyboard::isKeyPressed(Keyboard::Q)) {
+    this->sprite.move(-speed, 0);
+    //this->sprite.setScale(scale, scale);
+    }
+  if (Keyboard::isKeyPressed(Keyboard::D)) {
+    this->sprite.move(speed, 0);
+    //this->sprite.setScale(-scale, scale);
+    }
 
   //Constantes
   const sf::Vector2f pos = sprite.getPosition(); //La position du sprite zombie
@@ -31,23 +37,19 @@ void Zombie::bouger(Command& cmd){
   //Traitement des obstacles
   std::vector<Obstacle>& obstacles = cmd.getObstacles(); //Référence à la variable existante
 
-  for (int i = 0; i < obstacles.size(); ++i) {
+  for (int i = 0; i < obstacles.size(); ++i) { //Pour chaque obstacle dans le vecteur d'obstacles
     const sf::FloatRect obstacleBounds = obstacles[i].getHitbox(); //On récupère la hitbox de l'obstacle
-    const sf::Vector2f obstaclePos(obstacleBounds.left, obstacleBounds.top); //Ses coordonnées
-    const sf::Vector2f obstacleSize(obstacleBounds.width, obstacleBounds.height); //Ses dimensions
 
-    const bool overlaps = bounds.intersects(obstacleBounds); //Si le zombie et l'obstacle se chevauchent
+    if (obstacleBounds.intersects(bounds)) { //Si le zombie et l'obstacle se chevauchent
+      sf::FloatRect intersection; //On déclare un rectangle d'intersection
+      obstacleBounds.intersects(bounds, intersection);  //On calcule l'intersection
 
-    if (overlaps) {
-      const float overlapX = std::min(pos.x + bounds.width, obstaclePos.x + obstacleSize.x) - std::max(pos.x, obstaclePos.x); //On calcule la longueur de l'intersection
-      const float overlapY = std::min(pos.y + bounds.height, obstaclePos.y + obstacleSize.y) - std::max(pos.y, obstaclePos.y); //On calcule la largeur de l'intersection
-
-      if (overlapX < overlapY) { //Si l'intersection est plus longue que large, on déplace le zombie sur l'axe des X
-        const float new_x = (pos.x < obstaclePos.x) ? obstaclePos.x - bounds.width : obstaclePos.x + obstacleSize.x; //On calcule la nouvelle position du zombie
+      if (intersection.width < intersection.height) { //Si l'intersection est plus longue que large, on déplace le zombie sur l'axe des X
+        const float new_x = (pos.x < obstacleBounds.left) ? obstacleBounds.left - bounds.width : obstacleBounds.left + obstacleBounds.width; //On calcule la nouvelle position du zombie
         setpos(new_x, pos.y); //On déplace le zombie
       }
       else { //Si l'intersection est plus large que longue, on déplace le zombie sur l'axe des Y
-        const float new_y = (pos.y < obstaclePos.y) ? obstaclePos.y - bounds.height : obstaclePos.y + obstacleSize.y; //On calcule la nouvelle position du zombie
+        const float new_y = (pos.y < obstacleBounds.top) ? obstacleBounds.top - bounds.height : obstacleBounds.top + obstacleBounds.height; //On calcule la nouvelle position du zombie
         setpos(pos.x, new_y); //On déplace le zombie
       }
     }
