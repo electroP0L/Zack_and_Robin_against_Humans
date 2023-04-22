@@ -10,8 +10,9 @@ class Zombie : public Living
     const float scale = 1.0f/12.5f;
     
   public:
-    Zombie(Texture& texture);
+    Zombie(vector<Texture>& textures);
     void bouger(Command& cmd) override;
+    void changeTexture(Command& cmd) override;
     //void attaquer();
 };  
 

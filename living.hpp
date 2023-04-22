@@ -7,13 +7,13 @@
 class Living : public Entity
 {
   protected:
-    //vector<Sprite> sprites;
+    vector<Texture> textures;
     Sprite sprite;
   public:
-    //Sprite getSprite(int i) {return sprites[i];}
     Sprite getSprite() {return sprite;}
     virtual void bouger(Command& cmd) = 0;
-    void setpos(int x, int y) {sprite.setPosition(x, y);}
+    void checkCollision(float& dx, float& dy, Command& cmd);
+    virtual void changeTexture(Command& cmd) = 0;
     //virtual void attaquer() = 0;
 };  
 

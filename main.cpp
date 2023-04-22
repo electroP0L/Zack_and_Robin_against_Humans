@@ -12,9 +12,17 @@ int main(int argc, char** argv)
 	RenderWindow window(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Zack & Robin VS. Humans");
 
 
-  Texture texzombie, texbackground, textree, texrock;
+  Texture texbackground, textree, texrock;
   
-  texzombie.loadFromFile("full_zombie1.png");
+  Texture texzombie1, texzombie2;
+  vector<Texture> texzombie;
+
+  
+  texzombie1.loadFromFile("full_zombie1.png");
+  texzombie.push_back(texzombie1);
+  texzombie2.loadFromFile("full_zombie2.png");
+  texzombie.push_back(texzombie2);
+  
   texbackground.loadFromFile("BG1.png");
   textree.loadFromFile("tree1.png");
   texrock.loadFromFile("rock3.png");
