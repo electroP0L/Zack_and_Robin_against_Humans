@@ -10,17 +10,14 @@ Zombie::Zombie(Texture& texture){
 
 void Zombie::bouger(Command& cmd){
   //Déplacement : On bouge le zombie en fonction des touches appuyées
+  float dx = 0;
+  float dy = 0;
   float speed = 300.0f/70;
-  if (Keyboard::isKeyPressed(Keyboard::Z)) {this->sprite.move(0, -speed);}
-  if (Keyboard::isKeyPressed(Keyboard::S)) {this->sprite.move(0, speed);}
-  if (Keyboard::isKeyPressed(Keyboard::Q)) {
-    this->sprite.move(-speed, 0);
-    //this->sprite.setScale(scale, scale);
-    }
-  if (Keyboard::isKeyPressed(Keyboard::D)) {
-    this->sprite.move(speed, 0);
-    //this->sprite.setScale(-scale, scale);
-    }
+  if (Keyboard::isKeyPressed(Keyboard::Z)) {dy = -speed;}
+  if (Keyboard::isKeyPressed(Keyboard::S)) {dy = speed;}
+  if (Keyboard::isKeyPressed(Keyboard::Q)) {dx = -speed;}
+  if (Keyboard::isKeyPressed(Keyboard::D)) {dx = speed;}
+  if(dx!=0 || dy!=0) {this->sprite.move(dx, dy);}
 
   //Constantes
   const sf::Vector2f pos = sprite.getPosition(); //La position du sprite zombie
@@ -33,7 +30,7 @@ void Zombie::bouger(Command& cmd){
   if(pos.x > screen_width) {sprite.setPosition(screen_width, pos.y);} //Si le zombie sort de l'écran à droite, on le replace
   if(pos.y < 0) {sprite.setPosition(pos.x, 0);} //Si le zombie sort de l'écran en haut, on le replace
   if(pos.y > screen_height) {sprite.setPosition(pos.x, screen_height);} //Si le zombie sort de l'écran en bas, on le replace
-
+  
   //Traitement des obstacles
   std::vector<Obstacle>& obstacles = cmd.getObstacles(); //Référence à la variable existante
 

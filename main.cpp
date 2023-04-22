@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     Event event;
 
 		// Events management
-    while (window.pollEvent(event)) { //Tant qu'il y a des évènements à traiter
+    if (window.pollEvent(event)) { //Tant qu'il y a des évènements à traiter
       
       switch (event.type) {
 
