@@ -2,7 +2,7 @@
 
 Zombie::Zombie(vector<Texture>& textures){
   this->textures = textures;
-  sprite.setTexture(textures[0]);
+  sprite.setTexture(textures[1]);
   sprite.scale(scale, scale);
   //texzombie.push_back(texzombie1);sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height/2);
   sprite.move(0 + 10, SCREEN_HEIGHT - sprite.getGlobalBounds().height);

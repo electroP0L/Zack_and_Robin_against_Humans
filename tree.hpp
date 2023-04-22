@@ -10,14 +10,14 @@ class Tree : public Obstacle
   public:
     Tree(Texture& texture, int x, int y){
       sprite.setTexture(texture);
-      float scale = 1.0f / 6.0f;
+      float scale = 1.0f / 4.0f;
       sprite.scale(scale, scale);
       setpos(x, y);
       hitbox = sprite.getGlobalBounds();
-      hitbox.height /=3;
-      hitbox.width /=3;
-      hitbox.top += 2*hitbox.height;
-      hitbox.left += hitbox.width;
+      hitbox.height /=5;
+      hitbox.width /=6;
+      hitbox.top += 4*hitbox.height;
+      hitbox.left += 2.5f*hitbox.width;
     }
 };  
 

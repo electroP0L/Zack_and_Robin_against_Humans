@@ -18,14 +18,14 @@ int main(int argc, char** argv)
   vector<Texture> texzombie;
 
   
-  texzombie1.loadFromFile("full_zombie1.png");
+  texzombie1.loadFromFile("zombie1.png");
   texzombie.push_back(texzombie1);
-  texzombie2.loadFromFile("full_zombie2.png");
+  texzombie2.loadFromFile("zombie2.png");
   texzombie.push_back(texzombie2);
   
-  texbackground.loadFromFile("BG1.png");
-  textree.loadFromFile("tree1.png");
-  texrock.loadFromFile("rock3.png");
+  texbackground.loadFromFile("BG.png");
+  textree.loadFromFile("tree.png");
+  texrock.loadFromFile("rock.png");
   //cout << "Textures loaded" << endl;
 
 
@@ -33,10 +33,10 @@ int main(int argc, char** argv)
 
   vector<Obstacle> obstacles;
   for (int i = 0; i < 5; i++){
-    obstacles.push_back(Rock(texrock, rand() % (SCREEN_WIDTH - 61), rand() % (SCREEN_HEIGHT - 60)));
+    obstacles.push_back(Rock(texrock, rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));
   }
   for (int i = 0; i < 5; i++){
-    obstacles.push_back(Tree(textree, rand() % (SCREEN_WIDTH - 115), rand() % (SCREEN_HEIGHT - 127)));
+    obstacles.push_back(Tree(textree, rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));
   }
 
   //cout << "Obstacles created" << endl;

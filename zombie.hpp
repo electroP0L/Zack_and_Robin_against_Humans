@@ -7,7 +7,7 @@ class Zombie : public Living
 {
   private:
     int nb_membres;
-    const float scale = 1.0f/12.5f;
+    const float scale = 1.0f/10.0f;
     
   public:
     Zombie(vector<Texture>& textures);
