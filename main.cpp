@@ -4,7 +4,6 @@
 #include "rock.hpp"
 #include "command.hpp"
 
-using namespace std;
 
 int main(int argc, char** argv)
 {

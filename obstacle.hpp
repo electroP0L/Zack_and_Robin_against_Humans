@@ -10,7 +10,7 @@ class Obstacle : public Entity
   public:
     Obstacle(){}; //Constructeur par défaut
     Sprite getSprite() {return sprite;}
-    void setpos(int x, int y) {sprite.setPosition(x, y);}
+    void setpos(int& x, int& y) {sprite.setPosition(x, y);}
 };  
 
 
