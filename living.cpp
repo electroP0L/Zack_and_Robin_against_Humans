@@ -1,6 +1,6 @@
 #include "living.hpp"
 
-void Living::checkCollision(float& dx, float& dy, Command& cmd) { //Traitement des obstacles
+bool Living::checkCollision(float& dx, float& dy, Contexte& ctxt) { //Traitement des obstacles
 
   //Constantes
   const sf::Vector2f pos = sprite.getPosition(); //La position du sprite living
@@ -32,7 +32,7 @@ void Living::checkCollision(float& dx, float& dy, Command& cmd) { //Traitement d
   //Traitement des obstacles
   sf::FloatRect newbounds = sf::FloatRect(newpos.x, newpos.y, bounds.width, bounds.height); //On déclare une hitbox de déplacement
   
-  std::vector<Obstacle>& obstacles = cmd.getObstacles(); //Référence à la variable existante
+  std::vector<Obstacle>& obstacles = ctxt.getObstacles(); //Référence à la variable existante
 
   for (int i = 0; i < obstacles.size(); ++i) { //Pour chaque obstacle dans le vecteur d'obstacles
     const sf::FloatRect obstacleBounds = obstacles[i].getHitbox(); //On récupère la hitbox de l'obstacle
@@ -47,6 +47,8 @@ void Living::checkCollision(float& dx, float& dy, Command& cmd) { //Traitement d
       else { //Si l'intersection est plus large que longue, on déplace le living sur l'axe des Y
         dy = (intersection.top == newbounds.top) ? intersection.height/2 : -intersection.height/2; //Si l'intersection est au dessus du living, on le déplace vers le bas, sinon on le déplace vers le haut
       }
+      return true;
     }
   }
+  return false;
 }

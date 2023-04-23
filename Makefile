@@ -14,15 +14,15 @@ ZandRVSH: $(OBJECTS)
 	$(LD)	-o ZandRVSH	$(OBJECTS)	$(LDFLAGS)
 
 
-main.o: main.cpp zombie.hpp region.hpp tree.hpp rock.hpp command.hpp
+main.o: main.cpp zombie.hpp region.hpp tree.hpp rock.hpp contexte.hpp
 	$(CPP)	-c main.cpp	$(CPPFLAGS)
 
 
-command.o: command.hpp obstacle.hpp
+contexte.o: contexte.hpp obstacle.hpp
 
 entity.o: entity.hpp
 
-living.o: living.cpp living.hpp entity.hpp command.hpp
+living.o: living.cpp living.hpp entity.hpp contexte.hpp
 	$(CPP)	-c living.cpp	$(CPPFLAGS)
 
 
@@ -111,7 +111,7 @@ main.o: /usr/include/SFML/Graphics/Glsl.hpp
 main.o: /usr/include/SFML/Graphics/Glsl.inl
 main.o: /usr/include/SFML/Graphics/Sprite.hpp
 main.o: /usr/include/SFML/Graphics/Text.hpp
-main.o: /usr/include/SFML/Graphics/VertexBuffer.hpp command.hpp obstacle.hpp
+main.o: /usr/include/SFML/Graphics/VertexBuffer.hpp contexte.hpp obstacle.hpp
 main.o: region.hpp tree.hpp rock.hpp
 zombie.o: zombie.hpp living.hpp entity.hpp /usr/include/SFML/Graphics.hpp
 zombie.o: /usr/include/SFML/Window.hpp /usr/include/SFML/System.hpp
@@ -182,5 +182,5 @@ zombie.o: /usr/include/SFML/Graphics/Glsl.hpp
 zombie.o: /usr/include/SFML/Graphics/Glsl.inl
 zombie.o: /usr/include/SFML/Graphics/Sprite.hpp
 zombie.o: /usr/include/SFML/Graphics/Text.hpp
-zombie.o: /usr/include/SFML/Graphics/VertexBuffer.hpp command.hpp
+zombie.o: /usr/include/SFML/Graphics/VertexBuffer.hpp contexte.hpp
 zombie.o: obstacle.hpp

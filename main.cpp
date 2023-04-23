@@ -2,8 +2,9 @@
 #include "region.hpp"
 #include "tree.hpp"
 #include "rock.hpp"
-#include "command.hpp"
+#include "contexte.hpp"
 
+float z = 0.0f; //À SUPPRIMER SI ON TROUVE UN MEILLEUR MOYEN DE MODIFIER LES SPRITES DES LIVING IMMOBILES
 
 int main(int argc, char** argv)
 {
@@ -14,14 +15,19 @@ int main(int argc, char** argv)
 
   Texture texbackground, textree, texrock;
   
-  Texture texzombie1, texzombie2;
+  Texture texz;
   vector<Texture> texzombie;
 
-  
-  texzombie1.loadFromFile("zombie1.png");
-  texzombie.push_back(texzombie1);
-  texzombie2.loadFromFile("zombie2.png");
-  texzombie.push_back(texzombie2);
+  //GAUCHE
+  texz.loadFromFile("zombie1.png");
+  texzombie.push_back(texz); //index 0
+  texz.loadFromFile("zombie1_2.png");
+  texzombie.push_back(texz); //index 1
+  //DROITE
+  texz.loadFromFile("zombie2.png");
+  texzombie.push_back(texz); //index 2
+  texz.loadFromFile("zombie2_2.png");
+  texzombie.push_back(texz); //index 3
   
   texbackground.loadFromFile("BG.png");
   textree.loadFromFile("tree.png");
@@ -42,7 +48,7 @@ int main(int argc, char** argv)
   //cout << "Obstacles created" << endl;
 
 
-  Command cmd = Command(obstacles);
+  Contexte ctxt = Contexte(obstacles, zombie.getHitbox());
   Region region = Region(texbackground, obstacles);
 
 
@@ -68,12 +74,18 @@ int main(int argc, char** argv)
         case Event::KeyPressed : //Si une touche est enfoncée
         {
           //cout << "keydown" << endl;
-          zombie.bouger(cmd);
+          zombie.bouger(ctxt);
         }
         
         default:
           //cout << "default" << endl;
           break;
+      }
+    }
+    else {
+      if(ctxt.getElapsedTime() > 500){
+        ctxt.restartClock();
+        zombie.changeTexture(z);
       }
     }
     //Effement de la fenêtre
