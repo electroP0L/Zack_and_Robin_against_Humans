@@ -29,7 +29,7 @@ int main(int argc, char** argv)
   texz.loadFromFile("zombie2_2.png");
   texzombie.push_back(texz); //index 3
   
-  texbackground.loadFromFile("BG.png");
+  texbackground.loadFromFile("BG1.png");
   textree.loadFromFile("tree.png");
   texrock.loadFromFile("rock.png");
   //cout << "Textures loaded" << endl;
