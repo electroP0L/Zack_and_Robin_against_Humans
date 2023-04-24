@@ -19,7 +19,7 @@ class Living : public Entity
     Sprite getSprite() {return sprite;}
     virtual void bouger(Contexte& ctxt) = 0;
     bool checkCollision(float& dx, float& dy, Contexte& ctxt);
-    virtual void changeTexture(float& dx) = 0;
+    virtual void changeTexture(float& dx, float& dy) = 0;
     //virtual void attaquer() = 0;
 };  
 

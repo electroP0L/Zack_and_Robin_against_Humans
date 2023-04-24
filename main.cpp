@@ -19,15 +19,28 @@ int main(int argc, char** argv)
   vector<Texture> texzombie;
 
   //GAUCHE
+  //Immobile
   texz.loadFromFile("zombie1.png");
   texzombie.push_back(texz); //index 0
   texz.loadFromFile("zombie1_2.png");
   texzombie.push_back(texz); //index 1
-  //DROITE
-  texz.loadFromFile("zombie2.png");
+  //Marche
+  texz.loadFromFile("zombie1_3.png");
   texzombie.push_back(texz); //index 2
-  texz.loadFromFile("zombie2_2.png");
+  texz.loadFromFile("zombie1_4.png");
   texzombie.push_back(texz); //index 3
+
+  //DROITE
+  //Immobile
+  texz.loadFromFile("zombie2.png");
+  texzombie.push_back(texz); //index 4
+  texz.loadFromFile("zombie2_2.png");
+  texzombie.push_back(texz); //index 5
+  //Marche
+  texz.loadFromFile("zombie2_3.png");
+  texzombie.push_back(texz); //index 6
+  texz.loadFromFile("zombie2_4.png");
+  texzombie.push_back(texz); //index 7
   
   texbackground.loadFromFile("BG1.png");
   textree.loadFromFile("tree.png");
@@ -85,7 +98,7 @@ int main(int argc, char** argv)
     else {
       if(ctxt.getElapsedTime() > 500){
         ctxt.restartClock();
-        zombie.changeTexture(z);
+        zombie.changeTexture(z, z);
       }
     }
     //Effement de la fenêtre
