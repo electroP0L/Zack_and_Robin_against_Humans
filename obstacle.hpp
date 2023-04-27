@@ -1,16 +1,12 @@
 #ifndef OBSTACLE_HPP
 #define OBSTACLE_HPP
 
-#include "entity.hpp"
+#include "inanimate.hpp"
 
-class Obstacle : public Entity
+class Obstacle : public Inanimate
 {
-  protected:
-    Sprite sprite;
   public:
     Obstacle(){}; //Constructeur par défaut
-    Sprite getSprite() {return sprite;}
-    void setpos(int& x, int& y) {sprite.setPosition(x, y);}
 };  
 
 

@@ -10,7 +10,7 @@ class Living : public Entity
     vector<Texture> textures;
     int currentTextureIndex;
     Sprite sprite;
-    vector<float> previousMovements = {0.0f, 0.0f};
+    vector<float> previousmv = {0.0f, 0.0f};
 
     
     int size;
@@ -18,8 +18,8 @@ class Living : public Entity
   public:
     Sprite getSprite() {return sprite;}
     virtual void bouger(Contexte& ctxt) = 0;
-    bool checkCollision(float& dx, float& dy, Contexte& ctxt);
-    virtual void changeTexture(float& dx, float& dy) = 0;
+    bool checkCollision(vector<float>& mv, Contexte& ctxt);
+    virtual void changeTexture(vector<float>& mv) = 0;
     //virtual void attaquer() = 0;
 };  
 

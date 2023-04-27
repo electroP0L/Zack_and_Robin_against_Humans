@@ -1,10 +1,10 @@
 #include "living.hpp"
 
-bool Living::checkCollision(float& dx, float& dy, Contexte& ctxt) { //Traitement des obstacles
+bool Living::checkCollision(vector<float>& mv, Contexte& ctxt) { //Traitement des obstacles
 
   //Constantes
   const sf::Vector2f pos = sprite.getPosition(); //La position du sprite living
-  sf::Vector2f newpos = pos + sf::Vector2f(dx, dy); //On calcule la position du living après déplacement
+  sf::Vector2f newpos = pos + sf::Vector2f(mv[0], mv[1]); //On calcule la position du living après déplacement
 
   //Traitement des bords de l'écran
   const sf::FloatRect bounds = sprite.getGlobalBounds(); //La hitbox du sprite living
@@ -14,19 +14,19 @@ bool Living::checkCollision(float& dx, float& dy, Contexte& ctxt) { //Traitement
   const float screen_height = SCREEN_HEIGHT - bounds.height;
   if(newpos.x < 0) { //Si le living sort de l'écran par la gauche
     newpos.x = pos.x; 
-    dx = 0; //On annule le déplacement
+    mv[0] = 0; //On annule le déplacement
   }
   else if(newpos.x > screen_width) { //Si le living sort de l'écran par la droite
     newpos.x = pos.x;
-    dx = 0; //On annule le déplacement 
+    mv[0] = 0; //On annule le déplacement 
   }
   if(newpos.y < 0) { //Si le living sort de l'écran par le haut
     newpos.y = pos.y; 
-    dy = 0; //On annule le déplacement
+    mv[1] = 0; //On annule le déplacement
   }
   else if(newpos.y > screen_height) { //Si le living sort de l'écran par le bas
     newpos.y = pos.y; 
-    dy = 0; //On annule le déplacement
+    mv[1] = 0; //On annule le déplacement
   }
   
   //Traitement des obstacles
@@ -42,10 +42,10 @@ bool Living::checkCollision(float& dx, float& dy, Contexte& ctxt) { //Traitement
       obstacleBounds.intersects(newbounds, intersection);  //On calcule l'intersection
 
       if (intersection.width < intersection.height) { //Si l'intersection est plus longue que large, on déplace uniquement le living sur l'axe des X
-        dx = (intersection.left == newbounds.left) ? intersection.width/2 : -intersection.width/2; //Si l'intersection est à gauche du living, on le déplace vers la droite, sinon on le déplace vers la gauche
+        mv[0] = (intersection.left == newbounds.left) ? intersection.width/2 : -intersection.width/2; //Si l'intersection est à gauche du living, on le déplace vers la droite, sinon on le déplace vers la gauche
       }
       else { //Si l'intersection est plus large que longue, on déplace le living sur l'axe des Y
-        dy = (intersection.top == newbounds.top) ? intersection.height/2 : -intersection.height/2; //Si l'intersection est au dessus du living, on le déplace vers le bas, sinon on le déplace vers le haut
+        mv[1] = (intersection.top == newbounds.top) ? intersection.height/2 : -intersection.height/2; //Si l'intersection est au dessus du living, on le déplace vers le bas, sinon on le déplace vers le haut
       }
       return true;
     }

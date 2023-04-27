@@ -4,7 +4,7 @@
 #include "rock.hpp"
 #include "contexte.hpp"
 
-float z = 0.0f; //À SUPPRIMER SI ON TROUVE UN MEILLEUR MOYEN DE MODIFIER LES SPRITES DES LIVING IMMOBILES
+vector<float> z = {0.0f, 0.0f}; //À SUPPRIMER SI ON TROUVE UN MEILLEUR MOYEN DE MODIFIER LES SPRITES DES LIVING IMMOBILES
 
 int main(int argc, char** argv)
 {
@@ -98,7 +98,7 @@ int main(int argc, char** argv)
     else {
       if(ctxt.getElapsedTime() > 500){
         ctxt.restartClock();
-        zombie.changeTexture(z, z);
+        zombie.changeTexture(z);
       }
     }
     //Effement de la fenêtre
