@@ -1,4 +1,5 @@
 #include "zombie.hpp"
+#include "robot.hpp"
 #include "region.hpp"
 #include "tree.hpp"
 #include "rock.hpp"
@@ -15,40 +16,55 @@ int main(int argc, char** argv)
 
   Texture texbackground, textree, texrock;
   
-  Texture texz;
+  Texture tex;
   vector<Texture> texzombie;
+  vector<Texture> texrobot;
+  //vector<Texture> texhuman;
 
+  //============== ZOMBIE ==============
   //GAUCHE
   //Immobile
-  texz.loadFromFile("zombie1.png");
-  texzombie.push_back(texz); //index 0
-  texz.loadFromFile("zombie1_2.png");
-  texzombie.push_back(texz); //index 1
+  tex.loadFromFile("zombie1.png");
+  texzombie.push_back(tex); //index 0
+  tex.loadFromFile("zombie1_2.png");
+  texzombie.push_back(tex); //index 1
   //Marche
-  texz.loadFromFile("zombie1_3.png");
-  texzombie.push_back(texz); //index 2
-  texz.loadFromFile("zombie1_4.png");
-  texzombie.push_back(texz); //index 3
-
+  tex.loadFromFile("zombie1_3.png");
+  texzombie.push_back(tex); //index 2
+  tex.loadFromFile("zombie1_4.png");
+  texzombie.push_back(tex); //index 3
   //DROITE
   //Immobile
-  texz.loadFromFile("zombie2.png");
-  texzombie.push_back(texz); //index 4
-  texz.loadFromFile("zombie2_2.png");
-  texzombie.push_back(texz); //index 5
+  tex.loadFromFile("zombie2.png");
+  texzombie.push_back(tex); //index 4
+  tex.loadFromFile("zombie2_2.png");
+  texzombie.push_back(tex); //index 5
   //Marche
-  texz.loadFromFile("zombie2_3.png");
-  texzombie.push_back(texz); //index 6
-  texz.loadFromFile("zombie2_4.png");
-  texzombie.push_back(texz); //index 7
+  tex.loadFromFile("zombie2_3.png");
+  texzombie.push_back(tex); //index 6
+  tex.loadFromFile("zombie2_4.png");
+  texzombie.push_back(tex); //index 7
   
+
+  //============== ROBOT ==============
+  tex.loadFromFile("robot1.png");
+  texrobot.push_back(tex);
+  tex.loadFromFile("robot2.png");
+  texrobot.push_back(tex);
+
+
   texbackground.loadFromFile("BG1.png");
   textree.loadFromFile("tree.png");
   texrock.loadFromFile("rock.png");
   //cout << "Textures loaded" << endl;
 
 
+
+
+
+
   Zombie zombie = Zombie(texzombie);
+  Robot robot = Robot(texrobot);
 
   vector<Obstacle> obstacles;
   for (int i = 0; i < 5; i++){
@@ -61,7 +77,7 @@ int main(int argc, char** argv)
   //cout << "Obstacles created" << endl;
 
 
-  Contexte ctxt = Contexte(obstacles, zombie.getHitbox());
+  Contexte ctxt = Contexte(obstacles); //idéalement, le contexte devrait être construit à partir d'une région
   Region region = Region(texbackground, obstacles);
 
 
@@ -88,6 +104,7 @@ int main(int argc, char** argv)
         {
           //cout << "keydown" << endl;
           zombie.bouger(ctxt);
+          robot.bouger(ctxt);
         }
         
         default:
@@ -99,6 +116,7 @@ int main(int argc, char** argv)
       if(ctxt.getElapsedTime() > 500){
         ctxt.restartClock();
         zombie.changeTexture(z);
+        robot.changeTexture(z);
       }
     }
     //Effement de la fenêtre
@@ -109,6 +127,7 @@ int main(int argc, char** argv)
     window.draw(region.getBackgroundSprite());
       
     window.draw(zombie.getSprite());
+    window.draw(robot.getSprite());
     for (int i = 0; i < region.getObstacles().size(); i++){
       window.draw(region.getObstacles()[i].getSprite());
     }

@@ -34,7 +34,8 @@ void Zombie::bouger(Contexte& ctxt){
     }
   }
   sprite.move(mv[0], mv[1]); //On déplace le zombie
-  ctxt.updateZombieHitbox(hitbox); //On met à jour la hitbox du zombie dans le contexte
+  //On notifie les observateurs humains du déplacement du zombie
+  //notifymovement(ctxt);
   previousmv = mv;
 }
 
@@ -71,3 +72,10 @@ void Zombie::changeTexture(vector<float>& mv){
   currentTextureIndex = newTextureIndex;
   sprite.setTexture(textures[newTextureIndex]);
 }
+
+/*void Zombie::notifymovement(Contexte& ctxt){
+  vector<Human>& humans = ctxt.getHumans(); //Référence à la variable existante
+  for (int i = 0; i < humans.size(); ++i) {
+    humans[i]->update(this);
+  }
+}*/

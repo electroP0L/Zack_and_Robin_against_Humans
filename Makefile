@@ -7,14 +7,14 @@ CPPFLAGS= -Ideps/include -std=c++14 -g
 LDFLAGS= -Ldeps/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio
 
 
-OBJECTS = main.o living.o zombie.o 
+OBJECTS = main.o living.o zombie.o robot.o
 all: ZandRVSH
 
 ZandRVSH: $(OBJECTS)
 	$(LD)	-o ZandRVSH	$(OBJECTS)	$(LDFLAGS)
 
 
-main.o: main.cpp zombie.hpp region.hpp tree.hpp rock.hpp contexte.hpp
+main.o: main.cpp zombie.hpp robot.hpp region.hpp tree.hpp rock.hpp contexte.hpp
 	$(CPP)	-c main.cpp	$(CPPFLAGS)
 
 
@@ -28,6 +28,9 @@ living.o: living.cpp living.hpp entity.hpp contexte.hpp
 
 zombie.o: zombie.cpp zombie.hpp living.hpp
 	$(CPP)	-c zombie.cpp	$(CPPFLAGS)
+
+robot.o: robot.cpp robot.hpp living.hpp
+	$(CPP)	-c robot.cpp	$(CPPFLAGS)
 
 obstacle.o: obstacle.hpp entity.hpp
 

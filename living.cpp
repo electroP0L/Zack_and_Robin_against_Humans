@@ -3,11 +3,11 @@
 bool Living::checkCollision(vector<float>& mv, Contexte& ctxt) { //Traitement des obstacles
 
   //Constantes
-  const sf::Vector2f pos = sprite.getPosition(); //La position du sprite living
-  sf::Vector2f newpos = pos + sf::Vector2f(mv[0], mv[1]); //On calcule la position du living après déplacement
+  const Vector2f pos = sprite.getPosition(); //La position du sprite living
+  Vector2f newpos = pos + Vector2f(mv[0], mv[1]); //On calcule la position du living après déplacement
 
   //Traitement des bords de l'écran
-  const sf::FloatRect bounds = sprite.getGlobalBounds(); //La hitbox du sprite living
+  const FloatRect bounds = sprite.getGlobalBounds(); //La hitbox du sprite living
 
 
   const float screen_width = SCREEN_WIDTH - bounds.width; 
@@ -30,15 +30,15 @@ bool Living::checkCollision(vector<float>& mv, Contexte& ctxt) { //Traitement de
   }
   
   //Traitement des obstacles
-  sf::FloatRect newbounds = sf::FloatRect(newpos.x, newpos.y, bounds.width, bounds.height); //On déclare une hitbox de déplacement
+  FloatRect newbounds = FloatRect(newpos.x, newpos.y, bounds.width, bounds.height); //On déclare une hitbox de déplacement
   
-  std::vector<Obstacle>& obstacles = ctxt.getObstacles(); //Référence à la variable existante
+  vector<Obstacle>& obstacles = ctxt.getObstacles(); //Référence à la variable existante
 
   for (int i = 0; i < obstacles.size(); ++i) { //Pour chaque obstacle dans le vecteur d'obstacles
-    const sf::FloatRect obstacleBounds = obstacles[i].getHitbox(); //On récupère la hitbox de l'obstacle
+    const FloatRect obstacleBounds = obstacles[i].getHitbox(); //On récupère la hitbox de l'obstacle
 
     if (obstacleBounds.intersects(newbounds)) { //Si le living et l'obstacle se chevauchent
-      sf::FloatRect intersection; //On déclare un rectangle d'intersection
+      FloatRect intersection; //On déclare un rectangle d'intersection
       obstacleBounds.intersects(newbounds, intersection);  //On calcule l'intersection
 
       if (intersection.width < intersection.height) { //Si l'intersection est plus longue que large, on déplace uniquement le living sur l'axe des X

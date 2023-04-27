@@ -13,8 +13,9 @@ class Zombie : public Living
   public:
     Zombie(vector<Texture>& textures);
     void bouger(Contexte& ctxt) override;
-    void changeTexture(vector<float>& mv) override;
     //void attaquer();
+    void changeTexture(vector<float>& mv) override;
+    //void notifymovement(Contexte& ctxt);
 };  
 
 #endif
