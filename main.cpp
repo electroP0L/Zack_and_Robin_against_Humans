@@ -53,6 +53,7 @@ int main(int argc, char** argv)
   texrobot.push_back(tex);
 
 
+  //============== DÉCOR ==============
   texbackground.loadFromFile("sprites/BG1.png");
   textree.loadFromFile("sprites/tree.png");
   texrock.loadFromFile("sprites/rock.png");
