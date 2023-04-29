@@ -13,7 +13,7 @@ class Contexte {
 
     
   public:
-    Contexte(vector<Obstacle>& obstacles){this->obstacles = obstacles;}
+    Contexte(Region region){obstacles = region.getObstacles();}
     
     vector<Obstacle>& getObstacles() {return this->obstacles;}
     //vector<Human>& getHumans() {return this->humans;}

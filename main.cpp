@@ -60,36 +60,26 @@ int main(int argc, char** argv)
   //cout << "Textures loaded" << endl;
 
 
-
-
-
-
+  //============== CRÉATION DES OBJETS ==============
   Zombie zombie = Zombie(texzombie);
   Robot robot = Robot(texrobot);
 
   vector<Obstacle> obstacles;
-  for (int i = 0; i < 5; i++){
-    obstacles.push_back(Rock(texrock, rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));
-  }
-  for (int i = 0; i < 5; i++){
-    obstacles.push_back(Tree(textree, rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));
-  }
+  for (int i = 0; i < 5; i++){  obstacles.push_back(Rock(texrock, rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
+  for (int i = 0; i < 5; i++){  obstacles.push_back(Tree(textree, rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
 
-  //cout << "Obstacles created" << endl;
+  Region region1 = Region(texbackground, obstacles);
+  Contexte ctxt = Contexte(region1);
 
 
-  Contexte ctxt = Contexte(obstacles); //idéalement, le contexte devrait être construit à partir d'une région
-  Region region = Region(texbackground, obstacles);
-
-
-  //Game loop
+  //============== GAME LOOP ==============
   window.setFramerateLimit(60);
   Clock clock;
   const Time timePerFrame = seconds(1.f/60.f);
 
   while(window.isOpen()){
     
-    //Gestion de la fermeture de la fenêtre
+    //============== FERMETURE DE LA FENÊTRE ==============
     Event event;
     while(window.pollEvent(event)){
       if(event.type == Event::Closed){
@@ -97,34 +87,34 @@ int main(int argc, char** argv)
       }
     }
 
-    //Gestion des entrées - Mouvement des sprites
+    //============== GESTION DES ENTRÉES - MOUVEMENT DES SPRITES ==============
     zombie.bouger(ctxt);
     robot.bouger(ctxt);
 
-    //Gestion du timer d'animation
+    //============== GESTION DU TIMER D'ANIMATION ==============
     if(ctxt.getElapsedTime() > 500){
       ctxt.restartClock();
     }
 
-    //Effacement de la fenêtre
+    //============== AFFICHAGE ==============
     window.clear();
 
-    //Affichage des sprites
-    window.draw(region.getBackgroundSprite());
+    window.draw(region1.getBackgroundSprite());
 
     window.draw(zombie.getSprite());
     window.draw(robot.getSprite());
-    for (int i = 0; i < region.getObstacles().size(); i++){
-      window.draw(region.getObstacles()[i].getSprite());
+
+    for (int i = 0; i < region1.getObstacles().size(); i++){
+      window.draw(region1.getObstacles()[i].getSprite());
     }
 
     window.display();
 
-    //Pause pour respecter le délai entre chaque frame
+    //============== DÉLAI ENTRE CHAQUE FRAME  ==============
     sleep(timePerFrame);
   }
 
-  //On détruit tous les objets :
+  //============== FERMETURE DE LA FENÊTRE ==============
   window.close();
 
   return 0;

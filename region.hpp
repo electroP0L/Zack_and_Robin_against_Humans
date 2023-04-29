@@ -11,8 +11,8 @@ class Region
   private:
     Sprite background;
     int nb_obstacles;
-    std::vector<Obstacle> obstacles;
-    //std::vector<Entity> entities; ?
+    vector<Obstacle> obstacles;
+    //vector<Human> humans;
 
   public:
     Region(Texture& texbackground, std::vector<Obstacle> obstacles){
@@ -21,7 +21,8 @@ class Region
       this->nb_obstacles = obstacles.size();
     }
     Sprite getBackgroundSprite() {return background;}
-    std::vector<Obstacle> getObstacles() {return obstacles;}
+    vector<Obstacle> getObstacles() {return obstacles;}
+    //vector<Human> getHumans() {return humans;}
 
     
     
