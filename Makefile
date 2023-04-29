@@ -18,7 +18,7 @@ main.o: main.cpp zombie.hpp robot.hpp region.hpp tree.hpp rock.hpp contexte.hpp
 	$(CPP)	-c main.cpp	$(CPPFLAGS)
 
 
-contexte.o: contexte.hpp obstacle.hpp
+contexte.o: contexte.hpp region.hpp obstacle.hpp
 
 entity.o: entity.hpp
 

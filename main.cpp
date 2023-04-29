@@ -24,39 +24,39 @@ int main(int argc, char** argv)
   //============== ZOMBIE ==============
   //GAUCHE
   //Immobile
-  tex.loadFromFile("sprites/zombie1.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie1.png");
   texzombie.push_back(tex); //index 0
-  tex.loadFromFile("sprites/zombie1_2.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie1_2.png");
   texzombie.push_back(tex); //index 1
   //Marche
-  tex.loadFromFile("sprites/zombie1_3.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie1_3.png");
   texzombie.push_back(tex); //index 2
-  tex.loadFromFile("sprites/zombie1_4.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie1_4.png");
   texzombie.push_back(tex); //index 3
   //DROITE
   //Immobile
-  tex.loadFromFile("sprites/zombie2.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie2.png");
   texzombie.push_back(tex); //index 4
-  tex.loadFromFile("sprites/zombie2_2.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie2_2.png");
   texzombie.push_back(tex); //index 5
   //Marche
-  tex.loadFromFile("sprites/zombie2_3.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie2_3.png");
   texzombie.push_back(tex); //index 6
-  tex.loadFromFile("sprites/zombie2_4.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie2_4.png");
   texzombie.push_back(tex); //index 7
   
 
   //============== ROBOT ==============
-  tex.loadFromFile("sprites/robot1.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/robot1.png");
   texrobot.push_back(tex);
-  tex.loadFromFile("sprites/robot2.png");
+  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/robot2.png");
   texrobot.push_back(tex);
 
 
   //============== DÉCOR ==============
-  texbackground.loadFromFile("sprites/BG1.png");
-  textree.loadFromFile("sprites/tree.png");
-  texrock.loadFromFile("sprites/rock.png");
+  texbackground.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/BG1.png");
+  textree.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/tree.png");
+  texrock.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/rock.png");
   //cout << "Textures loaded" << endl;
 
 

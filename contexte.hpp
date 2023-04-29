@@ -1,6 +1,7 @@
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
-
+ 
+#include "region.hpp"
 #include "obstacle.hpp"
 #include <vector>
 
@@ -13,7 +14,7 @@ class Contexte {
 
     
   public:
-    Contexte(Region region){obstacles = region.getObstacles();}
+    Contexte(Region& region){obstacles = region.getObstacles();}
     
     vector<Obstacle>& getObstacles() {return this->obstacles;}
     //vector<Human>& getHumans() {return this->humans;}
