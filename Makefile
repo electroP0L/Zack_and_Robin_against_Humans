@@ -14,7 +14,7 @@ ZandRVSH: $(OBJECTS)
 	$(LD)	-o ZandRVSH	$(OBJECTS)	$(LDFLAGS)
 
 
-main.o: main.cpp zombie.hpp robot.hpp region.hpp tree.hpp rock.hpp contexte.hpp
+main.o: main.cpp zombie.hpp robot.hpp region.hpp tree.hpp rock.hpp fence.hpp contexte.hpp
 	$(CPP)	-c main.cpp	$(CPPFLAGS)
 
 
@@ -37,6 +37,8 @@ obstacle.o: obstacle.hpp entity.hpp
 rock.o: rock.hpp obstacle.hpp
 
 tree.o: tree.hpp obstacle.hpp
+
+fence.o: fence.hpp obstacle.hpp
 
 region.o: region.hpp obstacle.hpp
 

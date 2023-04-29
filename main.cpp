@@ -3,6 +3,7 @@
 #include "region.hpp"
 #include "tree.hpp"
 #include "rock.hpp"
+#include "fence.hpp"
 #include "contexte.hpp"
 
 String path = "Bureau/Informatique/"; // Chemin vers le dossier contenant le projet
@@ -12,9 +13,15 @@ int main(int argc, char** argv)
   srand(time(NULL));
 
 	RenderWindow window(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Zack & Robin VS. Humans");
+  Image icon;
 
+  if(!icon.loadFromFile("application/icon.png")){  icon.loadFromFile(path + "Zack_and_Robin_against_Humans/application/icon.png"); }
+  window.setIcon(48, 48, icon.getPixelsPtr());
 
-  Texture texbackground, textree, texrock;
+  window.setVerticalSyncEnabled(true);
+  window.setFramerateLimit(60);
+
+  Texture texbackground, textree, texrock, texfence;
   
   Texture tex;
   vector<Texture> texzombie;
@@ -57,6 +64,7 @@ int main(int argc, char** argv)
   if(!texbackground.loadFromFile("sprites/BG1.png")){ texbackground.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/BG1.png");  }
   if(!textree.loadFromFile("sprites/tree.png")){  textree.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/tree.png"); }
   if(!texrock.loadFromFile("sprites/rock.png")){  texrock.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/rock.png"); }
+  if(!texfence.loadFromFile("sprites/fence.png")){  texfence.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence.png"); }
   
 
 
@@ -65,15 +73,15 @@ int main(int argc, char** argv)
   Robot robot = Robot(texrobot);
 
   vector<Obstacle> obstacles;
-  for (int i = 0; i < 5; i++){  obstacles.push_back(Rock(texrock, rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
-  for (int i = 0; i < 5; i++){  obstacles.push_back(Tree(textree, rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
+  for (int i = 0; i < 3; i++){  obstacles.push_back(Rock(texrock, rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
+  for (int i = 0; i < 3; i++){  obstacles.push_back(Tree(textree, rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
+  for (int i = 0; i < 10; i++){  obstacles.push_back(Fence(texfence, rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
 
   Region region1 = Region(texbackground, obstacles);
   Contexte ctxt = Contexte(region1);
 
 
   //============== GAME LOOP ==============
-  window.setFramerateLimit(60);
   Clock clock;
   const Time timePerFrame = seconds(1.f/60.f);
 
