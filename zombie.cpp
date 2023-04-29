@@ -2,10 +2,11 @@
 
 Zombie::Zombie(vector<Texture>& textures){
   this->textures = textures;
-  sprite.setTexture(textures[2]);
-  currentTextureIndex = 2;
+  sprite.setTexture(textures[4]);
+  currentTextureIndex = 4;
   sprite.scale(scale, scale);
-  sprite.move(0 + 10, SCREEN_HEIGHT - sprite.getGlobalBounds().height);
+  //sprite.move(0 + 10, SCREEN_HEIGHT - sprite.getGlobalBounds().height);
+  sprite.move(SCREEN_WIDTH/2 - sprite.getGlobalBounds().width/2 , SCREEN_HEIGHT/2);
   hitbox = sprite.getGlobalBounds();
   size = textures.size()-1;
   halfsize = textures.size()/2 -1;
@@ -22,17 +23,16 @@ void Zombie::bouger(Contexte& ctxt){
   if(checkCollision(mv, ctxt)) { //Si on détecte une collision, le zombie va reculer pour l'éviter
     if(ctxt.getElapsedTime() > 500){ // Si le chronomètre indique une demi seconde
       mv[0] -= mv[0]; //On inverse temporairement la direction du zombie
-      ctxt.restartClock();  //On le remet à zéro
       changeTexture(mv); //On change la texture du zombie
       mv[0] -= mv[0]; //On remet la direction du zombie à sa valeur initiale
     }
   }
   else {
     if(ctxt.getElapsedTime() > 500 || previousmv[0] != mv[0] ){ // Si le chronomètre indique une demi seconde, ou le zombie a changé de direction
-      ctxt.restartClock();  //On le remet à zéro
       changeTexture(mv); //On change la texture du zombie
     }
   }
+
   sprite.move(mv[0], mv[1]); //On déplace le zombie
   //On notifie les observateurs humains du déplacement du zombie
   //notifymovement(ctxt);

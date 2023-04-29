@@ -5,7 +5,8 @@ Robot::Robot(vector<Texture>& textures){
   sprite.setTexture(textures[0]);
   currentTextureIndex = 0;
   sprite.setScale(scale, scale);
-  sprite.move(SCREEN_WIDTH - sprite.getGlobalBounds().height, 0 + 10);
+  //sprite.move(SCREEN_WIDTH - sprite.getGlobalBounds().height - 10, 0 + 10);
+  sprite.move(SCREEN_WIDTH/2 + sprite.getGlobalBounds().width/2, SCREEN_HEIGHT/2);
   hitbox = sprite.getGlobalBounds();
   size = textures.size()-1;
   halfsize = textures.size()/2 -1;
@@ -17,9 +18,13 @@ void Robot::bouger(Contexte& ctxt){
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){mv[1] += speed;}
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){mv[0] -= speed;}
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){mv[0] += speed;}
-
+  
   checkCollision(mv, ctxt);
   sprite.move(mv[0], mv[1]);
+  if (ctxt.getElapsedTime() > 500){
+    changeTexture(mv);
+  }
+
   previousmv = mv;
 }
 

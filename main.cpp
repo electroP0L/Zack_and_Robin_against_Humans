@@ -24,38 +24,38 @@ int main(int argc, char** argv)
   //============== ZOMBIE ==============
   //GAUCHE
   //Immobile
-  tex.loadFromFile("zombie1.png");
+  tex.loadFromFile("sprites/zombie1.png");
   texzombie.push_back(tex); //index 0
-  tex.loadFromFile("zombie1_2.png");
+  tex.loadFromFile("sprites/zombie1_2.png");
   texzombie.push_back(tex); //index 1
   //Marche
-  tex.loadFromFile("zombie1_3.png");
+  tex.loadFromFile("sprites/zombie1_3.png");
   texzombie.push_back(tex); //index 2
-  tex.loadFromFile("zombie1_4.png");
+  tex.loadFromFile("sprites/zombie1_4.png");
   texzombie.push_back(tex); //index 3
   //DROITE
   //Immobile
-  tex.loadFromFile("zombie2.png");
+  tex.loadFromFile("sprites/zombie2.png");
   texzombie.push_back(tex); //index 4
-  tex.loadFromFile("zombie2_2.png");
+  tex.loadFromFile("sprites/zombie2_2.png");
   texzombie.push_back(tex); //index 5
   //Marche
-  tex.loadFromFile("zombie2_3.png");
+  tex.loadFromFile("sprites/zombie2_3.png");
   texzombie.push_back(tex); //index 6
-  tex.loadFromFile("zombie2_4.png");
+  tex.loadFromFile("sprites/zombie2_4.png");
   texzombie.push_back(tex); //index 7
   
 
   //============== ROBOT ==============
-  tex.loadFromFile("robot1.png");
+  tex.loadFromFile("sprites/robot1.png");
   texrobot.push_back(tex);
-  tex.loadFromFile("robot2.png");
+  tex.loadFromFile("sprites/robot2.png");
   texrobot.push_back(tex);
 
 
-  texbackground.loadFromFile("BG1.png");
-  textree.loadFromFile("tree.png");
-  texrock.loadFromFile("rock.png");
+  texbackground.loadFromFile("sprites/BG1.png");
+  textree.loadFromFile("sprites/tree.png");
+  texrock.loadFromFile("sprites/rock.png");
   //cout << "Textures loaded" << endl;
 
 
@@ -83,49 +83,34 @@ int main(int argc, char** argv)
 
   //Game loop
   window.setFramerateLimit(60);
+  Clock clock;
+  const Time timePerFrame = seconds(1.f/60.f);
 
   while(window.isOpen()){
-
+    
+    //Gestion de la fermeture de la fenêtre
     Event event;
-
-		// Events management
-    if (window.pollEvent(event)) { //Tant qu'il y a des évènements à traiter
-      
-      switch (event.type) {
-
-        case Event::Closed : // handling of close button  
-        {
-          window.close();
-          break;
-          //cout << "quit" << endl;
-        }
- 
-        case Event::KeyPressed : //Si une touche est enfoncée
-        {
-          //cout << "keydown" << endl;
-          zombie.bouger(ctxt);
-          robot.bouger(ctxt);
-        }
-        
-        default:
-          //cout << "default" << endl;
-          break;
+    while(window.pollEvent(event)){
+      if(event.type == Event::Closed){
+        window.close();
       }
     }
-    else {
-      if(ctxt.getElapsedTime() > 500){
-        ctxt.restartClock();
-        zombie.changeTexture(z);
-        robot.changeTexture(z);
-      }
+
+    //Gestion des entrées - Mouvement des sprites
+    zombie.bouger(ctxt);
+    robot.bouger(ctxt);
+
+    //Gestion du timer d'animation
+    if(ctxt.getElapsedTime() > 500){
+      ctxt.restartClock();
     }
-    //Effement de la fenêtre
+
+    //Effacement de la fenêtre
     window.clear();
 
     //Affichage des sprites
-    // Le background rempli toute la fenêtre
     window.draw(region.getBackgroundSprite());
-      
+
     window.draw(zombie.getSprite());
     window.draw(robot.getSprite());
     for (int i = 0; i < region.getObstacles().size(); i++){
@@ -133,10 +118,12 @@ int main(int argc, char** argv)
     }
 
     window.display();
+
+    //Pause pour respecter le délai entre chaque frame
+    sleep(timePerFrame);
   }
 
   //On détruit tous les objets :
-
   window.close();
 
   return 0;

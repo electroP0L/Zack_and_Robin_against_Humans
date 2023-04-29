@@ -17,6 +17,8 @@ class Living : public Entity
     int halfsize;
   public:
     Sprite getSprite() {return sprite;}
+    vector <float> getPreviousmv() {return previousmv;}
+
     virtual void bouger(Contexte& ctxt) = 0;
     bool checkCollision(vector<float>& mv, Contexte& ctxt);
     virtual void changeTexture(vector<float>& mv) = 0;
