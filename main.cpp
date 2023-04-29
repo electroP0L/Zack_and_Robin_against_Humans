@@ -5,7 +5,7 @@
 #include "rock.hpp"
 #include "contexte.hpp"
 
-vector<float> z = {0.0f, 0.0f}; //À SUPPRIMER SI ON TROUVE UN MEILLEUR MOYEN DE MODIFIER LES SPRITES DES LIVING IMMOBILES
+String path = "Bureau/Informatique/"; // Chemin vers le dossier contenant le projet
 
 int main(int argc, char** argv)
 {
@@ -24,39 +24,39 @@ int main(int argc, char** argv)
   //============== ZOMBIE ==============
   //GAUCHE
   //Immobile
-  if(!tex.loadFromFile("sprites/zombie1.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie1.png"); }
+  if(!tex.loadFromFile("sprites/zombie1.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/zombie1.png"); }
   texzombie.push_back(tex); //index 0
-  if(!tex.loadFromFile("sprites/zombie1_2.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie1_2.png"); }
+  if(!tex.loadFromFile("sprites/zombie1_2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/zombie1_2.png"); }
   texzombie.push_back(tex); //index 1
   //Marche
-  if(!tex.loadFromFile("sprites/zombie1_3.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie1_3.png"); }
+  if(!tex.loadFromFile("sprites/zombie1_3.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/zombie1_3.png"); }
   texzombie.push_back(tex); //index 2
-  if(!tex.loadFromFile("sprites/zombie1_4.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie1_4.png"); }
+  if(!tex.loadFromFile("sprites/zombie1_4.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/zombie1_4.png"); }
   texzombie.push_back(tex); //index 3
   //DROITE
   //Immobile
-  if(!tex.loadFromFile("sprites/zombie2.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie2.png");  }
+  if(!tex.loadFromFile("sprites/zombie2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/zombie2.png");  }
   texzombie.push_back(tex); //index 4
-  if(!tex.loadFromFile("sprites/zombie2_2.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie2_2.png");  }
+  if(!tex.loadFromFile("sprites/zombie2_2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/zombie2_2.png");  }
   texzombie.push_back(tex); //index 5
   //Marche
-  if(!tex.loadFromFile("sprites/zombie2_3.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie2_3.png");  }
+  if(!tex.loadFromFile("sprites/zombie2_3.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/zombie2_3.png");  }
   texzombie.push_back(tex); //index 6
-  if(!tex.loadFromFile("sprites/zombie2_4.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/zombie2_4.png");  }
+  if(!tex.loadFromFile("sprites/zombie2_4.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/zombie2_4.png");  }
   texzombie.push_back(tex); //index 7
   
 
   //============== ROBOT ==============
-  if(!tex.loadFromFile("sprites/robot1.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/robot1.png");  }
+  if(!tex.loadFromFile("sprites/robot1.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/robot1.png");  }
   texrobot.push_back(tex);
-  if(!tex.loadFromFile("sprites/robot2.png")){  tex.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/robot2.png");  }
+  if(!tex.loadFromFile("sprites/robot2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/robot2.png");  }
   texrobot.push_back(tex);
 
 
   //============== DÉCOR ==============
-  if(!texbackground.loadFromFile("sprites/BG1.png")){ texbackground.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/BG1.png");  }
-  if(!textree.loadFromFile("sprites/tree.png")){  textree.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/tree.png"); }
-  if(!texrock.loadFromFile("sprites/rock.png")){  texrock.loadFromFile("Bureau/Informatique/Zack_and_Robin_against_Humans/sprites/rock.png"); }
+  if(!texbackground.loadFromFile("sprites/BG1.png")){ texbackground.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/BG1.png");  }
+  if(!textree.loadFromFile("sprites/tree.png")){  textree.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/tree.png"); }
+  if(!texrock.loadFromFile("sprites/rock.png")){  texrock.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/rock.png"); }
   
 
 
