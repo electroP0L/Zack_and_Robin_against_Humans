@@ -6,31 +6,56 @@ bool Living::checkCollision(vector<float>& mv, Contexte& ctxt) { //Traitement de
   const Vector2f pos = sprite.getPosition(); //La position du sprite living
   Vector2f newpos = pos + Vector2f(mv[0], mv[1]); //On calcule la position du living après déplacement
 
-  //Traitement des bords de l'écran
+  //Traitement des bords de l'écran 
+  //TODO : LES PNJ PEUVENT CHANGER LA REGION - A PATCHER PLUS TARD
   const FloatRect bounds = sprite.getGlobalBounds(); //La hitbox du sprite living
 
 
   const float screen_width = SCREEN_WIDTH - bounds.width; 
   const float screen_height = SCREEN_HEIGHT - bounds.height;
+
+  map<String, vector<float>> waypoints = ctxt.getWaypoints();
   if(newpos.x < 0) { //Si le living sort de l'écran par la gauche
-    newpos.x = pos.x; 
-    mv[0] = 0; //On annule le déplacement
+    if((waypoints.count("Left")) && (pos.y >= waypoints["Left"][0])&&(pos.y <= waypoints["Left"][1])){  //Si on peut sortir de la région par la gauche et que le sprite est compris dans la zone de changement
+      ctxt.setChangeRegion(true, waypoints["Left"][2]);
+    }
+    else{
+      newpos.x = pos.x; 
+      mv[0] = 0; //On annule le déplacement
+    }
   }
   else if(newpos.x > screen_width) { //Si le living sort de l'écran par la droite
-    newpos.x = pos.x;
-    mv[0] = 0; //On annule le déplacement 
+    if((waypoints.count("Right")) && (pos.y >= waypoints["Right"][0])&&(pos.y <= waypoints["Left"][1])){ //Si on peut sortir de la région par la droite et que le sprite est compris dans la zone de changement
+      ctxt.setChangeRegion(true, waypoints["Right"][2]);
+    }
+    else{
+      newpos.x = pos.x;
+      mv[0] = 0; //On annule le déplacement
+    } 
   }
   if(newpos.y < 0) { //Si le living sort de l'écran par le haut
-    newpos.y = pos.y; 
-    mv[1] = 0; //On annule le déplacement
+    if ((waypoints.count("Top")) && (pos.x >= waypoints["Top"][0])&&(pos.x+bounds.width) <= waypoints["Top"][1]){  //Si on peut sortir de la région par le haut et que le sprite est compris dans la zone de changement
+      ctxt.setChangeRegion(true, waypoints["Top"][2]);
+    }
+    else {
+      newpos.y = pos.y; 
+      mv[1] = 0; //On annule le déplacement
+    }
   }
   else if(newpos.y > screen_height) { //Si le living sort de l'écran par le bas
+    if((waypoints.count("Bottom")) && (pos.x >= waypoints["Bottom"][0])&&(pos.x+bounds.width) <= waypoints["Bottom"][1]){  //Si on peut sortir de la région par le bas et que le sprite est compris dans la zone de changement
+      ctxt.setChangeRegion(true, waypoints["Bottom"][2]);
+    }
+    else {
+      newpos.y = pos.y; 
+      mv[1] = 0; //On annule le déplacement
+    }
     newpos.y = pos.y; 
     mv[1] = 0; //On annule le déplacement
   }
   
   //Traitement des obstacles
-  FloatRect newbounds = FloatRect(newpos.x, newpos.y, bounds.width, bounds.height); //On déclare une hitbox de déplacement
+  const FloatRect newbounds = FloatRect(newpos.x, newpos.y, bounds.width, bounds.height); //On déclare une hitbox de déplacement
   
   vector<Obstacle>& obstacles = ctxt.getObstacles(); //Référence à la variable existante
 

@@ -5,8 +5,9 @@ Robot::Robot(vector<Texture>& textures){
   sprite.setTexture(textures[0]);
   currentTextureIndex = 0;
   sprite.setScale(scale, scale);
-  //sprite.move(SCREEN_WIDTH - sprite.getGlobalBounds().height - 10, 0 + 10);
-  sprite.move(SCREEN_WIDTH/2 + sprite.getGlobalBounds().width/2, SCREEN_HEIGHT/2);
+  //sprite.move(0 + 10, SCREEN_HEIGHT - sprite.getGlobalBounds().height);
+  //sprite.move(SCREEN_WIDTH/2 + sprite.getGlobalBounds().width/2, SCREEN_HEIGHT/2);
+  sprite.move(0,0);
   hitbox = sprite.getGlobalBounds();
   size = textures.size()-1;
   halfsize = textures.size()/2 -1;

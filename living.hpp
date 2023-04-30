@@ -18,6 +18,7 @@ class Living : public Entity
   public:
     Sprite getSprite() {return sprite;}
     vector <float> getPreviousmv() {return previousmv;}
+    void setposition(float x, float y) {sprite.setPosition(x, y);}
 
     virtual void bouger(Contexte& ctxt) = 0;
     bool checkCollision(vector<float>& mv, Contexte& ctxt);

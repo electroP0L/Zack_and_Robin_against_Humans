@@ -6,7 +6,8 @@ Zombie::Zombie(vector<Texture>& textures){
   currentTextureIndex = 4;
   sprite.scale(scale, scale);
   //sprite.move(0 + 10, SCREEN_HEIGHT - sprite.getGlobalBounds().height);
-  sprite.move(SCREEN_WIDTH/2 - sprite.getGlobalBounds().width/2 , SCREEN_HEIGHT/2);
+  //sprite.move(SCREEN_WIDTH/2 - sprite.getGlobalBounds().width/2 , SCREEN_HEIGHT/2);
+  sprite.move(0,0);
   hitbox = sprite.getGlobalBounds();
   size = textures.size()-1;
   halfsize = textures.size()/2 -1;

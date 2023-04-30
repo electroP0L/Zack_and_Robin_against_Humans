@@ -1,9 +1,6 @@
 #include "zombie.hpp"
 #include "robot.hpp"
-#include "region.hpp"
-#include "tree.hpp"
-#include "rock.hpp"
-#include "fence.hpp"
+#include "map.hpp"
 #include "contexte.hpp"
 
 String path = "Bureau/Informatique/"; // Chemin vers le dossier contenant le projet
@@ -21,12 +18,12 @@ int main(int argc, char** argv)
   window.setVerticalSyncEnabled(true);
   window.setFramerateLimit(60);
 
-  Texture texbackground, textree, texrock, texfence;
-  
   Texture tex;
   vector<Texture> texzombie;
   vector<Texture> texrobot;
   //vector<Texture> texhuman;
+  vector<Texture> texobs;
+  vector<Texture> texbackground;
 
   //============== ZOMBIE ==============
   //GAUCHE
@@ -61,39 +58,38 @@ int main(int argc, char** argv)
 
 
   //============== DÉCOR ==============
-  if(!texbackground.loadFromFile("sprites/BG1.png")){ texbackground.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/BG1.png");  }
-  if(!textree.loadFromFile("sprites/tree.png")){  textree.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/tree.png"); }
-  if(!texrock.loadFromFile("sprites/rock.png")){  texrock.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/rock.png"); }
-  if(!texfence.loadFromFile("sprites/fence.png")){  texfence.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence.png"); }
+  for(int i = 1; i <= 9; i++){
+    if(!tex.loadFromFile("sprites/BG" + to_string(i) + ".png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/BG" + to_string(i) + ".png");  }
+    texbackground.push_back(tex);
+  }
+
+  //============== OBSTACLES ==============
+  if(!tex.loadFromFile("sprites/tree.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/tree.png"); }
+  texobs.push_back(tex);
+  if(!tex.loadFromFile("sprites/rock.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/rock.png"); }
+  texobs.push_back(tex);
+  if(!tex.loadFromFile("sprites/fence.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence.png"); }
+  texobs.push_back(tex);
   
 
+  //================ CRÉATION DE LA MAP ET DU CONTEXTE =================
+
+  Map map = Map(texbackground, texobs);
 
   //============== CRÉATION DES OBJETS ==============
   Zombie zombie = Zombie(texzombie);
   Robot robot = Robot(texrobot);
 
-  vector<Obstacle> obstacles;
-
-  obstacles.push_back(Tree(textree, SCREEN_WIDTH/20, SCREEN_HEIGHT/3));
-  obstacles.push_back(Tree(textree, 15*SCREEN_WIDTH/20, SCREEN_HEIGHT/3 - 100));
-  obstacles.push_back(Tree(textree, 6*SCREEN_HEIGHT/10, 3*SCREEN_WIDTH/4));
-
-
-  obstacles.push_back(Rock(texrock, 2*SCREEN_WIDTH/10, 8*SCREEN_HEIGHT/10));
-  obstacles.push_back(Rock(texrock, 13*SCREEN_WIDTH/20, SCREEN_HEIGHT/3 + 50));
-  obstacles.push_back(Rock(texrock, 17*SCREEN_WIDTH/20, 7*SCREEN_HEIGHT/10));
-
-  for (int i = 0; i < 10; i++){
-    if((i != 4) && (i != 5) && (i != 6)){  obstacles.push_back(Fence(texfence, 100 * i, 10)); } 
-  }
-
-  Region region1 = Region(texbackground, obstacles);
-  Contexte ctxt = Contexte(region1);
-
 
   //============== GAME LOOP ==============
   Clock clock;
   const Time timePerFrame = seconds(1.f/60.f);
+
+  vector<bool> change = {false, 1};
+  map.loadRegion(zombie, robot, change[1]);
+  Region currentreg = map.getCurrentRegion();
+  Contexte ctxt = Contexte(currentreg);
+
 
   while(window.isOpen()){
     
@@ -114,16 +110,25 @@ int main(int argc, char** argv)
       ctxt.restartClock();
     }
 
+    //============== GESTION DU CHANGEMENT DE RÉGION ==============
+    change = ctxt.getChangeRegion();
+    if(change[0]){
+      map.loadRegion(zombie, robot, change[1]);
+      currentreg = map.getCurrentRegion();
+      ctxt.setChangeRegion(false, 0);
+      ctxt = Contexte(currentreg);
+    }
+
     //============== AFFICHAGE ==============
     window.clear();
 
-    window.draw(region1.getBackgroundSprite());
+    window.draw(currentreg.getBackgroundSprite());
 
     window.draw(zombie.getSprite());
     window.draw(robot.getSprite());
 
-    for (int i = 0; i < region1.getObstacles().size(); i++){
-      window.draw(region1.getObstacles()[i].getSprite());
+    for (int i = 0; i < currentreg.getObstacles().size(); i++){
+      window.draw(currentreg.getObstacles()[i].getSprite());
     }
 
     window.display();

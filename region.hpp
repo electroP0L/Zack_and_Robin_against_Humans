@@ -3,7 +3,9 @@
 
 #include "obstacle.hpp"
 #include "vector"
+#include "map"
 //#include "entity.hpp" ?
+
 
 class Region
 {
@@ -14,15 +16,25 @@ class Region
     vector<Obstacle> obstacles;
     //vector<Human> humans;
 
+    vector<vector<float>> spawn;  //spawn[0] = spawnpoint en avant //spawn[1] = spawnpoint en arrière
+    map<String, vector<float>> waypoints;
+
   public:
-    Region(Texture& texbackground, std::vector<Obstacle> obstacles){
+    Region(Texture& texbackground, vector<Obstacle> obstacles, vector<vector<float>> spawn, map<String, vector<float>> waypoints){
       background.setTexture(texbackground);
       this->obstacles = obstacles;
       this->nb_obstacles = obstacles.size();
+      this->spawn = spawn;
+      this->waypoints = waypoints;
     }
+
     Sprite getBackgroundSprite() {return background;}
     vector<Obstacle> getObstacles() {return obstacles;}
     //vector<Human> getHumans() {return humans;}
+
+    map<String, vector<float>> getWaypoints() {return waypoints;}
+
+    vector<float> getspawnpoint(int i) {return spawn[i];}
 
     
     
