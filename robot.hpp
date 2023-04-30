@@ -8,6 +8,7 @@ class Robot : public Living
   private:
     const float scale = 1.0f/8.0;
     float speed = 1.5f;
+    //float speed = 5.0f;
     
   public:
     Robot(vector<Texture>& textures);

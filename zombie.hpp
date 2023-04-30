@@ -9,6 +9,7 @@ class Zombie : public Living
     int nb_membres;
     const float scale = 1.0f/10.0f;
     float speed = 1.5f;
+    //float speed = 5.0f;
     
   public:
     Zombie(vector<Texture>& textures);

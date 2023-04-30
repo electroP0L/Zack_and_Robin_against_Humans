@@ -19,11 +19,11 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   map<String, vector<float>> waypoints;
-  waypoints["Top"] = {4*SCREEN_WIDTH/10, 7*SCREEN_HEIGHT/10, 1}; //Sortie
+  waypoints["Top"] = {4*SCREEN_WIDTH/10, 7*SCREEN_WIDTH/10, 1}; //Sortie
   waypoints["Bottom"] = {-1, -1, 0}; //Entrée (vide)
 
   //POSITIONNEMENT DES POINTS DE SPAWN
-  vector<vector<float>> spawn = {{SCREEN_WIDTH/2, SCREEN_HEIGHT/2} /*entrée*/, {SCREEN_WIDTH/2, 0}} /*sortie*/;
+  vector<vector<float>> spawn = {{SCREEN_WIDTH/2, SCREEN_HEIGHT/2} /*entrée*/, {SCREEN_WIDTH/2, 10}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
   regions.push_back(Region(texbackground[0], obs, spawn, waypoints));
@@ -32,12 +32,46 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   waypoints.clear();
   spawn.clear();
 
-  //============== AUTRES RÉGIONS ==============
-
-  for (int i = 1; i < 9; i++){
+  //============== RÉGION 2 ==============
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant on randomise)
     for (int i = 0; i < 5; i++){  obs.push_back(Tree(texobs[0], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
     for (int i = 0; i < 3; i++){  obs.push_back(Rock(texobs[1], rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
-    for (int i = 0; i < 10; i++){  obs.push_back(Fence(texobs[2], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
+    for (int i = 0; i < 5; i++){  obs.push_back(Fence(texobs[2], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
+
+    waypoints["Left"] = {3*SCREEN_HEIGHT/10, 5*SCREEN_HEIGHT/10, 1};
+    waypoints["Bottom"] = {4*SCREEN_WIDTH/10, 7*SCREEN_WIDTH/10, 0};
+
+    spawn = {{SCREEN_WIDTH/2, SCREEN_HEIGHT-100} /*entrée*/, {50, SCREEN_HEIGHT/3}} /*sortie*/;
+
+    regions.push_back(Region(texbackground[1], obs, spawn, waypoints));
+
+    obs.clear();
+    waypoints.clear();
+    spawn.clear();
+
+  //============== RÉGION 3 ==============
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant on randomise)
+    for (int i = 0; i < 5; i++){  obs.push_back(Tree(texobs[0], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
+    for (int i = 0; i < 3; i++){  obs.push_back(Rock(texobs[1], rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
+    for (int i = 0; i < 5; i++){  obs.push_back(Fence(texobs[2], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
+
+    waypoints["Bottom"] = {4.5*SCREEN_WIDTH/10, 5.5*SCREEN_WIDTH/10, 1};
+    waypoints["Right"] = {4.5*SCREEN_HEIGHT/10, 7.5*SCREEN_HEIGHT/10, 0};
+
+    spawn = {{SCREEN_WIDTH-50, SCREEN_HEIGHT/3} /*entrée*/, {2*SCREEN_WIDTH/4, SCREEN_HEIGHT-100}} /*sortie*/;
+
+    regions.push_back(Region(texbackground[2], obs, spawn, waypoints));
+
+    obs.clear();
+    waypoints.clear();
+    spawn.clear();
+
+  //============== AUTRES RÉGIONS ==============
+
+  for (int i = 3; i < 9; i++){
+    for (int i = 0; i < 5; i++){  obs.push_back(Tree(texobs[0], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
+    for (int i = 0; i < 3; i++){  obs.push_back(Rock(texobs[1], rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
+    for (int i = 0; i < 5; i++){  obs.push_back(Fence(texobs[2], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
 
     waypoints["Top"] = {4*SCREEN_WIDTH/10, 7*SCREEN_HEIGHT/10, 1};
     waypoints["Bottom"] = {4*SCREEN_WIDTH/10, 7*SCREEN_HEIGHT/10, 0};
