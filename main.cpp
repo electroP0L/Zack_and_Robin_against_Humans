@@ -64,7 +64,7 @@ int main(int argc, char** argv)
   if(!texbackground.loadFromFile("sprites/BG1.png")){ texbackground.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/BG1.png");  }
   if(!textree.loadFromFile("sprites/tree.png")){  textree.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/tree.png"); }
   if(!texrock.loadFromFile("sprites/rock.png")){  texrock.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/rock.png"); }
-  if(!texfence.loadFromFile("sprites/fence2.png")){  texfence.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence2.png"); }
+  if(!texfence.loadFromFile("sprites/fence.png")){  texfence.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence.png"); }
   
 
 
