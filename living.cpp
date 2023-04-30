@@ -25,7 +25,7 @@ bool Living::checkCollision(vector<float>& mv, Contexte& ctxt) { //Traitement de
     }
   }
   else if(newpos.x > screen_width) { //Si le living sort de l'écran par la droite
-    if((waypoints.count("Right")) && (pos.y >= waypoints["Right"][0])&&(pos.y <= waypoints["Left"][1])){ //Si on peut sortir de la région par la droite et que le sprite est compris dans la zone de changement
+    if((waypoints.count("Right")) && (pos.y >= waypoints["Right"][0])&&(pos.y <= waypoints["Right"][1])){ //Si on peut sortir de la région par la droite et que le sprite est compris dans la zone de changement
       ctxt.setChangeRegion(true, waypoints["Right"][2]);
     }
     else{

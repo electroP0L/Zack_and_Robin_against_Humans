@@ -19,11 +19,11 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   map<String, vector<float>> waypoints;
-  waypoints["Top"] = {4*SCREEN_WIDTH/10, 7*SCREEN_WIDTH/10, 1}; //Sortie
+  waypoints["Top"] = {400, 700, 1}; //Sortie
   waypoints["Bottom"] = {-1, -1, 0}; //Entrée (vide)
 
   //POSITIONNEMENT DES POINTS DE SPAWN
-  vector<vector<float>> spawn = {{SCREEN_WIDTH/2, SCREEN_HEIGHT/2} /*entrée*/, {SCREEN_WIDTH/2, 10}} /*sortie*/;
+  vector<vector<float>> spawn = {{500, 500} /*entrée*/, {500, 10}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
   regions.push_back(Region(texbackground[0], obs, spawn, waypoints));
@@ -33,57 +33,150 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   spawn.clear();
 
   //============== RÉGION 2 ==============
-  //POSITIONNEMENT DES OBSTACLES (pour l'instant on randomise)
-    for (int i = 0; i < 5; i++){  obs.push_back(Tree(texobs[0], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
-    for (int i = 0; i < 3; i++){  obs.push_back(Rock(texobs[1], rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
-    for (int i = 0; i < 5; i++){  obs.push_back(Fence(texobs[2], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
 
-    waypoints["Left"] = {3*SCREEN_HEIGHT/10, 5*SCREEN_HEIGHT/10, 1};
-    waypoints["Bottom"] = {4*SCREEN_WIDTH/10, 7*SCREEN_WIDTH/10, 0};
 
-    spawn = {{SCREEN_WIDTH/2, SCREEN_HEIGHT-100} /*entrée*/, {50, SCREEN_HEIGHT/3}} /*sortie*/;
+  //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
+  waypoints["Left"] = {300, 500, 1};
+  waypoints["Bottom"] = {400, 700, 0};
 
-    regions.push_back(Region(texbackground[1], obs, spawn, waypoints));
+  //POSITIONNEMENT DES POINTS DE SPAWN
+  spawn = {{500, 900} /*entrée*/, {50, 300}} /*sortie*/;
 
-    obs.clear();
-    waypoints.clear();
-    spawn.clear();
+  //CRÉATION DE LA RÉGION
+  regions.push_back(Region(texbackground[1], obs, spawn, waypoints));
+
+  obs.clear();
+  waypoints.clear();
+  spawn.clear();
 
   //============== RÉGION 3 ==============
-  //POSITIONNEMENT DES OBSTACLES (pour l'instant on randomise)
-    for (int i = 0; i < 5; i++){  obs.push_back(Tree(texobs[0], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
-    for (int i = 0; i < 3; i++){  obs.push_back(Rock(texobs[1], rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
-    for (int i = 0; i < 5; i++){  obs.push_back(Fence(texobs[2], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
-
-    waypoints["Bottom"] = {4.5*SCREEN_WIDTH/10, 5.5*SCREEN_WIDTH/10, 1};
-    waypoints["Right"] = {4.5*SCREEN_HEIGHT/10, 7.5*SCREEN_HEIGHT/10, 0};
-
-    spawn = {{SCREEN_WIDTH-50, SCREEN_HEIGHT/3} /*entrée*/, {2*SCREEN_WIDTH/4, SCREEN_HEIGHT-100}} /*sortie*/;
-
-    regions.push_back(Region(texbackground[2], obs, spawn, waypoints));
-
-    obs.clear();
-    waypoints.clear();
-    spawn.clear();
-
-  //============== AUTRES RÉGIONS ==============
-
-  for (int i = 3; i < 9; i++){
-    for (int i = 0; i < 5; i++){  obs.push_back(Tree(texobs[0], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
-    for (int i = 0; i < 3; i++){  obs.push_back(Rock(texobs[1], rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
-    for (int i = 0; i < 5; i++){  obs.push_back(Fence(texobs[2], rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
-
-    waypoints["Top"] = {4*SCREEN_WIDTH/10, 7*SCREEN_HEIGHT/10, 1};
-    waypoints["Bottom"] = {4*SCREEN_WIDTH/10, 7*SCREEN_HEIGHT/10, 0};
-
-    spawn = {{SCREEN_WIDTH/2, SCREEN_HEIGHT/2} /*entrée*/, {SCREEN_WIDTH/2, 0}} /*sortie*/;
-
-
-    regions.push_back(Region(texbackground[i], obs, spawn, waypoints));
-    obs.clear();
-    waypoints.clear();
-  }
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+    
   
+  //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
+  waypoints["Bottom"] = {500, 700, 1};
+  waypoints["Right"] = {300, 500, 0};
+
+  //POSITIONNEMENT DES POINTS DE SPAWN
+  spawn = {{900, 300} /*entrée*/, {550, 990}} /*sortie*/;
+
+  //CRÉATION DE LA RÉGION
+  regions.push_back(Region(texbackground[2], obs, spawn, waypoints));
+
+  obs.clear();
+  waypoints.clear();
+  spawn.clear();
+
+  //============== RÉGION 4 ==============
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+
+
+  //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
+  waypoints["Left"] = {300, 500, 1};
+  waypoints["Top"] = {500, 700, 0};
+
+  //POSITIONNEMENT DES POINTS DE SPAWN
+  spawn = {{550, 10} /*entrée*/, {100, 350}} /*sortie*/;
+
+  //CRÉATION DE LA RÉGION
+  regions.push_back(Region(texbackground[3], obs, spawn, waypoints));
+
+  obs.clear();
+  waypoints.clear();
+  spawn.clear();
+  
+  //============== RÉGION 5 ==============
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+
+
+  //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
+  waypoints["Top"] = {300, 500, 1};
+  waypoints["Right"] = {300, 500, 0};
+
+  //POSITIONNEMENT DES POINTS DE SPAWN
+  spawn = {{900, 300} /*entrée*/, {400, 10}} /*sortie*/;
+
+  //CRÉATION DE LA RÉGION
+  regions.push_back(Region(texbackground[4], obs, spawn, waypoints));
+
+  obs.clear();
+  waypoints.clear();
+  spawn.clear();
+
+  //============== RÉGION 6 ==============
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+
+
+  //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
+  waypoints["Top"] = {300, 500, 1};
+  waypoints["Bottom"] = {300, 500, 0};
+
+  //POSITIONNEMENT DES POINTS DE SPAWN
+  spawn = {{400, 900} /*entrée*/, {400, 10}} /*sortie*/;
+
+  //CRÉATION DE LA RÉGION
+  regions.push_back(Region(texbackground[5], obs, spawn, waypoints));
+
+  obs.clear();
+  waypoints.clear();
+  spawn.clear();
+
+  //============== RÉGION 7 ==============
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+
+
+  //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
+  waypoints["Right"] = {400, 600, 1};
+  waypoints["Bottom"] = {300, 500, 0};
+
+  //POSITIONNEMENT DES POINTS DE SPAWN
+  spawn = {{400, 900} /*entrée*/, {900, 450}} /*sortie*/;
+
+  //CRÉATION DE LA RÉGION
+  regions.push_back(Region(texbackground[6], obs, spawn, waypoints));
+
+  obs.clear();
+  waypoints.clear();
+  spawn.clear();
+
+  //============== RÉGION 8 ==============
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+
+
+  //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
+  waypoints["Right"] = {600, 800, 1};
+  waypoints["Left"] = {400, 600, 0};
+
+  //POSITIONNEMENT DES POINTS DE SPAWN
+  spawn = {{100, 450} /*entrée*/, {900, 650}} /*sortie*/;
+
+  //CRÉATION DE LA RÉGION
+  regions.push_back(Region(texbackground[7], obs, spawn, waypoints));
+
+  obs.clear();
+  waypoints.clear();
+  spawn.clear();
+
+  //============== RÉGION 9 ==============
+  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+
+
+  //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
+  waypoints["Top"] = {-1, -1, 1};
+  waypoints["Left"] = {600, 800, 0};
+
+  //POSITIONNEMENT DES POINTS DE SPAWN
+  spawn = {{100, 650} /*entrée*/, {500, 500}} /*sortie*/;
+
+  //CRÉATION DE LA RÉGION
+  regions.push_back(Region(texbackground[8], obs, spawn, waypoints));
+
+  obs.clear();
+  waypoints.clear();
+  spawn.clear();
+
+  //============== Initialisation ==============
   currentRegionIndex = -1;
   previousRegionIndex = -2;
 }

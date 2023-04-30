@@ -15,10 +15,10 @@ Robot::Robot(vector<Texture>& textures){
 
 void Robot::bouger(Contexte& ctxt){
   vector<float> mv = {0.0f, 0.0f};
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){mv[1] -= speed;}
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){mv[1] += speed;}
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){mv[0] -= speed;}
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){mv[0] += speed;}
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)){mv[1] -= speed;}
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)){mv[1] += speed;}
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)){mv[0] -= speed;}
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)){mv[0] += speed;}
   
   checkCollision(mv, ctxt);
   sprite.move(mv[0], mv[1]);
