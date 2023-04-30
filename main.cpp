@@ -64,7 +64,7 @@ int main(int argc, char** argv)
   if(!texbackground.loadFromFile("sprites/BG1.png")){ texbackground.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/BG1.png");  }
   if(!textree.loadFromFile("sprites/tree.png")){  textree.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/tree.png"); }
   if(!texrock.loadFromFile("sprites/rock.png")){  texrock.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/rock.png"); }
-  if(!texfence.loadFromFile("sprites/fence.png")){  texfence.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence.png"); }
+  if(!texfence.loadFromFile("sprites/fence2.png")){  texfence.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence2.png"); }
   
 
 
@@ -73,9 +73,19 @@ int main(int argc, char** argv)
   Robot robot = Robot(texrobot);
 
   vector<Obstacle> obstacles;
-  for (int i = 0; i < 3; i++){  obstacles.push_back(Rock(texrock, rand() % (SCREEN_WIDTH - 84), rand() % (SCREEN_HEIGHT - 53)));  }
-  for (int i = 0; i < 3; i++){  obstacles.push_back(Tree(textree, rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
-  for (int i = 0; i < 10; i++){  obstacles.push_back(Fence(texfence, rand() % (SCREEN_WIDTH - 175), rand() % (SCREEN_HEIGHT - 195)));  }
+
+  obstacles.push_back(Tree(textree, SCREEN_WIDTH/20, SCREEN_HEIGHT/3));
+  obstacles.push_back(Tree(textree, 15*SCREEN_WIDTH/20, SCREEN_HEIGHT/3 - 100));
+  obstacles.push_back(Tree(textree, 6*SCREEN_HEIGHT/10, 3*SCREEN_WIDTH/4));
+
+
+  obstacles.push_back(Rock(texrock, 2*SCREEN_WIDTH/10, 8*SCREEN_HEIGHT/10));
+  obstacles.push_back(Rock(texrock, 13*SCREEN_WIDTH/20, SCREEN_HEIGHT/3 + 50));
+  obstacles.push_back(Rock(texrock, 17*SCREEN_WIDTH/20, 7*SCREEN_HEIGHT/10));
+
+  for (int i = 0; i < 10; i++){
+    if((i != 4) && (i != 5) && (i != 6)){  obstacles.push_back(Fence(texfence, 100 * i, 10)); } 
+  }
 
   Region region1 = Region(texbackground, obstacles);
   Contexte ctxt = Contexte(region1);
