@@ -1,10 +1,14 @@
 #ifndef REGION_HPP
 #define REGION_HPP
 
-#include "obstacle.hpp"
+#include "human.hpp"
+//#include "obstacle.hpp"
+#include "tree.hpp"
+#include "rock.hpp"
+#include "fence.hpp"
+
 #include "vector"
 #include "map"
-//#include "entity.hpp" ?
 
 
 class Region
@@ -12,25 +16,25 @@ class Region
 
   private:
     Sprite background;
-    int nb_obstacles;
     vector<Obstacle> obstacles;
-    //vector<Human> humans;
+    vector<Human> humans;
 
     vector<vector<float>> spawn;  //spawn[0] = spawnpoint en avant //spawn[1] = spawnpoint en arrière
     map<String, vector<float>> waypoints;
 
   public:
-    Region(Texture& texbackground, vector<Obstacle> obstacles, vector<vector<float>> spawn, map<String, vector<float>> waypoints){
+    Region(Texture& texbackground, vector<Obstacle> obstacles, vector<Human> humans, vector<vector<float>> spawn, map<String, vector<float>> waypoints){
       background.setTexture(texbackground);
       this->obstacles = obstacles;
-      this->nb_obstacles = obstacles.size();
+      this->humans = humans;
       this->spawn = spawn;
       this->waypoints = waypoints;
     }
 
     Sprite getBackgroundSprite() {return background;}
-    vector<Obstacle> getObstacles() {return obstacles;}
-    //vector<Human> getHumans() {return humans;}
+    vector<Obstacle>& getObstacles() {return obstacles;}
+    vector<Human>* getHumansptr() {return &humans;}
+    vector<Human>& getHumans() {return humans;}
 
     map<String, vector<float>> getWaypoints() {return waypoints;}
 

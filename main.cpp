@@ -1,7 +1,6 @@
 #include "zombie.hpp"
 #include "robot.hpp"
 #include "map.hpp"
-#include "contexte.hpp"
 
 String path = "Bureau/Informatique/"; // Chemin vers le dossier contenant le projet
 
@@ -21,7 +20,7 @@ int main(int argc, char** argv)
   Texture tex;
   vector<Texture> texzombie;
   vector<Texture> texrobot;
-  //vector<Texture> texhuman;
+  vector<Texture> texhuman;
   vector<Texture> texobs;
   vector<Texture> texbackground;
 
@@ -56,6 +55,31 @@ int main(int argc, char** argv)
   if(!tex.loadFromFile("sprites/robot2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/robot2.png");  }
   texrobot.push_back(tex);
 
+  //============== HUMAIN ==============
+  //GAUCHE
+  //Immobile
+  if(!tex.loadFromFile("sprites/human1.png")){  if(!tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/human1.png"));  }
+  texhuman.push_back(tex); //index 0
+  if(!tex.loadFromFile("sprites/human1_2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/human1_2.png");  }
+  texhuman.push_back(tex); //index 1
+  //Marche
+  if(!tex.loadFromFile("sprites/human1_3.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/human1_3.png");  }
+  texhuman.push_back(tex); //index 2
+  if(!tex.loadFromFile("sprites/human1_4.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/human1_4.png");  }
+  texhuman.push_back(tex); //index 3
+  //DROITE
+  //Immobile
+  if(!tex.loadFromFile("sprites/human2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/human2.png");  }
+  texhuman.push_back(tex); //index 4
+  if(!tex.loadFromFile("sprites/human2_2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/human2_2.png");  }
+  texhuman.push_back(tex); //index 5
+  //Marche
+  if(!tex.loadFromFile("sprites/human2_3.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/human2_3.png");  }
+  texhuman.push_back(tex); //index 6
+  if(!tex.loadFromFile("sprites/human2_4.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/human2_4.png");  }
+  texhuman.push_back(tex); //index 7
+
+
 
   //============== DÉCOR ==============
   for(int i = 1; i <= 9; i++){
@@ -74,7 +98,7 @@ int main(int argc, char** argv)
 
   //================ CRÉATION DE LA MAP ET DU CONTEXTE =================
 
-  Map map = Map(texbackground, texobs);
+  Map map = Map(texbackground, texobs, texhuman);
 
   //============== CRÉATION DES OBJETS ==============
   Zombie zombie = Zombie(texzombie);
@@ -88,7 +112,7 @@ int main(int argc, char** argv)
   vector<bool> change = {false, 1};
   map.loadRegion(zombie, robot, change[1]);
   Region currentreg = map.getCurrentRegion();
-  Contexte ctxt = Contexte(currentreg);
+  Contexte ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints());
 
 
   while(window.isOpen()){
@@ -116,13 +140,17 @@ int main(int argc, char** argv)
       map.loadRegion(zombie, robot, change[1]);
       currentreg = map.getCurrentRegion();
       ctxt.setChangeRegion(false, 0);
-      ctxt = Contexte(currentreg);
+      Contexte ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints());
     }
 
     //============== AFFICHAGE ==============
     window.clear();
 
     window.draw(currentreg.getBackgroundSprite());
+
+    for (int i = 0; i < currentreg.getHumans().size(); i++){
+      window.draw(currentreg.getHumans()[i].getSprite());
+    }
 
     window.draw(zombie.getSprite());
     window.draw(robot.getSprite());

@@ -1,6 +1,6 @@
 #include "map.hpp"
 
-Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
+Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture>& texhumans){
   vector<Obstacle> obs;
 
   //============== RÉGION 1 ==============
@@ -17,6 +17,11 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
     if((i != 4) && (i != 5) && (i != 6)){  obs.push_back(Fence(texobs[2], 100 * i, 10)); } 
   }
 
+  //POSITIONNEMENT DES HUMAINS
+  vector<Human> humans;
+
+  humans.push_back(Human(texhumans, {100, 100}));
+
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   map<String, vector<float>> waypoints;
   waypoints["Top"] = {400, 700, 1}; //Sortie
@@ -26,9 +31,10 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   vector<vector<float>> spawn = {{500, 500} /*entrée*/, {500, 10}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
-  regions.push_back(Region(texbackground[0], obs, spawn, waypoints));
+  regions.push_back(Region(texbackground[0], obs, humans, spawn, waypoints));
 
   obs.clear();
+  humans.clear();
   waypoints.clear();
   spawn.clear();
 
@@ -44,9 +50,10 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   spawn = {{500, 900} /*entrée*/, {50, 300}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
-  regions.push_back(Region(texbackground[1], obs, spawn, waypoints));
+  regions.push_back(Region(texbackground[1], obs, humans, spawn, waypoints));
 
   obs.clear();
+  humans.clear();
   waypoints.clear();
   spawn.clear();
 
@@ -62,9 +69,10 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   spawn = {{900, 300} /*entrée*/, {550, 990}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
-  regions.push_back(Region(texbackground[2], obs, spawn, waypoints));
+  regions.push_back(Region(texbackground[2], obs, humans, spawn, waypoints));
 
   obs.clear();
+  humans.clear();
   waypoints.clear();
   spawn.clear();
 
@@ -80,9 +88,10 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   spawn = {{550, 10} /*entrée*/, {100, 350}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
-  regions.push_back(Region(texbackground[3], obs, spawn, waypoints));
+  regions.push_back(Region(texbackground[3], obs, humans, spawn, waypoints));
 
   obs.clear();
+  humans.clear();
   waypoints.clear();
   spawn.clear();
   
@@ -98,9 +107,10 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   spawn = {{900, 300} /*entrée*/, {400, 10}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
-  regions.push_back(Region(texbackground[4], obs, spawn, waypoints));
+  regions.push_back(Region(texbackground[4], obs, humans, spawn, waypoints));
 
   obs.clear();
+  humans.clear();
   waypoints.clear();
   spawn.clear();
 
@@ -116,9 +126,10 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   spawn = {{400, 900} /*entrée*/, {400, 10}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
-  regions.push_back(Region(texbackground[5], obs, spawn, waypoints));
+  regions.push_back(Region(texbackground[5], obs, humans, spawn, waypoints));
 
   obs.clear();
+  humans.clear();
   waypoints.clear();
   spawn.clear();
 
@@ -134,9 +145,10 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   spawn = {{400, 900} /*entrée*/, {900, 450}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
-  regions.push_back(Region(texbackground[6], obs, spawn, waypoints));
+  regions.push_back(Region(texbackground[6], obs, humans, spawn, waypoints));
 
   obs.clear();
+  humans.clear();
   waypoints.clear();
   spawn.clear();
 
@@ -152,9 +164,10 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   spawn = {{100, 450} /*entrée*/, {900, 650}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
-  regions.push_back(Region(texbackground[7], obs, spawn, waypoints));
+  regions.push_back(Region(texbackground[7], obs, humans, spawn, waypoints));
 
   obs.clear();
+  humans.clear();
   waypoints.clear();
   spawn.clear();
 
@@ -170,9 +183,10 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs){
   spawn = {{100, 650} /*entrée*/, {500, 500}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
-  regions.push_back(Region(texbackground[8], obs, spawn, waypoints));
+  regions.push_back(Region(texbackground[8], obs, humans, spawn, waypoints));
 
   obs.clear();
+  humans.clear();
   waypoints.clear();
   spawn.clear();
 

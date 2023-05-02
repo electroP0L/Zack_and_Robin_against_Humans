@@ -12,6 +12,8 @@ class Living : public Entity
     Sprite sprite;
     vector<float> previousmv = {0.0f, 0.0f};
 
+    float speed;
+
     
     int size;
     int halfsize;
@@ -22,9 +24,8 @@ class Living : public Entity
 
     virtual void bouger(Contexte& ctxt) = 0;
     bool checkCollision(vector<float>& mv, Contexte& ctxt);
-    virtual void changeTexture(vector<float>& mv) = 0;
+    virtual void changeTexture(vector<float>& mv);
     //virtual void attaquer() = 0;
 };  
-
 
 #endif

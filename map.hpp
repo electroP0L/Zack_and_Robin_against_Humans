@@ -1,13 +1,14 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
+
 #include "region.hpp"
 #include "zombie.hpp"
 #include "robot.hpp"
-//#include "human.hpp"
-#include "tree.hpp"
-#include "rock.hpp"
-#include "fence.hpp"
+/*
+#include "living.hpp"
+#include "obstacle.hpp"
+*/
 
 class Map {
   private:
@@ -17,7 +18,7 @@ class Map {
     int previousRegionIndex;
 
   public:
-    Map(vector<Texture>& texbackground, vector<Texture>& texobs);
+    Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture>& texhumans);
 
     void setCurrentRegion(Region& region) {currentRegion = &region;}
     Region& getCurrentRegion() {return *currentRegion;}

@@ -7,32 +7,33 @@ CPPFLAGS= -Ideps/include -std=c++14 -g
 LDFLAGS= -Ldeps/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio
 
 
-OBJECTS = main.o living.o zombie.o robot.o map.o
+OBJECTS = main.o living.o zombie.o robot.o human.o map.o
 all: ZandRVSH
 
 ZandRVSH: $(OBJECTS)
 	$(LD)	-o ZandRVSH	$(OBJECTS)	$(LDFLAGS)
 
 
-main.o: main.cpp zombie.hpp robot.hpp map.hpp contexte.hpp
+main.o: main.cpp zombie.hpp robot.hpp map.hpp
 	$(CPP)	-c main.cpp	$(CPPFLAGS)
-
-
-contexte.o: contexte.hpp region.hpp obstacle.hpp
 
 entity.o: entity.hpp
 
 living.o: living.cpp living.hpp entity.hpp contexte.hpp
 	$(CPP)	-c living.cpp	$(CPPFLAGS)
 
-
-zombie.o: zombie.cpp zombie.hpp living.hpp
+zombie.o: zombie.cpp zombie.hpp living.hpp human.hpp
 	$(CPP)	-c zombie.cpp	$(CPPFLAGS)
 
 robot.o: robot.cpp robot.hpp living.hpp
 	$(CPP)	-c robot.cpp	$(CPPFLAGS)
 
-obstacle.o: obstacle.hpp entity.hpp
+human.o: human.cpp human.hpp living.hpp
+	$(CPP)	-c human.cpp	$(CPPFLAGS)
+
+inanimate.o: inanimate.hpp entity.hpp
+
+obstacle.o: obstacle.hpp inanimate.hpp
 
 rock.o: rock.hpp obstacle.hpp
 
@@ -40,10 +41,12 @@ tree.o: tree.hpp obstacle.hpp
 
 fence.o: fence.hpp obstacle.hpp
 
-map.o: map.cpp region.hpp zombie.hpp robot.hpp tree.hpp rock.hpp fence.hpp
+region.o: region.hpp human.hpp tree.hpp rock.hpp fence.hpp
+
+map.o: map.cpp map.hpp region.hpp
 	$(CPP)	-c map.cpp	$(CPPFLAGS)
 
-region.o: region.hpp obstacle.hpp
+contexte.o: contexte.hpp obstacle.hpp
 
 clean:
 	rm -f *.o ZandRVSH
