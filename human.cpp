@@ -20,7 +20,6 @@ Human::Human(vector<Texture>& textures, vector<float> pos){
 
 void Human::bouger(Contexte& ctxt){
   FloatRect& zombiePos = ctxt.getZombiePos();
-  //cout << "zombiePos : " << zombiePos.left << " " << zombiePos.top << endl;
 
   //Déplacement : L'Humain doit se rapprocher de la hitbox du zombie ;
   //Pour cela, on va bouger son sprite vers la hitbox du zombie :
@@ -37,11 +36,17 @@ void Human::bouger(Contexte& ctxt){
 
   //On calcule la norme du vecteur directeur :
   float norme = sqrt(mv[0]*mv[0] + mv[1]*mv[1]);
-  //norme -= 75; //On enlève 75 pour que l'humain ne soit pas trop proche du zombie
 
-  //On normalise le vecteur directeur :
-  if (norme < 1) {mv[0] = 0; mv[1] = 0;}
-  else {mv[0] /= norme; mv[1] /= norme;}
+  if (norme <= 100) {
+    // L'humain est dans le rayon d'action du zombie, on ne bouge pas l'humain
+    mv[0] = 0;
+    mv[1] = 0;
+  }
+  else{
+    //On normalise le vecteur directeur :
+    if (norme < 1) {mv[0] = 0; mv[1] = 0;}
+    else {mv[0] /= norme; mv[1] /= norme;}
+  }
 
   //On calcule le déplacement :
   mv[0] *= speed;
@@ -55,10 +60,13 @@ void Human::bouger(Contexte& ctxt){
     }
   }
   else {
-    int signmv = (mv[0] > 0) ? 1 : ((mv[0] < 0) ? -1 : 0); //On récupère le signe de mv[0]
+    int signmv = (mv[0] >= 0) ? 1 : ((mv[0] < 0) ? -1 : 0); //On récupère le signe de mv[0]
     int signprevmv = (previousmv[0] > 0) ? 1 : ((previousmv[0] < 0) ? -1 : 0); //On récupère le signe de previousmv[0]
 
-    if(ctxt.getElapsedTime() > 500 || signprevmv != signmv ){ // Si le chronomètre indique une demi seconde, ou le zombie a changé de direction
+    bool hasElapsed = ctxt.getElapsedTime() > 500;
+    bool hasChangedDirection = signprevmv != signmv && (previousmv[0] != 0 || mv[0] != 0);
+
+    if(hasElapsed || hasChangedDirection){ // Si le chronomètre indique une demi seconde, ou le zombie a changé de direction
       changeTexture(mv); //On change la texture de l'humain
     }
   }
