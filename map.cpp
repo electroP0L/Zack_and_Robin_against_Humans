@@ -19,7 +19,6 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
 
   //POSITIONNEMENT DES HUMAINS
   vector<Human> humans;
-
   humans.push_back(Human(texhumans, {100, 100}));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
@@ -41,6 +40,9 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
   //============== RÉGION 2 ==============
   //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
 
+
+  //POSITIONNEMENT DES HUMAINS
+  humans.push_back(Human(texhumans, {500, 500}));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Left"] = {300, 500, 1};

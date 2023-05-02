@@ -21,7 +21,11 @@ class Contexte {
 
     
   public:
-    Contexte(vector<Obstacle> obstacles, vector<Human>* humans, map<String, vector<float>> waypoints){this->obstacles = obstacles; this->humans = humans; this->waypoints = waypoints;}
+    Contexte(vector<Obstacle> obstacles, vector<Human>* humans, map<String, vector<float>> waypoints){
+      //On vide tous les vecteurs au préalable
+      this->obstacles.clear(); this->waypoints.clear();
+      this->obstacles = obstacles; this->humans = humans; this->waypoints = waypoints;
+    }
     
     vector<Obstacle>& getObstacles() {return this->obstacles;}
     vector<Human>& getHumans() {return *humans;}

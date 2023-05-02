@@ -140,7 +140,7 @@ int main(int argc, char** argv)
       map.loadRegion(zombie, robot, change[1]);
       currentreg = map.getCurrentRegion();
       ctxt.setChangeRegion(false, 0);
-      Contexte ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints());
+      ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints());
     }
 
     //============== AFFICHAGE ==============
