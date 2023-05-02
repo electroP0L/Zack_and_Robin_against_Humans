@@ -19,7 +19,8 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
 
   //POSITIONNEMENT DES HUMAINS
   vector<Human> humans;
-  humans.push_back(Human(texhumans, {100, 100}));
+  humans.push_back(Human(texhumans, {500, 250}));
+
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   map<String, vector<float>> waypoints;
@@ -42,7 +43,9 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
 
 
   //POSITIONNEMENT DES HUMAINS
-  humans.push_back(Human(texhumans, {500, 500}));
+    humans.push_back(Human(texhumans, {100, 100}));
+  humans.push_back(Human(texhumans, {900, 100}));
+  humans.push_back(Human(texhumans, {100, 900}));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Left"] = {300, 500, 1};
@@ -214,5 +217,4 @@ void Map::loadRegion(Zombie& zombie, Robot& robot, int direction){
     zombie.setposition(currentRegion->getspawnpoint(1)[0] - z_dx, currentRegion->getspawnpoint(1)[1]);
     robot.setposition(currentRegion->getspawnpoint(1)[0] + r_dx, currentRegion->getspawnpoint(1)[1]);
   }
-
 }

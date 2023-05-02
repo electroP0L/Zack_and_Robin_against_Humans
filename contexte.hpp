@@ -1,8 +1,6 @@
 #ifndef CONTEXTE_HPP
 #define CONTEXTE_HPP
- 
-//#include "region.hpp"
-//#include "human.hpp"
+
 #include "obstacle.hpp"
 class Human;
 
