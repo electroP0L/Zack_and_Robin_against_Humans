@@ -8,7 +8,7 @@ class Fence : public Obstacle
   private:
     
   public:
-    Fence(Texture& texture, int x, int y){
+    Fence(Texture& texture, float x, float y){
       sprite.setTexture(texture);
       float scale = 1.0f / 10.0f;
       sprite.scale(scale, scale);

@@ -9,8 +9,8 @@ class Inanimate : public Entity
     Sprite sprite;
   public:
     Inanimate(){}; //Constructeur par défaut
-    Sprite getSprite() {return sprite;}
-    void setpos(int& x, int& y) {sprite.setPosition(x, y);}
+    virtual Sprite getSprite(){return sprite;}
+    void setpos(float& x, float& y) {sprite.setPosition(x, y);}
 };
 
 #endif

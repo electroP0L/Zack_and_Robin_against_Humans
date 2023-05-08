@@ -78,6 +78,13 @@ bool Living::checkCollision(vector<float>& mv, Contexte& ctxt) { //Traitement de
   return false;
 }
 
+void Living::changeHP(int damage){
+  if(invincTimer.getElapsedTime()>invincTime){
+    HP -= damage;
+    if (HP <= 0) {HP = 0;}
+  }
+}
+
 void Living::changeTexture(vector<float>& mv){
   int sign = (mv[0] > 0) ? 1 : ((mv[0] < 0) ? -1 : 0); //On récupère le signe de mv[0]
   
@@ -90,7 +97,7 @@ void Living::changeTexture(vector<float>& mv){
     newTextureIndex = (currentTextureIndex != 6) ? 6 : 7; //Si on est à la troisième texture, on passe à la quatrième, sinon on passe à la troisième
     break;
   default: 
-    if (currentTextureIndex <= halfsize) { //Si on est dans la première moitié des textures
+    if (currentTextureIndex <= halftexSize) { //Si on est dans la première moitié des textures
       if (mv[1] == 0){ //Si on ne bouge pas sur l'axe y
         newTextureIndex = (currentTextureIndex == 0) ? 1 : 0; //Si on est à la première texture, on passe à la deuxième, sinon on passe à la première
       }

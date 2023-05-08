@@ -6,13 +6,15 @@
 class Robot : public Living
 {
   private:
-    const float scale = 1.0f/8.0;
+    const float scale = 1.0f/10.0;
     
   public:
     Robot(vector<Texture>& textures);
+    
     void bouger(Contexte& ctxt) override;
-    //void attaquer();
+    void attaquer(Contexte& ctxt, vector<float> direction) override;
     //void pickUpItem();
+
     void changeTexture(vector<float>& mv) override;
 };
 

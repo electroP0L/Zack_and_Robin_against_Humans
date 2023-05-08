@@ -23,6 +23,11 @@ int main(int argc, char** argv)
   vector<Texture> texhuman;
   vector<Texture> texobs;
   vector<Texture> texbackground;
+  vector<Texture> texattackperdirection;
+  vector<vector<Texture>> texattackspercaracter;
+  vector<vector<vector<Texture>>> texattacks;
+
+
 
   //============== ZOMBIE ==============
   //GAUCHE
@@ -79,7 +84,105 @@ int main(int argc, char** argv)
   if(!tex.loadFromFile("sprites/human2_4.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/human2_4.png");  }
   texhuman.push_back(tex); //index 7
 
+  //============== ATTAQUES ==============
+  //Zombie
+  /*  
+  if(!tex.loadFromFile("sprites/Zattack1T.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack1T.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Zattack2T.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack2T.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
 
+  if(!tex.loadFromFile("sprites/Zattack1B.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack1B.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Zattack2B.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack2B.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+  */
+
+  if(!tex.loadFromFile("sprites/Zattack1R.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack1R.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Zattack2R.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack2R.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  if(!tex.loadFromFile("sprites/Zattack1L.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack1L.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Zattack2L.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack2L.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  texattacks.push_back(texattackspercaracter);
+  texattackspercaracter.clear();
+
+  //Robot
+  if(!tex.loadFromFile("sprites/Rattack1T.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Rattack1T.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Rattack2T.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Rattack2T.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  if(!tex.loadFromFile("sprites/Rattack1B.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Rattack1B.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Rattack2B.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Rattack2B.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  if(!tex.loadFromFile("sprites/Rattack1R.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Rattack1R.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Rattack2R.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Rattack2R.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  if(!tex.loadFromFile("sprites/Rattack1L.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Rattack1L.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Rattack2L.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Rattack2L.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  texattacks.push_back(texattackspercaracter);
+  texattackspercaracter.clear();
+
+  //Human
+  if(!tex.loadFromFile("sprites/Hattack1T.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Hattack1T.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Hattack2T.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Hattack2T.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  if(!tex.loadFromFile("sprites/Hattack1B.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Hattack1B.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Hattack2B.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Hattack2B.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  if(!tex.loadFromFile("sprites/Hattack1R.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Hattack1R.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Hattack2R.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Hattack2R.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  if(!tex.loadFromFile("sprites/Hattack1L.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Hattack1L.png");  }
+  texattackperdirection.push_back(tex);
+  if(!tex.loadFromFile("sprites/Hattack2L.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Hattack2L.png");  }
+  texattackperdirection.push_back(tex);
+  texattackspercaracter.push_back(texattackperdirection);
+  texattackperdirection.clear();
+
+  texattacks.push_back(texattackspercaracter);
+  texattackspercaracter.clear();
+  
 
   //============== DÉCOR ==============
   for(int i = 1; i <= 9; i++){
@@ -112,7 +215,8 @@ int main(int argc, char** argv)
   vector<bool> change = {false, 1};
   map.loadRegion(zombie, robot, change[1]);
   Region currentreg = map.getCurrentRegion();
-  Contexte ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints());
+  Contexte ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints(), texattacks);
+  vector<Attack>& attacks = ctxt.getAttacks();
 
 
   while(window.isOpen()){
@@ -127,12 +231,15 @@ int main(int argc, char** argv)
 
     //============== GESTION DES ENTRÉES - MOUVEMENT DES SPRITES ==============
     zombie.bouger(ctxt);
+    if (Keyboard::isKeyPressed(Keyboard::E)){zombie.attaquer(ctxt, zombie.getPreviousmv());}
     robot.bouger(ctxt);
+    if (Keyboard::isKeyPressed(Keyboard::O)){robot.attaquer(ctxt, robot.getPreviousmv());}
 
     //============== GESTION DU TIMER D'ANIMATION ==============
     if(ctxt.getElapsedTime() > 500){
       ctxt.restartClock();
     }
+
 
     //============== GESTION DU CHANGEMENT DE RÉGION ==============
     change = ctxt.getChangeRegion();
@@ -140,7 +247,7 @@ int main(int argc, char** argv)
       map.loadRegion(zombie, robot, change[1]);
       currentreg = map.getCurrentRegion();
       ctxt.setChangeRegion(false, 0);
-      ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints());
+      ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints(), texattacks);
     }
 
     //============== AFFICHAGE ==============
@@ -155,6 +262,39 @@ int main(int argc, char** argv)
     window.draw(zombie.getSprite());
     window.draw(robot.getSprite());
 
+    //============== AFFICHAGE ET GESTION DES ATTAQUES ==============
+    if(attacks.size() > 0){
+      FloatRect zombieHitbox = zombie.getHitbox();
+      FloatRect humanHitbox;
+      for(int i = 0; i < attacks.size(); i++){ //Pour chaque attaque
+        //cout << "Attack " << i << endl;
+        if(attacks[i].getAttackTime().asMilliseconds() > 500){ //Si son temps est écoulé
+          if(attacks[i].getTarget() == "Human"){  //Si elle vise un humain
+            for (int j = 0; j < currentreg.getHumans().size(); j++){
+              humanHitbox = currentreg.getHumans()[j].getHitbox();
+              if(attacks[i].hit(humanHitbox)){ //Et qu'elle touche
+                currentreg.getHumans()[j].changeHP(attacks[i].getDamage()); //On inflige des dégâts
+              }
+            }
+          }
+          if(attacks[i].getTarget() == "Zombie"){
+            if(attacks[i].hit(zombieHitbox)){
+              zombie.changeHP(attacks[i].getDamage());
+            }
+          }
+
+          //On supprime l'attaque du vecteur
+          attacks.erase(attacks.begin() + i);
+        }
+        else{
+          attacks[i].changeTexture();
+          window.draw(attacks[i].getSprite());
+        }
+      }
+    }
+
+    //============== AFFICHAGE DES OBSTACLES ==============
+
     for (int i = 0; i < currentreg.getObstacles().size(); i++){
       window.draw(currentreg.getObstacles()[i].getSprite());
     }
@@ -162,7 +302,7 @@ int main(int argc, char** argv)
     window.display();
 
     //============== DÉLAI ENTRE CHAQUE FRAME  ==============
-    sleep(timePerFrame);
+    sf::sleep(timePerFrame);
   }
 
   //============== FERMETURE DE LA FENÊTRE ==============

@@ -8,7 +8,7 @@ class Tree : public Obstacle
   private:
     
   public:
-    Tree(Texture& texture, int x, int y){
+    Tree(Texture& texture, float x, float y){
       sprite.setTexture(texture);
       float scale = 1.0f / 4.0f;
       sprite.scale(scale, scale);

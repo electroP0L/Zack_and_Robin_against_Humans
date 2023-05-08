@@ -10,13 +10,18 @@ Human::Human(vector<Texture>& textures, vector<float> pos){
   currentTextureIndex = 0;
   sprite.scale(scale, scale);
 
+  texSize = textures.size()-1;
+  halftexSize = textures.size()/2 -1;
+
   setposition(pos[0], pos[1]);
   hitbox = sprite.getGlobalBounds();
-  size = textures.size()-1;
-  halfsize = textures.size()/2 -1;
-
   speed = 1.0f;
+
+  HP = 5;
+  attackDamage = 2;
+  attaqueTime = milliseconds(1500);
 }
+
 
 void Human::bouger(Contexte& ctxt){
   FloatRect& zombiePos = ctxt.getZombiePos();
@@ -41,6 +46,7 @@ void Human::bouger(Contexte& ctxt){
     // L'humain est dans le rayon d'action du zombie, on ne bouge pas l'humain
     mv[0] = 0;
     mv[1] = 0;
+    //attaquer(ctxt, previousmv);
   }
   else{
     //On normalise le vecteur directeur :
@@ -75,5 +81,39 @@ void Human::bouger(Contexte& ctxt){
   sprite.move(mv[0], mv[1]);
 
   previousmv = mv;
-  
+}
+
+void Human::attaquer(Contexte& ctxt, vector<float> direction){
+  if (attaqueTimer.getElapsedTime() > attaqueTime) {
+    attaqueTimer.restart();
+    Attack attack;
+    if (direction[0] > 0) { //Si on va vers la droite
+      attack = Attack(ctxt.getAttackTextures(2, 2), attackDamage, "Zombie");
+    }
+    else if (direction[0] < 0) { //Si on va vers la gauche
+      attack = Attack(ctxt.getAttackTextures(2, 3), attackDamage, "Zombie");
+    }
+    else if (direction[0] == 0) { //Si on va vers le haut ou le bas
+      if (direction[1] < 0) { //Si on va vers le haut
+        attack = Attack(ctxt.getAttackTextures(2, 0), attackDamage, "Zombie");
+      }
+      else if (direction[1] > 0) { //Si on va vers le bas
+        attack = Attack(ctxt.getAttackTextures(2, 1), attackDamage, "Zombie");
+      }
+      else { //Si on ne bouge pas
+        if(currentTextureIndex < halftexSize){ //Si on est dans la deuxième moitié des textures
+          attack = Attack(ctxt.getAttackTextures(2, 1), attackDamage,"Zombie");
+        }
+        else{ //Si on est dans la première moitié des textures
+          attack = Attack(ctxt.getAttackTextures(2, 0), attackDamage,"Zombie");
+        }
+      }
+    }
+    hitbox = sprite.getGlobalBounds();
+    attack.computepos(hitbox, direction);
+    ctxt.addAttack(attack);
+  }
+  else{
+    return;
+  }
 }

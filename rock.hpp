@@ -8,7 +8,7 @@ class Rock : public Obstacle
   private:
     
   public:
-    Rock(Texture& texture, int x, int y){
+    Rock(Texture& texture, float x, float y){
       sprite.setTexture(texture);
       float scale = 1.0f / 12.0f;
       sprite.scale(scale, scale);

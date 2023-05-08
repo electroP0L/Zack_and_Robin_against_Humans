@@ -43,9 +43,11 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
 
 
   //POSITIONNEMENT DES HUMAINS
-    humans.push_back(Human(texhumans, {100, 100}));
-  humans.push_back(Human(texhumans, {900, 100}));
-  humans.push_back(Human(texhumans, {100, 900}));
+  //humans.push_back(Human(texhumans, {100, 100}));
+  //humans.push_back(Human(texhumans, {900, 100}));
+  //humans.push_back(Human(texhumans, {100, 900}));
+
+  humans.push_back(Human(texhumans, {500, 500}));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Left"] = {300, 500, 1};
