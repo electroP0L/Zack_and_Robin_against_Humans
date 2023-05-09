@@ -19,7 +19,7 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
 
   //POSITIONNEMENT DES HUMAINS
   vector<Human> humans;
-  //humans.push_back(Human(texhumans, {500, 250}));
+  humans.push_back(Human(texhumans, {500, 250}));
 
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)

@@ -32,6 +32,8 @@ class Living : public Entity
     virtual void bouger(Contexte& ctxt) = 0;
     bool checkCollision(vector<float>& mv, Contexte& ctxt);
 
+    int getHP() {return HP;}
+    FloatRect getHitbox() override {return sprite.getGlobalBounds();}
     void changeHP(int HP);
     virtual void attaquer(Contexte& ctxt, vector<float> direction) = 0;
 

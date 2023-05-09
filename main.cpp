@@ -14,6 +14,35 @@ int main(int argc, char** argv)
   if(!icon.loadFromFile("application/icon.png")){  icon.loadFromFile(path + "Zack_and_Robin_against_Humans/application/icon.png"); }
   window.setIcon(48, 48, icon.getPixelsPtr());
 
+  Texture iconTexture;
+  iconTexture.loadFromImage(icon);
+
+  //============== CHARGEMENT DU GAME OVER ==============
+  Font font;
+  if(!font.loadFromFile("fonts/gooddog.ttf")){  font.loadFromFile(path + "Zack_and_Robin_against_Humans/fonts/gooddog.ttf"); }
+  Text gameOverText;
+  gameOverText.setFont(font);
+  gameOverText.setString("GAME OVER");
+  gameOverText.setCharacterSize(185);
+  gameOverText.setOutlineColor(Color::Black);
+  gameOverText.setFillColor(Color(200, 0, 0));
+  gameOverText.setPosition(sf::Vector2f(5, 50));
+
+  Text ZaRaHText;
+  if(!font.loadFromFile("fonts/Branda-yolq.ttf")){  font.loadFromFile(path + "Zack_and_Robin_against_Humans/fonts/Branda-yolq.ttf"); }  
+  ZaRaHText.setFont(font);
+  ZaRaHText.setString("Zack & Robin against Humans");
+  ZaRaHText.setCharacterSize(75);
+  ZaRaHText.setFillColor(Color::Black);
+  ZaRaHText.setPosition(sf::Vector2f(13, 800));
+
+  Sprite iconSprite;
+  iconSprite.setTexture(iconTexture);
+  iconSprite.setScale(10, 10);
+  iconSprite.setPosition(300 , 300);
+
+  //============== GESTION DE LA FENÊTRE ET ALLOCATION DES TEXTURES ==============
+
   window.setVerticalSyncEnabled(true);
   window.setFramerateLimit(60);
 
@@ -248,22 +277,53 @@ int main(int argc, char** argv)
 
     //============== AFFICHAGE ET GESTION DES ATTAQUES ==============
     if(attacks.size() > 0){
-      FloatRect zombieHitbox = zombie.getHitbox();
+      FloatRect zombieHitbox = zombie.getSprite().getGlobalBounds();
       FloatRect humanHitbox;
       for(int i = 0; i < attacks.size(); i++){ //Pour chaque attaque
         //cout << "Attack " << i << endl;
         if(attacks[i].getAttackTime().asMilliseconds() > 500){ //Si son temps est écoulé
           if(attacks[i].getTarget() == "Human"){  //Si elle vise un humain
-            for (int j = 0; j < currentreg.getHumans().size(); j++){
-              humanHitbox = currentreg.getHumans()[j].getHitbox();
+          vector <Human>& humans = currentreg.getHumans();
+            for (int j = 0; j < humans.size(); j++){
+              humanHitbox = humans[j].getHitbox();
               if(attacks[i].hit(humanHitbox)){ //Et qu'elle touche
-                currentreg.getHumans()[j].changeHP(attacks[i].getDamage()); //On inflige des dégâts
+                humans[j].changeHP(attacks[i].getDamage()); //On inflige des dégâts
+                if (humans[j].getHP() <= 0){ //Si l'humain est mort
+                  humans.erase(humans.begin() + j); //On le supprime
+                }
               }
             }
           }
           if(attacks[i].getTarget() == "Zombie"){
             if(attacks[i].hit(zombieHitbox)){
               zombie.changeHP(attacks[i].getDamage());
+              if (zombie.getHP() <= 0){
+                
+                //On assombrit la texture du background :
+                Sprite gameoversprite = currentreg.getBackgroundSprite();
+                gameoversprite.setColor(Color(100, 100, 100));
+
+                //On affiche le background modifié :
+                window.draw(gameoversprite);
+                window.draw(gameOverText);
+                window.draw(ZaRaHText);
+                window.draw(iconSprite);
+                window.display();
+
+
+
+
+                sf::sleep(seconds(5));
+
+
+
+
+
+
+
+                window.close();
+                return 0;
+              }
             }
           }
 

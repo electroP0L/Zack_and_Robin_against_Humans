@@ -22,6 +22,7 @@ class Map {
 
     void setCurrentRegion(Region& region) {currentRegion = &region;}
     Region& getCurrentRegion() {return *currentRegion;}
+    int getCurrentRegionIndex() {return currentRegionIndex;}
     Region& getRegion(int index) {return regions[index];}
 
     void loadRegion(Zombie& zombie, Robot& Robot, int direction);

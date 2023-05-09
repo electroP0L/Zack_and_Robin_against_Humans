@@ -19,7 +19,7 @@ class Entity
     FloatRect hitbox;
   
   public:
-    FloatRect getHitbox() {return hitbox;}
+    virtual FloatRect getHitbox() {return hitbox;}
 };
 
 #endif
