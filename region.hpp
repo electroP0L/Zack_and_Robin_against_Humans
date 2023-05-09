@@ -6,6 +6,10 @@
 #include "tree.hpp"
 #include "rock.hpp"
 #include "fence.hpp"
+//#include "UFOfence.hpp"
+#include "spaceship.hpp"
+#include "jungle_tree.hpp"
+#include "temple.hpp"
 
 #include "vector"
 #include "map"

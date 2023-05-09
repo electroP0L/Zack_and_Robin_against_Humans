@@ -197,7 +197,7 @@ int main(int argc, char** argv)
   texattackspercaracter.clear();
   
 
-  //============== DÉCOR ==============
+  //============== BACKGROUNDS ==============
   for(int i = 1; i <= 9; i++){
     if(!tex.loadFromFile("sprites/BG" + to_string(i) + ".png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/BG" + to_string(i) + ".png");  }
     texbackground.push_back(tex);
@@ -209,6 +209,12 @@ int main(int argc, char** argv)
   if(!tex.loadFromFile("sprites/rock.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/rock.png"); }
   texobs.push_back(tex);
   if(!tex.loadFromFile("sprites/fence.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence.png"); }
+  texobs.push_back(tex);
+  if(!tex.loadFromFile("sprites/spaceship.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/spaceship.png"); }
+  texobs.push_back(tex);
+  if(!tex.loadFromFile("sprites/jungle_tree.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/jungle_tree.png"); }
+  texobs.push_back(tex);
+  if(!tex.loadFromFile("sprites/temple.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/temple.png"); }
   texobs.push_back(tex);
   
 

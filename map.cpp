@@ -7,7 +7,7 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
   //POSITIONNEMENT DES OBSTACLES
   obs.push_back(Tree(texobs[0], 50, 333));
   obs.push_back(Tree(texobs[0], 750, 233));
-  obs.push_back(Tree(texobs[0], 6000, 750));
+  obs.push_back(Tree(texobs[0], 600, 725));
 
   obs.push_back(Rock(texobs[1], 200, 800));
   obs.push_back(Rock(texobs[1], 650, 383));
@@ -19,7 +19,7 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
 
   //POSITIONNEMENT DES HUMAINS
   vector<Human> humans;
-  humans.push_back(Human(texhumans, {500, 250}));
+  //humans.push_back(Human(texhumans, {500, 250}));
 
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
@@ -40,14 +40,21 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
 
   //============== RÉGION 2 ==============
   //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+  obs.push_back(JungleTree(texobs[4], 100, 100));
+
+  obs.push_back(Spaceship(texobs[3], 500, 200));
+
+  obs.push_back(Temple(texobs[5], 500, 500));
+
 
 
   //POSITIONNEMENT DES HUMAINS
+  /*
   humans.push_back(Human(texhumans, {100, 100}));
   humans.push_back(Human(texhumans, {900, 100}));
   humans.push_back(Human(texhumans, {100, 900}));
-
   humans.push_back(Human(texhumans, {500, 500}));
+  */
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Left"] = {300, 500, 1};

@@ -11,7 +11,8 @@ Zombie::Zombie(vector<Texture>& textures){
 
   setposition(0,0);
   hitbox = sprite.getGlobalBounds();
-  speed = 1.5f;
+  //speed = 1.5f;
+  speed = 10.0f;
 
   HP = 5;
   attackDamage = 3;

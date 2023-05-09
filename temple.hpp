@@ -1,15 +1,15 @@
-#ifndef ROCK_HPP
-#define ROCK_HPP
+#ifndef TEMPLE_HPP
+#define TEMPLE_HPP
 
 #include "obstacle.hpp"
 
-class Rock : public Obstacle
+class Temple : public Obstacle
 {
   private:
-    float scale = 1.0f / 12.0f;
-
+    float scale = 1.0f / 3.0f;
+    
   public:
-    Rock(Texture& texture, float x, float y){
+    Temple(Texture& texture, float x, float y){
       sprite.setTexture(texture);
       sprite.scale(scale, scale);
       setpos(x, y);
