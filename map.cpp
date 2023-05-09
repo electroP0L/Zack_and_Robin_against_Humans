@@ -5,13 +5,13 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
 
   //============== RÉGION 1 ==============
   //POSITIONNEMENT DES OBSTACLES
-  obs.push_back(Tree(texobs[0], SCREEN_WIDTH/20, SCREEN_HEIGHT/3));
-  obs.push_back(Tree(texobs[0], 15*SCREEN_WIDTH/20, SCREEN_HEIGHT/3 - 100));
-  obs.push_back(Tree(texobs[0], 6*SCREEN_HEIGHT/10, 3*SCREEN_WIDTH/4));
+  obs.push_back(Tree(texobs[0], 50, 333));
+  obs.push_back(Tree(texobs[0], 750, 233));
+  obs.push_back(Tree(texobs[0], 6000, 750));
 
-  obs.push_back(Rock(texobs[1], 2*SCREEN_WIDTH/10, 8*SCREEN_HEIGHT/10));
-  obs.push_back(Rock(texobs[1], 13*SCREEN_WIDTH/20, SCREEN_HEIGHT/3 + 50));
-  obs.push_back(Rock(texobs[1], 17*SCREEN_WIDTH/20, 7*SCREEN_HEIGHT/10));  
+  obs.push_back(Rock(texobs[1], 200, 800));
+  obs.push_back(Rock(texobs[1], 650, 383));
+  obs.push_back(Rock(texobs[1], 850, 700));  
 
   for (int i = 0; i < 10; i++){
     if((i != 4) && (i != 5) && (i != 6)){  obs.push_back(Fence(texobs[2], 100 * i, 10)); } 
