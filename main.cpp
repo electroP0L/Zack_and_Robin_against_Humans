@@ -86,22 +86,6 @@ int main(int argc, char** argv)
 
   //============== ATTAQUES ==============
   //Zombie
-  /*  
-  if(!tex.loadFromFile("sprites/Zattack1T.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack1T.png");  }
-  texattackperdirection.push_back(tex);
-  if(!tex.loadFromFile("sprites/Zattack2T.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack2T.png");  }
-  texattackperdirection.push_back(tex);
-  texattackspercaracter.push_back(texattackperdirection);
-  texattackperdirection.clear();
-
-  if(!tex.loadFromFile("sprites/Zattack1B.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack1B.png");  }
-  texattackperdirection.push_back(tex);
-  if(!tex.loadFromFile("sprites/Zattack2B.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack2B.png");  }
-  texattackperdirection.push_back(tex);
-  texattackspercaracter.push_back(texattackperdirection);
-  texattackperdirection.clear();
-  */
-
   if(!tex.loadFromFile("sprites/Zattack1R.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack1R.png");  }
   texattackperdirection.push_back(tex);
   if(!tex.loadFromFile("sprites/Zattack2R.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/Zattack2R.png");  }

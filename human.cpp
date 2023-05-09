@@ -18,8 +18,8 @@ Human::Human(vector<Texture>& textures, vector<float> pos){
   speed = 1.0f;
 
   HP = 5;
-  attackDamage = 2;
-  attaqueTime = milliseconds(1500);
+  attackDamage = 1;
+  attaqueTime = milliseconds(2500);
 }
 
 
@@ -46,7 +46,7 @@ void Human::bouger(Contexte& ctxt){
     // L'humain est dans le rayon d'action du zombie, on ne bouge pas l'humain
     mv[0] = 0;
     mv[1] = 0;
-    //attaquer(ctxt, previousmv);
+    attaquer(ctxt, previousmv);
   }
   else{
     //On normalise le vecteur directeur :
@@ -84,36 +84,61 @@ void Human::bouger(Contexte& ctxt){
 }
 
 void Human::attaquer(Contexte& ctxt, vector<float> direction){
-  if (attaqueTimer.getElapsedTime() > attaqueTime) {
+  if(attaqueTimer.getElapsedTime() > attaqueTime){
     attaqueTimer.restart();
     Attack attack;
-    if (direction[0] > 0) { //Si on va vers la droite
-      attack = Attack(ctxt.getAttackTextures(2, 2), attackDamage, "Zombie");
-    }
-    else if (direction[0] < 0) { //Si on va vers la gauche
-      attack = Attack(ctxt.getAttackTextures(2, 3), attackDamage, "Zombie");
-    }
-    else if (direction[0] == 0) { //Si on va vers le haut ou le bas
-      if (direction[1] < 0) { //Si on va vers le haut
-        attack = Attack(ctxt.getAttackTextures(2, 0), attackDamage, "Zombie");
-      }
-      else if (direction[1] > 0) { //Si on va vers le bas
-        attack = Attack(ctxt.getAttackTextures(2, 1), attackDamage, "Zombie");
-      }
-      else { //Si on ne bouge pas
+    vector<float> still;
+    if(direction[0] == 0 && direction[1] == 0){ //Si on ne bouge pas
         if(currentTextureIndex < halftexSize){ //Si on est dans la deuxième moitié des textures
-          attack = Attack(ctxt.getAttackTextures(2, 1), attackDamage,"Zombie");
+          attack = Attack(ctxt.getAttackTextures(2, 3), attackDamage,"Zombie");
+          still = {-1.0f, 0.0f};
         }
         else{ //Si on est dans la première moitié des textures
-          attack = Attack(ctxt.getAttackTextures(2, 0), attackDamage,"Zombie");
+          attack = Attack(ctxt.getAttackTextures(2, 2), attackDamage,"Zombie");
+          still = {1.0f, 0.0f};
         }
+        hitbox = sprite.getGlobalBounds();
+        attack.computepos(hitbox, still);
+        ctxt.addAttack(attack);
+        return;
+    }
+    else if(abs(direction[0]) > abs(direction[1])){
+      if(direction[0] > 0){ //Si on va vers la droite
+        attack = Attack(ctxt.getAttackTextures(2, 2), attackDamage, "Zombie");
+        still = {1.0f, 0.0f};
+      }
+      else if(direction[0] < 0){ //Si on va vers la gauche
+        attack = Attack(ctxt.getAttackTextures(2, 3), attackDamage,"Zombie");
+        still = {-1.0f, 0.0f};
+      }
+    }
+    else if(abs(direction[0] < abs(direction[1]))){
+      if(direction[1] < 0){ //Si on va vers le haut
+        attack = Attack(ctxt.getAttackTextures(2, 0), attackDamage,"Zombie");
+        still = {0.0f, -1.0f};
+      }
+      else if(direction[1] > 0){ //Si on va vers le bas
+        attack = Attack(ctxt.getAttackTextures(2, 1), attackDamage,"Zombie");
+        still = {0.0f, 1.0f};
       }
     }
     hitbox = sprite.getGlobalBounds();
-    attack.computepos(hitbox, direction);
+    attack.computepos(hitbox, still);
     ctxt.addAttack(attack);
   }
   else{
     return;
   }
 }
+
+//Si abs(mouvement horizontal superieur à abs mouvement vertical)
+//Si mouvement horizontal > 0
+//Telle attaque
+//Si mouvement horizontal < 0
+//Telle attaque
+
+//Si abs(mouvement vertical superieur à abs mouvement horizontal)
+//Si mouvement vertical > 0
+//Telle attaque
+//Si mouvement vertical < 0
+//Telle attaque
