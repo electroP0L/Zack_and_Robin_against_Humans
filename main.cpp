@@ -287,7 +287,7 @@ int main(int argc, char** argv)
             for (int j = 0; j < humans.size(); j++){
               humanHitbox = humans[j].getHitbox();
               if(attacks[i].hit(humanHitbox)){ //Et qu'elle touche
-                humans[j].changeHP(attacks[i].getDamage()); //On inflige des dégâts
+                humans[j].changeHP(-attacks[i].getDamage()); //On inflige des dégâts
                 if (humans[j].getHP() <= 0){ //Si l'humain est mort
                   humans.erase(humans.begin() + j); //On le supprime
                 }
@@ -296,30 +296,21 @@ int main(int argc, char** argv)
           }
           if(attacks[i].getTarget() == "Zombie"){
             if(attacks[i].hit(zombieHitbox)){
-              zombie.changeHP(attacks[i].getDamage());
+              zombie.changeHP(-attacks[i].getDamage());
               if (zombie.getHP() <= 0){
                 
-                //On assombrit la texture du background :
+                //On rend plus sombre la texture du background :
                 Sprite gameoversprite = currentreg.getBackgroundSprite();
                 gameoversprite.setColor(Color(100, 100, 100));
 
-                //On affiche le background modifié :
+                //On affiche le Game Over :
                 window.draw(gameoversprite);
                 window.draw(gameOverText);
                 window.draw(ZaRaHText);
                 window.draw(iconSprite);
                 window.display();
 
-
-
-
                 sf::sleep(seconds(5));
-
-
-
-
-
-
 
                 window.close();
                 return 0;

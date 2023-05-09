@@ -80,7 +80,7 @@ bool Living::checkCollision(vector<float>& mv, Contexte& ctxt) { //Traitement de
 
 void Living::changeHP(int damage){
   if(invincTimer.getElapsedTime()>invincTime){
-    HP -= damage;
+    HP += damage;
     if (HP <= 0) {HP = 0;}
   }
 }
