@@ -11,7 +11,7 @@ Robot::Robot(vector<Texture>& textures){
 
   setposition(0,0);
   hitbox = sprite.getGlobalBounds();
-  speed = 1.5f;
+  speed = 1.0f;
 
   HP = 5;
   attackDamage = 1;
@@ -32,11 +32,16 @@ void Robot::bouger(Contexte& ctxt){
     changeTexture(mv);
   }
 
-  if(collision){
+  if(mv[0] == 0 && mv[1] == 0){
+    return;
+  }
+  else if(collision){
     previousmv[0] = -mv[0];
     previousmv[1] = -mv[1];
   }
-  else{ previousmv = mv; }
+  else{
+    previousmv = mv;
+  }
 }
 
 void Robot::attaquer(Contexte& ctxt, vector<float> direction){
@@ -57,8 +62,8 @@ void Robot::attaquer(Contexte& ctxt, vector<float> direction){
         attack = Attack(ctxt.getAttackTextures(1, 1), attackDamage, "Human");
       }
       else{ //Si on ne bouge pas
-        cout << "Erreur : direction nulle" << endl;
-        //TODO : Gérer le cas où on ne bouge pas
+        cout << "previousmv : " << previousmv[0] << " " << previousmv[1] << endl;
+        attaquer(ctxt, previousmv);
       }
     }
     hitbox = sprite.getGlobalBounds();
