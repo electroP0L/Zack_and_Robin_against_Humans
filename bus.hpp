@@ -1,15 +1,15 @@
-#ifndef SPACESHIP_HPP
-#define SPACESHIP_HPP
+#ifndef BUS_HPP
+#define BUS_HPP
 
 #include "obstacle.hpp"
 
-class Spaceship : public Obstacle
+class Bus : public Obstacle
 {
   private:
-    float scale = 1.0f/2.0f;
+    float scale = 1.0f/3.5f;
     
   public:
-    Spaceship(Texture& texture, float x, float y){
+    Bus(Texture& texture, float x, float y){
       sprite.setTexture(texture);
       sprite.scale(scale, scale);
       setpos(x, y);

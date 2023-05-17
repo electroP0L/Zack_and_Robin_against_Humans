@@ -17,6 +17,8 @@ Robot::Robot(vector<Texture>& textures){
   attackDamage = 1;
   attaqueTime = milliseconds(2000);
 
+  haslimb = false;
+
   previousmv = {1.0f, 0.0f}; //On initialise le vecteur de déplacement précédent à {1, 0} pour que le robot regarde vers la droite au début 
 }
 

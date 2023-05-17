@@ -39,22 +39,31 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
   spawn.clear();
 
   //============== RÉGION 2 ==============
-  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
-  obs.push_back(JungleTree(texobs[4], 100, 100));
+  //POSITIONNEMENT DES OBSTACLES
 
-  obs.push_back(Spaceship(texobs[3], 500, 200));
+  //obs.push_back(Spaceship(texobs[3], 500, 500));
 
-  obs.push_back(Temple(texobs[5], 500, 500));
+  //obs.push_back(Bus(texobs[5], 500, 500));
+
+  //obs.push_back(Car(texobs[6], 500, 500));
+
+  //obs.push_back(Building(texobs[7], 500, 200));
+
+  //obs.push_back(Building(texobs[8], 500, 200));
+
+  //obs.push_back(JungleTree(texobs[9], 500, 500));
+
+  //obs.push_back(Head(texobs[10],500, 500));
+
+  //obs.push_back(Temple(texobs[11], 300, 200));
+
+  //obs.push_back(Fence(texobs[4], 700, 200));
+
 
 
 
   //POSITIONNEMENT DES HUMAINS
-  /*
-  humans.push_back(Human(texhumans, {100, 100}));
-  humans.push_back(Human(texhumans, {900, 100}));
-  humans.push_back(Human(texhumans, {100, 900}));
-  humans.push_back(Human(texhumans, {500, 500}));
-  */
+  humans.push_back(Human(texhumans, {500, 250}));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Left"] = {300, 500, 1};
@@ -80,7 +89,7 @@ Map::Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture
   waypoints["Right"] = {300, 500, 0};
 
   //POSITIONNEMENT DES POINTS DE SPAWN
-  spawn = {{900, 300} /*entrée*/, {550, 990}} /*sortie*/;
+  spawn = {{900, 300} /*entrée*/, {550, 890}} /*sortie*/;
 
   //CRÉATION DE LA RÉGION
   regions.push_back(Region(texbackground[2], obs, humans, spawn, waypoints));

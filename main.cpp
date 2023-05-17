@@ -46,7 +46,7 @@ int main(int argc, char** argv)
   window.setVerticalSyncEnabled(true);
   window.setFramerateLimit(60);
 
-  Texture tex;
+  Texture tex, texlimb;
   vector<Texture> texzombie;
   vector<Texture> texrobot;
   vector<Texture> texhuman;
@@ -205,17 +205,32 @@ int main(int argc, char** argv)
 
   //============== OBSTACLES ==============
   if(!tex.loadFromFile("sprites/tree.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/tree.png"); }
-  texobs.push_back(tex);
+  texobs.push_back(tex); //Index 0
   if(!tex.loadFromFile("sprites/rock.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/rock.png"); }
-  texobs.push_back(tex);
+  texobs.push_back(tex); //Index 1
   if(!tex.loadFromFile("sprites/fence.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence.png"); }
-  texobs.push_back(tex);
+  texobs.push_back(tex); //Index 2
   if(!tex.loadFromFile("sprites/spaceship.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/spaceship.png"); }
-  texobs.push_back(tex);
+  texobs.push_back(tex); //Index 3
+  if(!tex.loadFromFile("sprites/fence2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/fence2.png"); }
+  texobs.push_back(tex); //Index 4
+  if(!tex.loadFromFile("sprites/bus.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/bus.png"); }
+  texobs.push_back(tex); //Index 5
+  if(!tex.loadFromFile("sprites/car.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/car.png"); }
+  texobs.push_back(tex); //Index 6
+  if(!tex.loadFromFile("sprites/building1.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/building1.png"); }
+  texobs.push_back(tex); //Index 7
+  if(!tex.loadFromFile("sprites/building2.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/building2.png"); }
+  texobs.push_back(tex); //Index 8
   if(!tex.loadFromFile("sprites/jungle_tree.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/jungle_tree.png"); }
-  texobs.push_back(tex);
+  texobs.push_back(tex); //Index 9
+  if(!tex.loadFromFile("sprites/head.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/head.png"); }
+  texobs.push_back(tex); //Index 10
   if(!tex.loadFromFile("sprites/temple.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/temple.png"); }
-  texobs.push_back(tex);
+  texobs.push_back(tex); //Index 11
+
+  if(!texlimb.loadFromFile("sprites/limb.png")){  texlimb.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/limb.png"); }
+
   
 
   //================ CRÉATION DE LA MAP ET DU CONTEXTE =================
@@ -223,7 +238,7 @@ int main(int argc, char** argv)
   Map map = Map(texbackground, texobs, texhuman);
 
   //============== CRÉATION DES OBJETS ==============
-  Zombie zombie = Zombie(texzombie);
+  Zombie zombie = Zombie(texzombie, texlimb);
   Robot robot = Robot(texrobot);
 
 

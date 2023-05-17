@@ -2,13 +2,16 @@
 #define REGION_HPP
 
 #include "human.hpp"
-//#include "obstacle.hpp"
+
 #include "tree.hpp"
 #include "rock.hpp"
 #include "fence.hpp"
-//#include "UFOfence.hpp"
 #include "spaceship.hpp"
+#include "bus.hpp"
+#include "car.hpp"
+#include "building.hpp"
 #include "jungle_tree.hpp"
+#include "head.hpp"
 #include "temple.hpp"
 
 #include "vector"

@@ -1,6 +1,8 @@
 #include "zombie.hpp"
 
-Zombie::Zombie(vector<Texture>& textures){
+Zombie::Zombie(vector<Texture>& textures, Texture& texlimb){
+  this->texlimb = texlimb;
+  
   this->textures = textures;
   sprite.setTexture(textures[4]);
   currentTextureIndex = 4;
@@ -12,7 +14,7 @@ Zombie::Zombie(vector<Texture>& textures){
   setposition(0,0);
   hitbox = sprite.getGlobalBounds();
   //speed = 1.5f;
-  speed = 10.0f;
+  speed = 5.0f;
 
   HP = 5;
   attackDamage = 3;
