@@ -45,6 +45,7 @@ int main(int argc, char** argv)
 
   window.setVerticalSyncEnabled(true);
   window.setFramerateLimit(60);
+  const Time timePerFrame = seconds(1.f/60.f);
 
   Texture tex, texlimb;
   vector<Texture> texzombie;
@@ -233,29 +234,24 @@ int main(int argc, char** argv)
 
   
 
-  //================ CRÉATION DE LA MAP ET DU CONTEXTE =================
+  //============== CRÉATION DES OBJETS ==============
 
   Map map = Map(texbackground, texobs, texhuman);
 
-  //============== CRÉATION DES OBJETS ==============
   Zombie zombie = Zombie(texzombie, texlimb);
   Robot robot = Robot(texrobot);
 
 
   //============== GAME LOOP ==============
-  Clock clock;
-  const Time timePerFrame = seconds(1.f/60.f);
 
-  vector<bool> change = {false, 1};
+  vector<bool> changeRegion;
 
-
-  map.loadRegion(zombie, robot, change[1]);
-  Region currentreg = map.getCurrentRegion();
+  map.loadRegion(zombie, robot, 1);
+  Region& currentRegion = map.getCurrentRegion();
   vector<Limb>& missingLimbs = zombie.getMissingLimbs();
-  Contexte ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints(), texattacks, missingLimbs);
+  Contexte ctxt = Contexte(currentRegion.getObstacles(), currentRegion.getHumansptr(), currentRegion.getWaypoints(), texattacks, missingLimbs);
   
   vector<Attack>& attacks = ctxt.getAttacks();
-
 
   while(window.isOpen()){
     
@@ -273,6 +269,7 @@ int main(int argc, char** argv)
     if (Keyboard::isKeyPressed(Keyboard::E)){zombie.attaquer(ctxt, zombie.getPreviousmv());}
     robot.bouger(ctxt);
     if (Keyboard::isKeyPressed(Keyboard::O)){robot.attaquer(ctxt, robot.getPreviousmv());}
+    
     //============== GESTION DU TIMER D'ANIMATION ==============
     if(ctxt.getElapsedTime() > 500){
       ctxt.restartClock();
@@ -280,17 +277,17 @@ int main(int argc, char** argv)
 
 
     //============== GESTION DU CHANGEMENT DE RÉGION ==============
-    change = ctxt.getChangeRegion();
-    if(change[0]){
-      map.loadRegion(zombie, robot, change[1]);
-      currentreg = map.getCurrentRegion();
+    changeRegion = ctxt.getChangeRegion();
+    if(changeRegion[0]){
+      map.loadRegion(zombie, robot, changeRegion[1]);
+      currentRegion = map.getCurrentRegion();
       ctxt.setChangeRegion(false, 0);
-      ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints(), texattacks, missingLimbs);
+      ctxt = Contexte(currentRegion.getObstacles(), currentRegion.getHumansptr(), currentRegion.getWaypoints(), texattacks, missingLimbs);
     }
 
     //============== AFFICHAGE ==============
     window.clear();
-    window.draw(currentreg.getBackgroundSprite());
+    window.draw(currentRegion.getBackgroundSprite());
 
     //============== AFFICHAGE DES MEMBRES ==============
     zombie.updateLimbs(ctxt);
@@ -305,8 +302,8 @@ int main(int argc, char** argv)
 
     //============== AFFICHAGE DES VIVANTS ==============
 
-    for (int i = 0; i < currentreg.getHumans().size(); i++){
-      window.draw(currentreg.getHumans()[i].getSprite());
+    for (int i = 0; i < currentRegion.getHumans().size(); i++){
+      window.draw(currentRegion.getHumans()[i].getSprite());
     }
 
     window.draw(zombie.getSprite());
@@ -320,7 +317,7 @@ int main(int argc, char** argv)
         //cout << "Attack " << i << endl;
         if(attacks[i].getAttackTime().asMilliseconds() > 500){ //Si son temps est écoulé
           if(attacks[i].getTarget() == "Human"){  //Si elle vise un humain
-          vector <Human>& humans = currentreg.getHumans();
+          vector <Human>& humans = currentRegion.getHumans();
             for (int j = 0; j < humans.size(); j++){
               humanHitbox = humans[j].getHitbox();
               if(attacks[i].hit(humanHitbox)){ //Et qu'elle touche
@@ -337,7 +334,7 @@ int main(int argc, char** argv)
               if (zombie.getHP() <= 0){
                 
                 //On rend plus sombre la texture du background :
-                Sprite gameoversprite = currentreg.getBackgroundSprite();
+                Sprite gameoversprite = currentRegion.getBackgroundSprite();
                 gameoversprite.setColor(Color(100, 100, 100));
 
                 //On affiche le Game Over :
@@ -367,19 +364,19 @@ int main(int argc, char** argv)
 
     //============== AFFICHAGE DES OBSTACLES ==============
 
-    for (int i = 0; i < currentreg.getObstacles().size(); i++){
-      window.draw(currentreg.getObstacles()[i].getSprite());
+    for (int i = 0; i < currentRegion.getObstacles().size(); i++){
+      window.draw(currentRegion.getObstacles()[i].getSprite());
     }
 
-    //============== RROVISOIRE : AFFICHAGE DES HP DU ZOMBIE EN HAUT À GAUCHE DE L'ÉCRAN ==============
-    Text hp;
-    hp.setFont(font);
-    hp.setString("HP : " + to_string(zombie.getHP()));
-    hp.setCharacterSize(50);
+    //============== PROVISOIRE : AFFICHAGE DES HP DU ZOMBIE EN HAUT À GAUCHE DE L'ÉCRAN ==============
+    Text HP;
+    HP.setFont(font);
+    HP.setString("HP : " + to_string(zombie.getHP()));
+    HP.setCharacterSize(50);
     //Couleur : rouge foncé
-    hp.setFillColor(Color(200, 0, 0));
-    hp.setPosition(sf::Vector2f(10, 110));
-    window.draw(hp);
+    HP.setFillColor(Color(200, 0, 0));
+    HP.setPosition(sf::Vector2f(10, 110));
+    window.draw(HP);
 
     window.display();
 

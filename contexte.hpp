@@ -33,7 +33,7 @@ class Contexte {
 
   public:
 
-    Contexte(vector<Obstacle> obstacles, vector<Human>* humans, map<String, vector<float>> waypoints, vector<vector<vector<Texture>>>& texattacks, vector<Limb>& missingLimbs){
+    Contexte(vector<Obstacle>& obstacles, vector<Human>* humans, map<String, vector<float>> waypoints, vector<vector<vector<Texture>>>& texattacks, vector<Limb>& missingLimbs){
       this->obstacles.clear(); this->waypoints.clear(); this->attacks.clear();
       this->obstacles = obstacles; this->humans = humans; this->waypoints = waypoints;
       this->attackTextures = texattacks;
