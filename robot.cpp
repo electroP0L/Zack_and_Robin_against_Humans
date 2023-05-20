@@ -11,7 +11,8 @@ Robot::Robot(vector<Texture>& textures){
 
   setposition(0,0);
   hitbox = sprite.getGlobalBounds();
-  speed = 1.0f;
+  //speed = 1.0f;
+  speed = 5.0f;
 
   HP = 5;
   attackDamage = 1;
@@ -34,6 +35,9 @@ void Robot::bouger(Contexte& ctxt){
   sprite.move(mv[0], mv[1]);
   if (ctxt.getElapsedTime() > 500){
     changeTexture(mv);
+  }
+  if(!pickLimb(ctxt)){
+    giveLimb(ctxt); //On ne rend pas son membre au zombie si on vient de le ramasser
   }
 
   if(mv[0] == 0 && mv[1] == 0){
@@ -79,6 +83,40 @@ void Robot::attaquer(Contexte& ctxt, vector<float> direction){
   }
 }
 
+bool Robot::pickLimb(Contexte& ctxt){
+  if (haslimb) {return false;} //Si le robot a déjà un membre, on ne fait rien
+
+  FloatRect limbBounds;
+  vector<Limb>& limbs = ctxt.getLimbs();
+  if(limbs.size() > 0){
+    
+    FloatRect limbBounds;
+    for (int i = 0; i < limbs.size(); ++i) { //Pour chaque membre dans le vecteur de membres
+      limbBounds = limbs[i].getSprite().getGlobalBounds(); //On récupère la hitbox du membre
+
+      if (limbBounds.intersects(sprite.getGlobalBounds())) { //Si le robot et le membre se chevauchent
+        haslimb = true;
+        ctxt.setLimbStatus(1, i);
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+void Robot::giveLimb(Contexte& ctxt){
+  if(haslimb){
+    //Si le robot se trouve sur le zombie :
+    if(ctxt.getZombiePos().intersects(sprite.getGlobalBounds())){
+      haslimb = false;
+      ctxt.setLimbStatus(2, 0);
+      return;
+    }
+  }
+  else{
+    return;
+  }
+}
 
 void Robot::changeTexture(vector<float>& mv){
   int nextTextureIndex;

@@ -36,7 +36,7 @@ inanimate.o: inanimate.hpp entity.hpp
 attack.o: attack.cpp attack.hpp inanimate.hpp
 	$(CPP)	-c attack.cpp	$(CPPFLAGS)
 
-limb.o: limb.cpp limb.hpp inanimate.hpp
+limb.o: limb.cpp limb.hpp inanimate.hpp contexte.hpp
 	$(CPP)	-c limb.cpp	$(CPPFLAGS)
 
 obstacle.o: obstacle.hpp inanimate.hpp

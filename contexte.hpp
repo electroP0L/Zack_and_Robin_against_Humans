@@ -3,6 +3,7 @@
 
 #include "obstacle.hpp"
 #include "attack.hpp"
+class Limb;
 class Human;
 
 #include <vector>
@@ -13,6 +14,11 @@ class Contexte {
 
     vector<Obstacle> obstacles;
     vector<Human>* humans;
+
+    vector<Limb>* limbs;
+    vector<int> limbStatus;
+    //Première adresse : 0 = Rien à faire ; 1 = Supprimer le limb car pris en charge ; 2 = Limb donné, regagner 1 HP
+    //Deuxième adresse : indice du limb à supprimer ou à donner
 
     FloatRect zombiePos;
 
@@ -27,10 +33,12 @@ class Contexte {
 
   public:
 
-    Contexte(vector<Obstacle> obstacles, vector<Human>* humans, map<String, vector<float>> waypoints, vector<vector<vector<Texture>>>& texattacks){
+    Contexte(vector<Obstacle> obstacles, vector<Human>* humans, map<String, vector<float>> waypoints, vector<vector<vector<Texture>>>& texattacks, vector<Limb>& missingLimbs){
       this->obstacles.clear(); this->waypoints.clear(); this->attacks.clear();
       this->obstacles = obstacles; this->humans = humans; this->waypoints = waypoints;
       this->attackTextures = texattacks;
+      this->limbStatus = {0, 0};
+      setLimbs(missingLimbs);
     }
 
 
@@ -44,6 +52,10 @@ class Contexte {
 
     void setZombiePos(FloatRect& zombieHitbox)  {  zombiePos = zombieHitbox;}
     FloatRect& getZombiePos() {return this->zombiePos;}
+    void setLimbs(vector<Limb>& limbs) {this->limbs = &limbs;}
+    vector<Limb>& getLimbs() {return *limbs;}
+    void setLimbStatus(int status, int adress) {this->limbStatus.clear(); this->limbStatus.push_back(status); this->limbStatus.push_back(adress);}
+    vector<int> getLimbStatus() {return this->limbStatus;}
 
 
     vector<Attack>& getAttacks() {return this->attacks;}

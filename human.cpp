@@ -20,6 +20,7 @@ Human::Human(vector<Texture>& textures, vector<float> pos){
   HP = 5;
   attackDamage = 1;
   attaqueTime = milliseconds(2500);
+  invincTime = milliseconds(250);
 }
 
 

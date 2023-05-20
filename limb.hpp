@@ -2,6 +2,7 @@
 #define LIMB_HPP
 
 #include "inanimate.hpp"
+#include "contexte.hpp"
 
 class Limb : public Inanimate
 {
@@ -10,12 +11,12 @@ class Limb : public Inanimate
     vector<float> targetpos;
     float speed = 5.0f;
 
-    
+
   public:
     Limb(){}; //Constructeur par défaut
 
-    Limb(Texture &texlimb);
-    void choosetargetpos();
+    Limb(Texture &texlimb, Contexte &ctxt);
+    void choosetargetpos(Contexte &ctxt);
     void updatepos();
 };  
 

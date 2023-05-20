@@ -16,7 +16,8 @@ class Robot : public Living
     void bouger(Contexte& ctxt) override;
     void attaquer(Contexte& ctxt, vector<float> direction) override;
     
-    //void pickLimb();
+    bool pickLimb(Contexte& ctxt);
+    void giveLimb(Contexte& ctxt);
 
     void changeTexture(vector<float>& mv) override;
 };

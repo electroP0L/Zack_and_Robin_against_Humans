@@ -34,7 +34,7 @@ class Living : public Entity
 
     int getHP() {return HP;}
     FloatRect getHitbox() override {return sprite.getGlobalBounds();}
-    void changeHP(int HP);
+    void changeHP(int damage);
     virtual void attaquer(Contexte& ctxt, vector<float> direction) = 0;
 
     virtual void changeTexture(vector<float>& mv);

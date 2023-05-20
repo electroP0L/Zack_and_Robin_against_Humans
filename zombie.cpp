@@ -16,9 +16,10 @@ Zombie::Zombie(vector<Texture>& textures, Texture& texlimb){
   //speed = 1.5f;
   speed = 5.0f;
 
-  HP = 5;
+  HP = 6;
   attackDamage = 3;
   attaqueTime = milliseconds(1000);
+  invincTime = milliseconds(500);
 }
 
 
@@ -105,5 +106,42 @@ void Zombie::attaquer(Contexte& ctxt, vector<float> direction){
   }
   else{
     return;
+  }
+}
+
+/*void Zombie::changeHP(int damage, Contexte& ctxt){
+  if(invincTimer.getElapsedTime()>invincTime){
+    HP += damage;
+    if (damage<0){
+      invincTimer.restart();
+      missingLimbs.push_back(Limb(texlimb, ctxt));
+      ctxt.setLimbs(missingLimbs);
+    }
+    if (HP <= 0) {HP = 0;}
+  }
+}*/
+
+void Zombie::changeHP(int damage, Contexte& ctxt){
+  if(damage<0 && invincTimer.getElapsedTime()>invincTime){
+    HP += damage;
+    invincTimer.restart();
+    missingLimbs.push_back(Limb(texlimb, ctxt));
+    ctxt.setLimbs(missingLimbs);
+    if (HP <= 0) {HP = 0;}
+  }
+  else if(damage>0 && invincTimer.getElapsedTime()>invincTime){
+    HP += damage;
+  }
+}
+
+void Zombie::updateLimbs(Contexte& ctxt){
+  vector<int> limbStatus = ctxt.getLimbStatus();
+  if (limbStatus[0] == 1){
+    missingLimbs.erase(missingLimbs.begin() + limbStatus[1]);
+    ctxt.setLimbStatus(0, 0);
+  }
+  else if (limbStatus[0] == 2){
+    changeHP(1, ctxt);
+    ctxt.setLimbStatus(0, 0);
   }
 }

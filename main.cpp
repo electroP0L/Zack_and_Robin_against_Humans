@@ -247,9 +247,13 @@ int main(int argc, char** argv)
   const Time timePerFrame = seconds(1.f/60.f);
 
   vector<bool> change = {false, 1};
+
+
   map.loadRegion(zombie, robot, change[1]);
   Region currentreg = map.getCurrentRegion();
-  Contexte ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints(), texattacks);
+  vector<Limb>& missingLimbs = zombie.getMissingLimbs();
+  Contexte ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints(), texattacks, missingLimbs);
+  
   vector<Attack>& attacks = ctxt.getAttacks();
 
 
@@ -264,11 +268,11 @@ int main(int argc, char** argv)
     }
 
     //============== GESTION DES ENTRÉES - MOUVEMENT DES SPRITES ==============
+    
     zombie.bouger(ctxt);
     if (Keyboard::isKeyPressed(Keyboard::E)){zombie.attaquer(ctxt, zombie.getPreviousmv());}
     robot.bouger(ctxt);
     if (Keyboard::isKeyPressed(Keyboard::O)){robot.attaquer(ctxt, robot.getPreviousmv());}
-
     //============== GESTION DU TIMER D'ANIMATION ==============
     if(ctxt.getElapsedTime() > 500){
       ctxt.restartClock();
@@ -281,13 +285,25 @@ int main(int argc, char** argv)
       map.loadRegion(zombie, robot, change[1]);
       currentreg = map.getCurrentRegion();
       ctxt.setChangeRegion(false, 0);
-      ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints(), texattacks);
+      ctxt = Contexte(currentreg.getObstacles(), currentreg.getHumansptr(), currentreg.getWaypoints(), texattacks, missingLimbs);
     }
 
     //============== AFFICHAGE ==============
     window.clear();
-
     window.draw(currentreg.getBackgroundSprite());
+
+    //============== AFFICHAGE DES MEMBRES ==============
+    zombie.updateLimbs(ctxt);
+    missingLimbs = zombie.getMissingLimbs();
+    if(missingLimbs.size() > 0){
+      for (int i = 0; i < missingLimbs.size(); i++){
+        window.draw(missingLimbs[i].getSprite());
+        missingLimbs[i].updatepos();
+      }
+    }
+
+
+    //============== AFFICHAGE DES VIVANTS ==============
 
     for (int i = 0; i < currentreg.getHumans().size(); i++){
       window.draw(currentreg.getHumans()[i].getSprite());
@@ -317,7 +333,7 @@ int main(int argc, char** argv)
           }
           if(attacks[i].getTarget() == "Zombie"){
             if(attacks[i].hit(zombieHitbox)){
-              zombie.changeHP(-attacks[i].getDamage());
+              zombie.changeHP(-attacks[i].getDamage(), ctxt);
               if (zombie.getHP() <= 0){
                 
                 //On rend plus sombre la texture du background :
@@ -354,6 +370,16 @@ int main(int argc, char** argv)
     for (int i = 0; i < currentreg.getObstacles().size(); i++){
       window.draw(currentreg.getObstacles()[i].getSprite());
     }
+
+    //============== RROVISOIRE : AFFICHAGE DES HP DU ZOMBIE EN HAUT À GAUCHE DE L'ÉCRAN ==============
+    Text hp;
+    hp.setFont(font);
+    hp.setString("HP : " + to_string(zombie.getHP()));
+    hp.setCharacterSize(50);
+    //Couleur : rouge foncé
+    hp.setFillColor(Color(200, 0, 0));
+    hp.setPosition(sf::Vector2f(10, 110));
+    window.draw(hp);
 
     window.display();
 
