@@ -5,10 +5,6 @@
 #include "region.hpp"
 #include "zombie.hpp"
 #include "robot.hpp"
-/*
-#include "living.hpp"
-#include "obstacle.hpp"
-*/
 
 class Map {
   private:
