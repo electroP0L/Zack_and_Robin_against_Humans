@@ -12,20 +12,24 @@
 
 class Map {
   private:
-    vector<Region> regions;
+    vector<Region*> regions;
     Region* currentRegion;
     int currentRegionIndex;
     int previousRegionIndex;
 
   public:
-    Map(vector<Texture>& texbackground, vector<Texture>& texobs, vector<Texture>& texhumans);
+    //Map(){}; //Constructeur par défaut
+    Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture>* texhumans);
 
-    void setCurrentRegion(Region& region) {currentRegion = &region;}
-    Region& getCurrentRegion() {return *currentRegion;}
+    void setCurrentRegion(Region* region) {currentRegion = region;}
+    Region* getCurrentRegion() {return currentRegion;}
     int getCurrentRegionIndex() {return currentRegionIndex;}
-    Region& getRegion(int index) {return regions[index];}
+    Region* getRegion(int index) {return regions[index];}
 
-    void loadRegion(Zombie& zombie, Robot& Robot, int direction);
+    void loadRegion(Zombie* zombie, Robot* Robot, int direction);
+
+
+    vector<Region*> getRegions() {return regions;}
 };
 
 #endif

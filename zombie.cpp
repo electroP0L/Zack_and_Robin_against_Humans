@@ -1,15 +1,15 @@
 #include "zombie.hpp"
 
-Zombie::Zombie(vector<Texture>& textures, Texture& texlimb){
+Zombie::Zombie(vector<Texture>* textures, Texture* texlimb){
   this->texlimb = texlimb;
   
   this->textures = textures;
-  sprite.setTexture(textures[4]);
+  sprite.setTexture(textures->at(4));
   currentTextureIndex = 4;
   sprite.scale(scale, scale);
   
-  texSize = textures.size()-1;
-  halftexSize = textures.size()/2 -1;
+  texSize = textures->size()-1;
+  halftexSize = textures->size()/2 -1;
 
   setposition(0,0);
   hitbox = sprite.getGlobalBounds();
@@ -23,7 +23,7 @@ Zombie::Zombie(vector<Texture>& textures, Texture& texlimb){
 }
 
 
-void Zombie::bouger(Contexte& ctxt){
+void Zombie::bouger(Contexte* ctxt){
   //Déplacement : On bouge le zombie en fonction des touches appuyées
   vector<float> mv = {0.0f, 0.0f};
   if (Keyboard::isKeyPressed(Keyboard::Z)) {mv[1] = -speed;}
@@ -31,17 +31,19 @@ void Zombie::bouger(Contexte& ctxt){
   if (Keyboard::isKeyPressed(Keyboard::Q)) {mv[0] = -speed;}
   if (Keyboard::isKeyPressed(Keyboard::D)) {mv[0] = speed;}
 
-  bool collision = checkCollision(mv, ctxt);
+
+  bool collision = checkCollision(&mv, ctxt);
+
   if(collision) { //Si on détecte une collision, le zombie va reculer pour l'éviter
-    if(ctxt.getElapsedTime() > 500){ // Si le chronomètre indique une demi seconde
+    if(ctxt->getElapsedTime() > 500){ // Si le chronomètre indique une demi seconde
       mv[0] -= mv[0]; //On inverse temporairement la direction du zombie
-      changeTexture(mv); //On change la texture du zombie
+      changeTexture(&mv); //On change la texture du zombie
       mv[0] -= mv[0]; //On remet la direction du zombie à sa valeur initiale
     }
   }
   else {
-    if(ctxt.getElapsedTime() > 500 || previousmv[0] != mv[0] ){ // Si le chronomètre indique une demi seconde, ou le zombie a changé de direction
-      changeTexture(mv); //On change la texture du zombie
+    if(ctxt->getElapsedTime() > 500 || previousmv[0] != mv[0] ){ // Si le chronomètre indique une demi seconde, ou le zombie a changé de direction
+      changeTexture(&mv); //On change la texture du zombie
     }
   }
 
@@ -55,78 +57,66 @@ void Zombie::bouger(Contexte& ctxt){
 
 
   FloatRect zombieHitbox = sprite.getGlobalBounds();
-  ctxt.setZombiePos(zombieHitbox);
+  ctxt->setZombiePos(zombieHitbox);
   notifymovement(ctxt);
 }
 
-void Zombie::notifymovement(Contexte& ctxt){
-  vector<Human>& humans = ctxt.getHumans(); //Référence à la variable existante
-  for (int i = 0; i < humans.size(); ++i) {
-    humans[i].bouger(ctxt); //La nouvelle hitbox du zombie se trouve dans le contexte
+void Zombie::notifymovement(Contexte* ctxt){
+  vector<Human*>* humans = ctxt->getHumans(); //Référence à la variable existante
+  for (Human* human : *humans) { //Pour chaque humain dans le vecteur d'humains
+    human->bouger(ctxt); //La nouvelle hitbox du zombie se trouve dans le contexte
   }
 }
 
-void Zombie::attaquer(Contexte& ctxt, vector<float> direction){
+void Zombie::attaquer(Contexte* ctxt, vector<float>* direction){
   if(attaqueTimer.getElapsedTime() > attaqueTime){
     attaqueTimer.restart();
-    Attack attack;
-    if(direction[0] == 0 && direction[1] == 0){ //Si on ne bouge pas
+    Attack* attack;
+    if(direction->at(0) == 0 && direction->at(1) == 0){ //Si on ne bouge pas
         vector<float> still;
         if(currentTextureIndex < halftexSize){ //Si on est dans la deuxième moitié des textures
-          attack = Attack(ctxt.getAttackTextures(0, 1), attackDamage,"Human");
+          attack = new Attack(ctxt->getAttackTextures(0, 1), attackDamage,"Human");
           still = {-1.0f, 0.0f};
         }
         else{ //Si on est dans la première moitié des textures
-          attack = Attack(ctxt.getAttackTextures(0, 0), attackDamage,"Human");
+          attack = new Attack(ctxt->getAttackTextures(0, 0), attackDamage,"Human");
           still = {1.0f, 0.0f};
         }
-        hitbox = sprite.getGlobalBounds();
-        attack.computepos(hitbox, still);
-        ctxt.addAttack(attack);
+        FloatRect casterHitbox = sprite.getGlobalBounds();
+        attack->computepos(casterHitbox, &still);
+        ctxt->addAttack(attack);
         return;
     }
-    else if(direction[0] > 0){ //Si on va vers la droite
-      attack = Attack(ctxt.getAttackTextures(0, 0), attackDamage, "Human");
+    else if(direction->at(0) > 0){ //Si on va vers la droite
+      attack = new Attack(ctxt->getAttackTextures(0, 0), attackDamage, "Human");
     }
-    else if(direction[0] < 0){ //Si on va vers la gauche
-      attack = Attack(ctxt.getAttackTextures(0, 1), attackDamage,"Human");
+    else if(direction->at(0) < 0){ //Si on va vers la gauche
+      attack = new Attack(ctxt->getAttackTextures(0, 1), attackDamage,"Human");
     }
-    else if(direction[0] == 0){ //Si on va vers le haut ou le bas
-      if(direction[1] < 0){ //Si on va vers le haut
-        attack = Attack(ctxt.getAttackTextures(0, 0), attackDamage,"Human");
+    else if(direction->at(0) == 0){ //Si on va vers le haut ou le bas
+      if(direction->at(1) < 0){ //Si on va vers le haut
+        attack = new Attack(ctxt->getAttackTextures(0, 0), attackDamage,"Human");
       }
-      else if(direction[1] > 0){ //Si on va vers le bas
-        attack = Attack(ctxt.getAttackTextures(0, 1), attackDamage,"Human");
+      else if(direction->at(1) > 0){ //Si on va vers le bas
+        attack = new Attack(ctxt->getAttackTextures(0, 1), attackDamage,"Human");
       }
-      
     }
-    hitbox = sprite.getGlobalBounds();
-    attack.computepos(hitbox, direction);
-    ctxt.addAttack(attack);
+    FloatRect casterHitbox = sprite.getGlobalBounds();
+    attack->computepos(casterHitbox, direction);
+    ctxt->addAttack(attack);
   }
   else{
     return;
   }
 }
 
-/*void Zombie::changeHP(int damage, Contexte& ctxt){
-  if(invincTimer.getElapsedTime()>invincTime){
-    HP += damage;
-    if (damage<0){
-      invincTimer.restart();
-      missingLimbs.push_back(Limb(texlimb, ctxt));
-      ctxt.setLimbs(missingLimbs);
-    }
-    if (HP <= 0) {HP = 0;}
-  }
-}*/
-
-void Zombie::changeHP(int damage, Contexte& ctxt){
+void Zombie::changeHP(int damage, Contexte* ctxt){
   if(damage<0 && invincTimer.getElapsedTime()>invincTime){
     HP += damage;
     invincTimer.restart();
-    missingLimbs.push_back(Limb(texlimb, ctxt));
-    ctxt.setLimbs(missingLimbs);
+    missingLimbs.push_back(new Limb(*texlimb, ctxt));
+
+    ctxt->setLimbs(getMissingLimbs());
     if (HP <= 0) {HP = 0;}
   }
   else if(damage>0 && invincTimer.getElapsedTime()>invincTime){
@@ -134,14 +124,14 @@ void Zombie::changeHP(int damage, Contexte& ctxt){
   }
 }
 
-void Zombie::updateLimbs(Contexte& ctxt){
-  vector<int> limbStatus = ctxt.getLimbStatus();
-  if (limbStatus[0] == 1){
-    missingLimbs.erase(missingLimbs.begin() + limbStatus[1]);
-    ctxt.setLimbStatus(0, 0);
+void Zombie::updateLimbs(Contexte* ctxt){
+  vector<int>* limbStatus = ctxt->getLimbStatus();
+  if (limbStatus->at(0) == 1){
+    missingLimbs.erase(missingLimbs.begin() + limbStatus->at(1));
+    ctxt->setLimbStatus(0, 0);
   }
-  else if (limbStatus[0] == 2){
+  else if (limbStatus->at(0) == 2){
     changeHP(1, ctxt);
-    ctxt.setLimbStatus(0, 0);
+    ctxt->setLimbStatus(0, 0);
   }
 }

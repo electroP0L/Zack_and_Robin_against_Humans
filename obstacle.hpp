@@ -6,7 +6,7 @@
 class Obstacle : public Inanimate
 {
   public:
-    Obstacle(){}; //Constructeur par défaut
+    //Obstacle(){}; //Constructeur par défaut
 };  
 
 

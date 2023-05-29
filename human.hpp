@@ -9,11 +9,11 @@ class Human : public Living
     float scale = 1.0f/10.0f;
 
   public:
-    Human(); //Constructeur par défaut
-    Human(vector<Texture>& textures, vector<float> pos);
+    //Human(){}; //Constructeur par défaut
+    Human(vector<Texture>* textures, float x, float y);
 
-    void bouger(Contexte& ctxt) override;
-    void attaquer(Contexte& ctxt, vector<float> direction) override;
+    void bouger(Contexte* ctxt) override;
+    void attaquer(Contexte* ctxt, vector<float>* direction) override;
 };
 
 #endif

@@ -13,10 +13,10 @@ class Limb : public Inanimate
 
 
   public:
-    Limb(){}; //Constructeur par défaut
+    //Limb(){}; //Constructeur par défaut
 
-    Limb(Texture &texlimb, Contexte &ctxt);
-    void choosetargetpos(Contexte &ctxt);
+    Limb(Texture& texlimb, Contexte* ctxt);
+    void choosetargetpos(Contexte* ctxt);
     void updatepos();
 };  
 

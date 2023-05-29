@@ -1,13 +1,13 @@
 #include "robot.hpp"
 
-Robot::Robot(vector<Texture>& textures){
+Robot::Robot(vector<Texture>* textures){
   this->textures = textures;
-  sprite.setTexture(textures[0]);
+  sprite.setTexture(textures->at(0));
   currentTextureIndex = 0;
   sprite.setScale(scale, scale);
 
-  texSize = textures.size()-1;
-  halftexSize = textures.size()/2 -1;
+  texSize = textures->size()-1;
+  halftexSize = textures->size()/2 -1;
 
   setposition(0,0);
   hitbox = sprite.getGlobalBounds();
@@ -24,17 +24,17 @@ Robot::Robot(vector<Texture>& textures){
 }
 
 
-void Robot::bouger(Contexte& ctxt){
+void Robot::bouger(Contexte* ctxt){
   vector<float> mv = {0.0f, 0.0f};
   if (Keyboard::isKeyPressed(Keyboard::I)){mv[1] -= speed;}
   if (Keyboard::isKeyPressed(Keyboard::K)){mv[1] += speed;}
   if (Keyboard::isKeyPressed(Keyboard::J)){mv[0] -= speed;}
   if (Keyboard::isKeyPressed(Keyboard::L)){mv[0] += speed;}
   
-  bool collision = checkCollision(mv, ctxt);
+  bool collision = checkCollision(&mv, ctxt);
   sprite.move(mv[0], mv[1]);
-  if (ctxt.getElapsedTime() > 500){
-    changeTexture(mv);
+  if (ctxt->getElapsedTime() > 500){
+    changeTexture(&mv);
   }
   if(!pickLimb(ctxt)){
     giveLimb(ctxt); //On ne rend pas son membre au zombie si on vient de le ramasser
@@ -52,51 +52,51 @@ void Robot::bouger(Contexte& ctxt){
   }
 }
 
-void Robot::attaquer(Contexte& ctxt, vector<float> direction){
+void Robot::attaquer(Contexte* ctxt, vector<float>* direction){
   if(attaqueTimer.getElapsedTime() > attaqueTime){
     attaqueTimer.restart();
-    Attack attack;
-    if(direction[0] > 0){ //Si on va vers la droite
-      attack = Attack(ctxt.getAttackTextures(1, 2), attackDamage, "Human");
+    Attack* attack;
+    if(direction->at(0) > 0){ //Si on va vers la droite
+      attack = new Attack(ctxt->getAttackTextures(1, 2), attackDamage, "Human");
     }
-    else if(direction[0] < 0){ //Si on va vers la gauche
-      attack = Attack(ctxt.getAttackTextures(1, 3), attackDamage, "Human");
+    else if(direction->at(0) < 0){ //Si on va vers la gauche
+      attack = new Attack(ctxt->getAttackTextures(1, 3), attackDamage, "Human");
     }
-    else if(direction[0] == 0){ //Si on va vers le haut ou le bas
-      if(direction[1] < 0){ //Si on va vers le haut
-        attack = Attack(ctxt.getAttackTextures(1, 0), attackDamage, "Human");
+    else if(direction->at(0) == 0){ //Si on va vers le haut ou le bas
+      if(direction->at(1) < 0){ //Si on va vers le haut
+        attack = new Attack(ctxt->getAttackTextures(1, 0), attackDamage, "Human");
       }
-      else if(direction[1] > 0){ //Si on va vers le bas
-        attack = Attack(ctxt.getAttackTextures(1, 1), attackDamage, "Human");
+      else if(direction->at(1) > 0){ //Si on va vers le bas
+        attack = new Attack(ctxt->getAttackTextures(1, 1), attackDamage, "Human");
       }
       else{ //Si on ne bouge pas
         cout << "previousmv : " << previousmv[0] << " " << previousmv[1] << endl;
-        attaquer(ctxt, previousmv);
+        attaquer(ctxt, &previousmv);
       }
     }
-    hitbox = sprite.getGlobalBounds();
-    attack.computepos(hitbox, direction);
-    ctxt.addAttack(attack);
+    FloatRect casterHitbox = sprite.getGlobalBounds();
+    attack->computepos(casterHitbox, direction);
+    ctxt->addAttack(attack);
   }
   else{
     return;
   }
 }
 
-bool Robot::pickLimb(Contexte& ctxt){
+bool Robot::pickLimb(Contexte* ctxt){
   if (haslimb) {return false;} //Si le robot a déjà un membre, on ne fait rien
 
   FloatRect limbBounds;
-  vector<Limb>& limbs = ctxt.getLimbs();
-  if(limbs.size() > 0){
+  vector<Limb*>* limbs = ctxt->getLimbs();
+  if(limbs->size() > 0){
     
     FloatRect limbBounds;
-    for (int i = 0; i < limbs.size(); ++i) { //Pour chaque membre dans le vecteur de membres
-      limbBounds = limbs[i].getSprite().getGlobalBounds(); //On récupère la hitbox du membre
+    for (int i = 0; i < limbs->size(); ++i) { //Pour chaque membre dans le vecteur de membres
+      limbBounds = limbs->at(i)->getSprite().getGlobalBounds(); //On récupère la hitbox du membre
 
       if (limbBounds.intersects(sprite.getGlobalBounds())) { //Si le robot et le membre se chevauchent
         haslimb = true;
-        ctxt.setLimbStatus(1, i);
+        ctxt->setLimbStatus(1, i);
         return true;
       }
     }
@@ -104,12 +104,12 @@ bool Robot::pickLimb(Contexte& ctxt){
   return false;
 }
 
-void Robot::giveLimb(Contexte& ctxt){
+void Robot::giveLimb(Contexte* ctxt){
   if(haslimb){
     //Si le robot se trouve sur le zombie :
-    if(ctxt.getZombiePos().intersects(sprite.getGlobalBounds())){
+    if(ctxt->getZombiePos()->intersects(sprite.getGlobalBounds())){
       haslimb = false;
-      ctxt.setLimbStatus(2, 0);
+      ctxt->setLimbStatus(2, 0);
       return;
     }
   }
@@ -118,12 +118,12 @@ void Robot::giveLimb(Contexte& ctxt){
   }
 }
 
-void Robot::changeTexture(vector<float>& mv){
+void Robot::changeTexture(vector<float>* mv){
   int nextTextureIndex;
 
   if (currentTextureIndex == 0){nextTextureIndex = 1;} 
   else {nextTextureIndex = 0;}
 
   currentTextureIndex = nextTextureIndex;
-  sprite.setTexture(textures[currentTextureIndex]);
+  sprite.setTexture(textures->at(currentTextureIndex));
 }

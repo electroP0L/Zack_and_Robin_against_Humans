@@ -8,7 +8,7 @@
 class Living : public Entity
 {
   protected:
-    vector<Texture> textures;
+    vector<Texture>* textures;
     int currentTextureIndex;
     Sprite sprite;
     int texSize;
@@ -25,19 +25,21 @@ class Living : public Entity
     int attackDamage;
 
   public:
-    Sprite getSprite() {return sprite;}
-    vector <float> getPreviousmv() {return previousmv;}
+    ~Living(){delete &sprite;}; //Destructeur
+
+    Sprite* getSprite() {return &sprite;}
+    vector<float>* getPreviousmv() {return &previousmv;}
     void setposition(float x, float y) {sprite.setPosition(x, y);}
 
-    virtual void bouger(Contexte& ctxt) = 0;
-    bool checkCollision(vector<float>& mv, Contexte& ctxt);
+    virtual void bouger(Contexte* ctxt) = 0;
+    bool checkCollision(vector<float>* mv, Contexte* ctxt);
 
     int getHP() {return HP;}
     FloatRect getHitbox() override {return sprite.getGlobalBounds();}
     void changeHP(int damage);
-    virtual void attaquer(Contexte& ctxt, vector<float> direction) = 0;
+    virtual void attaquer(Contexte* ctxt, vector<float>* direction) = 0;
 
-    virtual void changeTexture(vector<float>& mv);
+    virtual void changeTexture(vector<float>* mv);
 };  
 
 #endif

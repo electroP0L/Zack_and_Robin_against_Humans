@@ -1,32 +1,32 @@
 #include "limb.hpp"
 #include <cmath>
 
-Limb::Limb(Texture &texlimb, Contexte& ctxt)
+Limb::Limb(Texture& texlimb, Contexte* ctxt)
 {
   sprite.setTexture(texlimb);
   sprite.scale(scale, scale);
   
   hitbox = sprite.getGlobalBounds();
 
-  FloatRect& zombiePos = ctxt.getZombiePos();
-  vector<float> zpos = {zombiePos.left + zombiePos.width/2, zombiePos.top + zombiePos.height/2};
+  FloatRect* zombiePos = ctxt->getZombiePos();
+  vector<float> zpos = {zombiePos->left + zombiePos->width/2, zombiePos->top + zombiePos->height/2};
 
   setpos(zpos[0], zpos[1]);
 
   choosetargetpos(ctxt);
 }
 
-void Limb::choosetargetpos(Contexte& ctxt)
+void Limb::choosetargetpos(Contexte* ctxt)
 {
   int xrand = SCREEN_WIDTH - 34; //34 = largeur du limb
   int yrand = SCREEN_HEIGHT -14; //14 = hauteur du limb
 
   float x = rand() % xrand;
   float y = rand() % yrand;
-  //Si le limbe est superposé à un des obstacles du contexte :
-  for (auto& obstacle : ctxt.getObstacles())
+  //Si le limb est superposé à un des obstacles du contexte :
+  for (Obstacle* obstacle : *(ctxt->getObstacles()))
   {
-    while(obstacle.getHitbox().intersects(hitbox))
+    while(obstacle->getHitbox().intersects(hitbox))
     {
       x = rand() % xrand;
       y = rand() % yrand;

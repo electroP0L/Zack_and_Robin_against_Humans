@@ -7,15 +7,24 @@ CPPFLAGS= -Ideps/include -std=c++14 -g
 LDFLAGS= -Ldeps/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio
 
 
-OBJECTS = main.o living.o zombie.o robot.o human.o attack.o limb.o map.o 
+OBJECTS = main.o game.o texturemanager.o gameoverscreen.o living.o zombie.o robot.o human.o attack.o limb.o map.o 
 all: ZandRVSH
 
 ZandRVSH: $(OBJECTS)
 	$(LD)	-o ZandRVSH	$(OBJECTS)	$(LDFLAGS)
 
 
-main.o: main.cpp zombie.hpp robot.hpp map.hpp
+main.o: main.cpp game.hpp
 	$(CPP)	-c main.cpp	$(CPPFLAGS)
+
+game.o: game.cpp game.hpp texturemanager.hpp gameoverscreen.hpp zombie.hpp robot.hpp map.hpp
+	$(CPP)	-c game.cpp	$(CPPFLAGS)
+
+texturemanager.o: texturemanager.cpp texturemanager.hpp game.hpp
+	$(CPP)	-c texturemanager.cpp	$(CPPFLAGS)
+
+gameoverscreen.o: gameoverscreen.cpp gameoverscreen.hpp game.hpp
+	$(CPP)	-c gameoverscreen.cpp	$(CPPFLAGS)
 
 entity.o: entity.hpp
 
