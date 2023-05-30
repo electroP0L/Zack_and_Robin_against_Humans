@@ -12,7 +12,7 @@ Robot::Robot(vector<Texture>* textures){
   setposition(0,0);
   hitbox = sprite.getGlobalBounds();
   //speed = 1.0f;
-  speed = 5.0f;
+  speed = 2.5f;
 
   HP = 5;
   attackDamage = 1;

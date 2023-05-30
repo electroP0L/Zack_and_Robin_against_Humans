@@ -3,20 +3,33 @@
 Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture>* texhumans){
   
   vector<Obstacle*> obs;
+  //RAPPEL INDICES OBSTACLES :
+  //0 : tree
+  //1 : rock
+  //2 : fence
+  //3 : spaceship
+  //4 : fence2
+  //5 : bus
+  //6 : car
+  //7 : building1
+  //8 : building2
+  //9 : jungle_tree
+  //10 : head
+  //11 : temple
 
   //============== RÉGION 1 ==============
   //POSITIONNEMENT DES OBSTACLES
-  obs.push_back(new Tree(texobs->at(0), 50, 333));
-  obs.push_back(new Tree(texobs->at(0), 750, 233));
-  obs.push_back(new Tree(texobs->at(0), 600, 725));
+  for (int i = 0; i < 10; i++){
+    if((i != 4) && (i != 5) && (i != 6)){  obs.push_back(new Fence(texobs->at(2), 100 * i, 10)); } 
+  }
 
   obs.push_back(new Rock(texobs->at(1), 200, 800));
   obs.push_back(new Rock(texobs->at(1), 650, 383));
   obs.push_back(new Rock(texobs->at(1), 850, 700));  
 
-  for (int i = 0; i < 10; i++){
-    if((i != 4) && (i != 5) && (i != 6)){  obs.push_back(new Fence(texobs->at(2), 100 * i, 10)); } 
-  }
+  obs.push_back(new Tree(texobs->at(0), 50, 333));
+  obs.push_back(new Tree(texobs->at(0), 750, 233));
+  obs.push_back(new Tree(texobs->at(0), 600, 725));
 
   //POSITIONNEMENT DES HUMAINS
   vector<Human*> humans;
@@ -41,10 +54,30 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
   //============== RÉGION 2 ==============
   //POSITIONNEMENT DES OBSTACLES
+    for (int i = 7; i < 10; i++){
+    obs.push_back(new Fence(texobs->at(2), 100 * i, 10));
+  }
+  for (int i = 7; i < 10; i++){
+    obs.push_back(new Fence(texobs->at(2), 100 * i, 300));
+  }
 
+  obs.push_back(new Rock(texobs->at(1), 485, 600));
+  obs.push_back(new Rock(texobs->at(1), 350, 70));
+  obs.push_back(new Rock(texobs->at(1), 850, 650));
+  obs.push_back(new Rock(texobs->at(1), 200, 800));
+
+  obs.push_back(new Car(texobs->at(6), 700, 50));
+
+  obs.push_back(new Tree(texobs->at(0), 75, 350));
+  obs.push_back(new Tree(texobs->at(0), 525, 170));
+  obs.push_back(new Tree(texobs->at(0), 750, 700));
+  obs.push_back(new Tree(texobs->at(0), 0, 50));
 
   //POSITIONNEMENT DES HUMAINS
-  humans.push_back(new Human(texhumans, 500, 250));
+  humans.push_back(new Human(texhumans, 300, 600));
+  humans.push_back(new Human(texhumans, 825, 425));
+  humans.push_back(new Human(texhumans, 900, 130));
+  humans.push_back(new Human(texhumans, 800, 140));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Left"] = new vector<float>{300, 500, 1};
@@ -63,7 +96,40 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
   //============== RÉGION 3 ==============
   //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
-    
+  for (int i = 0; i < 4; i++){
+    obs.push_back(new Fence(texobs->at(4), 25 + 100 * i, 300)); 
+  }
+  for (int i = 0; i < 3; i++){
+    obs.push_back(new Fence(texobs->at(4), 50 + 100 * i, 600)); 
+  }
+  for (int i = 6; i < 8; i++){
+    obs.push_back(new Fence(texobs->at(4), 75 + 100 * i - 50, 415)); 
+  }
+  obs.push_back(new Fence(texobs->at(2), 700, 700)); 
+  obs.push_back(new Fence(texobs->at(2), 900, 700));
+
+  obs.push_back(new Spaceship(texobs->at(3), 5, 400));
+
+  obs.push_back(new Rock(texobs->at(1), 355, 600));
+  obs.push_back(new Rock(texobs->at(1), 650, 500));
+  obs.push_back(new Rock(texobs->at(1), 800, 200));
+
+  obs.push_back(new Tree(texobs->at(0), 50, 700));
+  obs.push_back(new Tree(texobs->at(0), 550, 100));
+
+  //POSITIONNEMENT DES HUMAINS
+
+  humans.push_back(new Human(texhumans, 50, 50));
+  humans.push_back(new Human(texhumans, 400, 170));
+  humans.push_back(new Human(texhumans, 50, 200));
+  humans.push_back(new Human(texhumans, 450, 70));
+
+
+  humans.push_back(new Human(texhumans, 900, 875));
+  humans.push_back(new Human(texhumans, 700, 875));
+  humans.push_back(new Human(texhumans, 800, 775));
+
+
   
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Bottom"] = new vector<float>{500, 700, 1};
