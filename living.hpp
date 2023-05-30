@@ -19,8 +19,8 @@ class Living : public Entity
 
     Clock invincTimer;
     Time invincTime;
-    Clock attaqueTimer;
-    Time attaqueTime;
+    Clock attackTimer;
+    Time attackTime;
     int HP;
     int attackDamage;
 

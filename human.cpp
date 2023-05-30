@@ -18,7 +18,7 @@ Human::Human(vector<Texture>* textures, float x, float y){
 
   HP = 5;
   attackDamage = 1;
-  attaqueTime = milliseconds(2500);
+  attackTime = milliseconds(2500);
   invincTime = milliseconds(250);
 }
 
@@ -84,8 +84,8 @@ void Human::bouger(Contexte* ctxt){
 }
 
 void Human::attaquer(Contexte* ctxt, vector<float>* direction){
-  if(attaqueTimer.getElapsedTime() > attaqueTime){
-    attaqueTimer.restart();
+  if(attackTimer.getElapsedTime() > attackTime){
+    attackTimer.restart();
     Attack* attack;
     vector<float> still;
     if(direction->at(0) == 0 && direction->at(1) == 0){ //Si on ne bouge pas

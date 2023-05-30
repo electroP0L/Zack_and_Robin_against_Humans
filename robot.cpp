@@ -16,7 +16,7 @@ Robot::Robot(vector<Texture>* textures){
 
   HP = 5;
   attackDamage = 1;
-  attaqueTime = milliseconds(2000);
+  attackTime = milliseconds(2000);
 
   haslimb = false;
 
@@ -53,8 +53,8 @@ void Robot::bouger(Contexte* ctxt){
 }
 
 void Robot::attaquer(Contexte* ctxt, vector<float>* direction){
-  if(attaqueTimer.getElapsedTime() > attaqueTime){
-    attaqueTimer.restart();
+  if(attackTimer.getElapsedTime() > attackTime){
+    attackTimer.restart();
     Attack* attack;
     if(direction->at(0) > 0){ //Si on va vers la droite
       attack = new Attack(ctxt->getAttackTextures(1, 2), attackDamage, "Human");

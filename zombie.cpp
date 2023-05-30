@@ -18,7 +18,7 @@ Zombie::Zombie(vector<Texture>* textures, Texture* texlimb){
 
   HP = 6;
   attackDamage = 3;
-  attaqueTime = milliseconds(1000);
+  attackTime = milliseconds(1000);
   invincTime = milliseconds(500);
 }
 
@@ -77,8 +77,8 @@ void Zombie::notifymovement(Contexte* ctxt){
 }
 
 void Zombie::attaquer(Contexte* ctxt, vector<float>* direction){
-  if(attaqueTimer.getElapsedTime() > attaqueTime){
-    attaqueTimer.restart();
+  if(attackTimer.getElapsedTime() > attackTime){
+    attackTimer.restart();
     Attack* attack;
     if(direction->at(0) == 0 && direction->at(1) == 0){ //Si on ne bouge pas
         vector<float> still;
