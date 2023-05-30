@@ -14,8 +14,8 @@ class Map {
     int previousRegionIndex;
 
   public:
-    //Map(){}; //Constructeur par défaut
     Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture>* texhumans);
+    ~Map();
 
     void setCurrentRegion(Region* region) {currentRegion = region;}
     Region* getCurrentRegion() {return currentRegion;}

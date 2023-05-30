@@ -30,7 +30,16 @@ class Game {
 
   public:
     Game(String& path);
-    ~Game(){delete textureManager; delete gameOverScreen; delete map; delete zombie; delete robot; delete changeRegion; delete currentRegion; delete missingLimbs; delete attacks;}
+    
+    ~Game(){
+      delete textureManager; 
+      delete gameOverScreen; 
+      delete map; 
+      delete zombie; 
+      delete robot;
+    }
+    
+    
     void run();
     void manageRegionChange();
     void display();

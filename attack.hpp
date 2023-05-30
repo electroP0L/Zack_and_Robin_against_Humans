@@ -11,11 +11,6 @@ class Attack : public Inanimate{
     String target;
 
   public:
-    //Attack(){}; //Constructeur par défaut
-    ~Attack(){
-      delete attackTextures;
-      delete &attackTimer;
-    }
     Attack(vector<Texture>* attackTextures, int attackDamage, String target);
     
     Time getAttackTime() {return attackTimer.getElapsedTime();}

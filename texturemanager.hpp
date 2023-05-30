@@ -20,30 +20,6 @@ class TextureManager {
 
   public:
     TextureManager(){}; //Constructeur par défaut
-    ~TextureManager() {
-      for (int i = 0; i < texZombie.size(); i++) {
-        texZombie[i].~Texture();
-      }
-      for (int i = 0; i < texRobot.size(); i++) {
-        texRobot[i].~Texture();
-      }
-      for (int i = 0; i < texHuman.size(); i++) {
-        texHuman[i].~Texture();
-      }
-      for (int i = 0; i < texObstacles.size(); i++) {
-        texObstacles[i].~Texture();
-      }
-      for (int i = 0; i < texBackground.size(); i++) {
-        texBackground[i].~Texture();
-      }
-      for (int i = 0; i < texAttacks.size(); i++) {
-        for (int j = 0; j < texAttacks[i].size(); j++) {
-          for (int k = 0; k < texAttacks[i][j].size(); k++) {
-            texAttacks[i][j][k].~Texture();
-          }
-        }
-      }
-    }
     
     TextureManager(String& path);
     void loadZombieTextures(String& path);

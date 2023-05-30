@@ -40,6 +40,12 @@ class Contexte {
       this->limbs = missingLimbs;
       this->attacks = {};
     }
+    ~Contexte(){
+      for (Attack* attack : attacks) {
+        delete attack;
+      }
+      attacks.clear();
+    }
 
 
     float getElapsedTime() {return this->clock.getElapsedTime().asMilliseconds();}

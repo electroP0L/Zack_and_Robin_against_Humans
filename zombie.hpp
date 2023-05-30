@@ -14,8 +14,8 @@ class Zombie : public Living
     vector<Limb*> missingLimbs; 
     
   public:
-    Zombie(){}; //Constructeur par défaut
     Zombie(vector<Texture>* textures, Texture* texlimb);
+    ~Zombie();
 
     void bouger(Contexte* ctxt) override;
     void attaquer(Contexte* ctxt, vector<float>* direction) override;

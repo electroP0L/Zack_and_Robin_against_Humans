@@ -23,6 +23,14 @@ Zombie::Zombie(vector<Texture>* textures, Texture* texlimb){
 }
 
 
+Zombie::~Zombie() {
+  for (Limb* limb : missingLimbs) {
+    delete limb;
+  }
+  missingLimbs.clear();
+}
+
+
 void Zombie::bouger(Contexte* ctxt){
   //Déplacement : On bouge le zombie en fonction des touches appuyées
   vector<float> mv = {0.0f, 0.0f};
@@ -127,6 +135,7 @@ void Zombie::changeHP(int damage, Contexte* ctxt){
 void Zombie::updateLimbs(Contexte* ctxt){
   vector<int>* limbStatus = ctxt->getLimbStatus();
   if (limbStatus->at(0) == 1){
+    delete missingLimbs.at(limbStatus->at(1));
     missingLimbs.erase(missingLimbs.begin() + limbStatus->at(1));
     ctxt->setLimbStatus(0, 0);
   }

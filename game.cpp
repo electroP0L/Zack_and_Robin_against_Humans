@@ -162,6 +162,7 @@ void Game::manageAttacks()
               humans->at(j)->changeHP(-attacks->at(i)->getDamage()); //On inflige des dégâts
               if (humans->at(j)->getHP() <= 0){ //Si l'humain est mort
                 //On le delete
+                delete humans->at(j);
                 humans->erase(humans->begin() + j);
               }
             }
@@ -175,12 +176,15 @@ void Game::manageAttacks()
               Sprite* backgroundSprite = currentRegion->getBackgroundSprite();
               gameOverScreen->displayGameOver(&window, backgroundSprite);
 
+              ctxt.~Contexte();
+
               return;
             }
           }
         }
 
         //On supprime l'attaque du vecteur
+        delete attacks->at(i);
         attacks->erase(attacks->begin() + i);
       }
       else{

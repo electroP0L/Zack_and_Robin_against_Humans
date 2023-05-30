@@ -25,7 +25,6 @@ class Living : public Entity
     int attackDamage;
 
   public:
-    ~Living(){delete &sprite;}; //Destructeur
 
     Sprite* getSprite() {return &sprite;}
     vector<float>* getPreviousmv() {return &previousmv;}

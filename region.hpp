@@ -38,6 +38,41 @@ class Region
       this->waypoints = waypoints;
     }
 
+    ~Region() {
+    // Release memory for obstacles
+    for (Obstacle* obstacle : obstacles) {
+      delete obstacle;
+    }
+    
+    // Clear the vector of obstacles
+    obstacles.clear();
+
+    // Release memory for humans
+    for (Human* human : humans) {
+      delete human;
+    }
+    
+    // Clear the vector of humans
+    humans.clear();
+
+    // Release memory for spawn vectors
+    for (vector<float>* spawnPoint : spawn) {
+      delete spawnPoint;
+    }
+    
+    // Clear the vector of spawn points
+    spawn.clear();
+
+    // Release memory for waypoints
+    for (auto& pair : waypoints) {
+      delete pair.second;
+    }
+    
+    // Clear the map of waypoints
+    waypoints.clear();
+  }
+
+
     Sprite* getBackgroundSprite() {return &background;}
     vector<Obstacle*>* getObstacles() {return &obstacles;}
     vector<Human*>* getHumans() {return &humans;}

@@ -14,7 +14,6 @@ class GameOverScreen {
 
   public:
     GameOverScreen(){}; //Constructeur par défaut
-    ~GameOverScreen(){delete &GOtext; delete &ZaRaHtext; delete &iconSprite;};
     GameOverScreen(vector<Font>* fonts, Image* icon);
     void displayGameOver(RenderWindow* window, Sprite* backgroundSprite);
     

@@ -11,7 +11,6 @@ class Robot : public Living
     bool haslimb;
     
   public:
-    //Robot(){}; //Constructeur par défaut
     Robot(vector<Texture>* textures);
     
     void bouger(Contexte* ctxt) override;

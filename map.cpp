@@ -258,12 +258,23 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   obs.clear();
   humans.clear();
   waypoints.clear();
-  //spawn.clear();
+  spawn.clear();
 
   //============== Initialisation ==============
   currentRegionIndex = -1;
   previousRegionIndex = -2;
 }
+
+Map::~Map() {
+  // Release memory for regions
+  for (Region* region : regions) {
+    delete region;
+  }
+  
+  // Clear the vector of regions
+  regions.clear();
+}
+
 
 void Map::loadRegion(Zombie* zombie, Robot* robot, int direction){
   float z_dx = zombie->getSprite()->getGlobalBounds().width/2;
