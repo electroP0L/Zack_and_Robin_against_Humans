@@ -204,8 +204,21 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   spawn.clear();
 
   //============== RÉGION 7 ==============
-  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+  //POSITIONNEMENT DES OBSTACLES  
+  obs.push_back(new JungleTree(texobs->at(9), 350, 70));
+  obs.push_back(new JungleTree(texobs->at(9), 550, 170));
+  obs.push_back(new Head(texobs->at(10), 200, 275));
+  obs.push_back(new JungleTree(texobs->at(9), 75, 350));
+  obs.push_back(new JungleTree(texobs->at(9), 485, 600));
+  obs.push_back(new JungleTree(texobs->at(9), 150, 700));
+  obs.push_back(new JungleTree(texobs->at(9), 850, 550));
 
+  //POSITIONNEMENT DES HUMAINS
+  humans.push_back(new Human(texhumans, 400, 400));
+  humans.push_back(new Human(texhumans, 400, 350));
+  humans.push_back(new Human(texhumans, 825, 425));
+  humans.push_back(new Human(texhumans, 900, 130));
+  humans.push_back(new Human(texhumans, 800, 140));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Right"] = new vector<float>{400, 600, 1};
@@ -223,8 +236,21 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   spawn.clear();
 
   //============== RÉGION 8 ==============
-  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+   //POSITIONNEMENT DES OBSTACLES
+  obs.push_back(new Temple(texobs->at(11), 680, 60));
+  obs.push_back(new JungleTree(texobs->at(9), 485, 600));
+  obs.push_back(new JungleTree(texobs->at(9), 350, 70));
+  obs.push_back(new JungleTree(texobs->at(9), 750, 250));
+  obs.push_back(new JungleTree(texobs->at(9), 150, 700));
+  obs.push_back(new JungleTree(texobs->at(9), 75, 450));
+  obs.push_back(new JungleTree(texobs->at(9), 525, 170));
 
+  //POSITIONNEMENT DES HUMAINS
+  humans.push_back(new Human(texhumans, 650, 250));
+  humans.push_back(new Human(texhumans, 650, 280));
+  humans.push_back(new Human(texhumans, 825, 625));
+  humans.push_back(new Human(texhumans, 900, 730));
+  humans.push_back(new Human(texhumans, 800, 850));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Right"] = new vector<float>{600, 800, 1};
@@ -241,9 +267,9 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   waypoints.clear();
   spawn.clear();
 
-  //============== RÉGION 9 ==============
-  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
-
+    //============== RÉGION 9 ==============
+  //POSITIONNEMENT DES OBSTACLES
+  obs.push_back(new Temple(texobs->at(11), 340, 100));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Top"] = new vector<float>{-1, -1, 1};

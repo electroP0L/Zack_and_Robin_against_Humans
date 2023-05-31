@@ -15,8 +15,15 @@ bool Living::checkCollision(vector<float>* mv, Contexte* ctxt) { //Traitement de
   const float screen_height = SCREEN_HEIGHT - bounds.height;
 
   map<String, vector<float>*>* waypoints = ctxt->getWaypoints();
+  bool clearRegion;
+  if(ctxt->getHumans()->size() == 0 && ctxt->getLimbs()->size() == 0){clearRegion = true;}
+  else{clearRegion = false;}
+
+
+  //clearRegion = true;
+
   if(newpos.x < 0) { //Si le living sort de l'écran par la gauche
-    if((waypoints->count("Left")) && (pos.y >= (*waypoints)["Left"]->at(0))&&(pos.y <= (*waypoints)["Left"]->at(1))){  //Si on peut sortir de la région par la gauche et que le sprite est compris dans la zone de changement
+    if((waypoints->count("Left")) && (pos.y >= (*waypoints)["Left"]->at(0))&&(pos.y <= (*waypoints)["Left"]->at(1))&&clearRegion){  //Si on peut sortir de la région par la gauche et que le sprite est compris dans la zone de changement
       ctxt->setChangeRegion(true, (*waypoints)["Left"]->at(2));
     }
     else{
@@ -25,7 +32,7 @@ bool Living::checkCollision(vector<float>* mv, Contexte* ctxt) { //Traitement de
     }
   }
   else if(newpos.x > screen_width) { //Si le living sort de l'écran par la droite
-    if((waypoints->count("Right")) && (pos.y >= (*waypoints)["Right"]->at(0))&&(pos.y <= (*waypoints)["Right"]->at(1))){ //Si on peut sortir de la région par la droite et que le sprite est compris dans la zone de changement
+    if((waypoints->count("Right")) && (pos.y >= (*waypoints)["Right"]->at(0))&&(pos.y <= (*waypoints)["Right"]->at(1))&&clearRegion){ //Si on peut sortir de la région par la droite et que le sprite est compris dans la zone de changement
       ctxt->setChangeRegion(true, (*waypoints)["Right"]->at(2));
     }
     else{
@@ -34,7 +41,7 @@ bool Living::checkCollision(vector<float>* mv, Contexte* ctxt) { //Traitement de
     } 
   }
   if(newpos.y < 0) { //Si le living sort de l'écran par le haut
-    if ((waypoints->count("Top")) && (pos.x >= (*waypoints)["Top"]->at(0))&&(pos.x+bounds.width) <= (*waypoints)["Top"]->at(1)){  //Si on peut sortir de la région par le haut et que le sprite est compris dans la zone de changement
+    if ((waypoints->count("Top")) && (pos.x >= (*waypoints)["Top"]->at(0))&&(pos.x+bounds.width) <= (*waypoints)["Top"]->at(1)&&clearRegion){  //Si on peut sortir de la région par le haut et que le sprite est compris dans la zone de changement
       ctxt->setChangeRegion(true, (*waypoints)["Top"]->at(2));
     }
     else {
@@ -43,7 +50,7 @@ bool Living::checkCollision(vector<float>* mv, Contexte* ctxt) { //Traitement de
     }
   }
   else if(newpos.y > screen_height) { //Si le living sort de l'écran par le bas
-    if((waypoints->count("Bottom")) && (pos.x >= (*waypoints)["Bottom"]->at(0))&&(pos.x+bounds.width) <= (*waypoints)["Bottom"]->at(1)){  //Si on peut sortir de la région par le bas et que le sprite est compris dans la zone de changement
+    if((waypoints->count("Bottom")) && (pos.x >= (*waypoints)["Bottom"]->at(0))&&(pos.x+bounds.width) <= (*waypoints)["Bottom"]->at(1)&&clearRegion){  //Si on peut sortir de la région par le bas et que le sprite est compris dans la zone de changement
       ctxt->setChangeRegion(true, (*waypoints)["Bottom"]->at(2));
     }
     else {
