@@ -11,6 +11,7 @@ class Bus : public Obstacle
   public:
     Bus(Texture& texture, float x, float y){
       sprite.setTexture(texture);
+      float scale = 1.0f;
       sprite.scale(scale, scale);
       setpos(x, y);
       hitbox = sprite.getGlobalBounds();
