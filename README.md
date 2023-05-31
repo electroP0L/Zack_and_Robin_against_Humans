@@ -36,7 +36,7 @@ Le robot inflige 1 dégât par attaque, il lui faut donc 5 coups pour éliminer 
 
 ### Carte
 La carte est divisée en 9 régions. Vous aurez l'occasion de visiter des paysages variés.
-Pour passer à la région suivante il suffit de suivre le chemin. La fin du jeu se déclenche quand vous atteignez la fin du chemin sur la dernière région.
+Pour passer à la région suivante il faut éliminer l'ensemble des humains de la carte, et récupérer tous les membres perdus. Il suffit ensuite de suivre le chemin. La fin du jeu se déclenche quand vous atteignez la fin du chemin sur la dernière région.
 
 ## Programme
 Notre code suit une logique assez simple d'interactions diverses entre les objets qu'il implémente. 
@@ -49,9 +49,9 @@ Nous sommes assez fiers des éléments suivants de notre jeu :
 
 Quelques pistes d'améliorations :
 - Nous avions initialement prévu de modifier le Sprite du marcheur à chaque coup qu'il recevait, pour rendre compte physiquement de la perte de ses membres. Seulement, cela nous aurait pris beaucoup de création de graphismes, et la solution de l'affichage des points de vie a été privilégiée.
-- Nous souhaitions également ajouter une petite fin à notre jeu. Arrivés à la dernière Zone, Zack & Robin pourraient enfin se reposer dans leurs maisons respectives.
 - Il serait envisageable d'ajouter un écran de début de jeu, et de rendre l'écran de Game Over plus interactif.
 - En l'état, il est techniquement possible pour n'importe quel living (Ennemis compris) de déclencher les changements de région. En théorie, le fonctionnement des humains rend cela impossible, mais cela pourrait poser problème à l'ajout de nouveaux PNJs.
+- Il serait mieux de faire une grosse classe obstacle regroupant les 12 obstacles, plutôt qu'une classe pour chaque type obstacle
 
 
 
