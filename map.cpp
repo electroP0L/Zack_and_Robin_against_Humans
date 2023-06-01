@@ -287,12 +287,19 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
   //============== RÉGION 7 ==============
   //POSITIONNEMENT DES OBSTACLES  
+  obs.push_back(new Rock(texobs->at(1), 150, 100)); 
+  obs.push_back(new Rock(texobs->at(1), 850, 200));
+  obs.push_back(new Rock(texobs->at(1), 650, 803));
+  obs.push_back(new Rock(texobs->at(1), 150, 700));
+  obs.push_back(new JungleTree(texobs->at(9), 850, 10));
+  obs.push_back(new JungleTree(texobs->at(9), 800, 50));
   obs.push_back(new JungleTree(texobs->at(9), 350, 70));
   obs.push_back(new JungleTree(texobs->at(9), 550, 170));
   obs.push_back(new Head(texobs->at(10), 200, 275));
+  obs.push_back(new Fence(texobs->at(2),250,500));
   obs.push_back(new JungleTree(texobs->at(9), 75, 350));
   obs.push_back(new JungleTree(texobs->at(9), 485, 600));
-  obs.push_back(new JungleTree(texobs->at(9), 150, 700));
+  obs.push_back(new Tree(texobs->at(0), 150, 700));
   obs.push_back(new JungleTree(texobs->at(9), 850, 550));
 
   //POSITIONNEMENT DES HUMAINS
@@ -319,13 +326,21 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
   //============== RÉGION 8 ==============
    //POSITIONNEMENT DES OBSTACLES
+  obs.push_back(new Rock(texobs->at(1), 100, 100));
+  obs.push_back(new Rock(texobs->at(1), 150, 300));
+  obs.push_back(new Rock(texobs->at(1), 750, 800));
+  obs.push_back(new Rock(texobs->at(1), 50, 700));  
   obs.push_back(new Temple(texobs->at(11), 680, 60));
+  obs.push_back(new Fence(texobs->at(2),700,350));
+  obs.push_back(new JungleTree(texobs->at(9), 10, 10));
+  obs.push_back(new JungleTree(texobs->at(9), 30, 200));
   obs.push_back(new JungleTree(texobs->at(9), 485, 600));
   obs.push_back(new JungleTree(texobs->at(9), 350, 70));
   obs.push_back(new JungleTree(texobs->at(9), 750, 250));
   obs.push_back(new JungleTree(texobs->at(9), 150, 700));
   obs.push_back(new JungleTree(texobs->at(9), 75, 450));
   obs.push_back(new JungleTree(texobs->at(9), 525, 170));
+  obs.push_back(new Head(texobs->at(10), 200, 750));
 
   //POSITIONNEMENT DES HUMAINS
   humans.push_back(new Human(texhumans, 650, 250));
@@ -351,7 +366,14 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
     //============== RÉGION 9 ==============
   //POSITIONNEMENT DES OBSTACLES
-  obs.push_back(new Temple(texobs->at(11), 340, 100));
+  obs.push_back(new Tree(texobs->at(0), 100, 50));
+  obs.push_back(new Tree(texobs->at(0), 700, 40));
+  obs.push_back(new Tree(texobs->at(0), 100, 450));
+  obs.push_back(new Tree(texobs->at(0), 600, 550));
+  obs.push_back(new Tree(texobs->at(0), 300, 650));
+  obs.push_back(new Tree(texobs->at(0), 700, 700));
+  obs.push_back(new Temple(texobs->at(11), 340, 100));//mettre House
+  obs.push_back(new Head(texobs->at(10), 700, 350));//mettre Garden
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Top"] = new vector<float>{-1, -1, 1};
