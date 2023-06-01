@@ -7,7 +7,6 @@ bool Living::checkCollision(vector<float>* mv, Contexte* ctxt) { //Traitement de
   Vector2f newpos = pos + Vector2f(mv->at(0), mv->at(1)); //On calcule la position du living après déplacement
 
   //Traitement des bords de l'écran 
-  //TODO : LES PNJ PEUVENT CHANGER LA REGION - A PATCHER PLUS TARD
   const FloatRect bounds = sprite.getGlobalBounds(); //La hitbox du sprite living
 
 
