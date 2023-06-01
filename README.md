@@ -50,7 +50,6 @@ Nous sommes assez fiers des éléments suivants de notre jeu :
 Quelques pistes d'améliorations :
 - Nous avions initialement prévu de modifier le Sprite du marcheur à chaque coup qu'il recevait, pour rendre compte physiquement de la perte de ses membres. Seulement, cela nous aurait pris beaucoup de création de graphismes, et la solution de l'affichage des points de vie a été privilégiée.
 - Il serait envisageable d'ajouter un écran de début de jeu, et de rendre l'écran de Game Over plus interactif.
-- En l'état, il est techniquement possible pour n'importe quel living (Ennemis compris) de déclencher les changements de région. En théorie, le fonctionnement des humains rend cela impossible, mais cela pourrait poser problème à l'ajout de nouveaux PNJs.
 - Il serait mieux de faire une grosse classe obstacle regroupant les 12 obstacles, plutôt qu'une classe pour chaque type obstacle
 - Nous aurions aimer faire en sorte que le jeu se lance qu'on clique sur une icône sur le bureau de l'ordinateur. Cette idée n'a pas abouti car ne fonctionnait pas sur tous nos ordinateurs, mais nous avons laissé le dossier "Application" dans les fichiers du jeu
 
