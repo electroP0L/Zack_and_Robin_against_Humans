@@ -6,7 +6,7 @@
 class Building : public Obstacle
 {
   private:
-    float scale = 1.0f / 2.5f;
+    float scale = 1.0f / 4.0f;
 
   public:
     Building(Texture& texture, float x, float y){
@@ -17,6 +17,6 @@ class Building : public Obstacle
       hitbox.height /=2;
       hitbox.top += hitbox.height;
     }
-};  
+};
 
 #endif

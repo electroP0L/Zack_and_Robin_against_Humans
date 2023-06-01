@@ -146,8 +146,43 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   waypoints.clear();
   spawn.clear();
 
-  //============== RÉGION 4 ==============
-  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+//============== RÉGION 4 ==============
+  //POSITIONNEMENT DES OBSTACLES
+  obs.push_back(new Rock(texobs->at(1),350,350));
+
+  obs.push_back(new Fence(texobs->at(2),0,930));
+  obs.push_back(new Fence(texobs->at(2),100,930));
+  obs.push_back(new Fence(texobs->at(2),0,740));
+  obs.push_back(new Fence(texobs->at(2),100,740));
+  obs.push_back(new Fence(texobs->at(4),0,300));
+  obs.push_back(new Fence(texobs->at(4),0,500));
+  obs.push_back(new Fence(texobs->at(4),430,0));
+  obs.push_back(new Fence(texobs->at(4),630,0));
+
+  obs.push_back(new Car(texobs->at(6), 5, 780));
+  obs.push_back(new Car(texobs->at(6), 5, 830));
+  obs.push_back(new Car(texobs->at(6), 800, 580));
+  obs.push_back(new Car(texobs->at(6), 600, 580));
+
+  obs.push_back(new Bus(texobs->at(5),10, 580 ));
+
+  obs.push_back(new Tree(texobs->at(0),100,100));
+  obs.push_back(new Tree(texobs->at(0),650,50));
+  obs.push_back(new Tree(texobs->at(0),150,750));
+
+  obs.push_back(new Building(texobs->at(7), 570, 300));
+  obs.push_back(new Building(texobs->at(7), 755, 300));
+
+
+  //POSITIONNEMENT DES HUMAINS 
+  humans.push_back(new Human(texhumans, 300, 600));
+  humans.push_back(new Human(texhumans, 450, 450));
+  humans.push_back(new Human(texhumans, 600, 700));
+  humans.push_back(new Human(texhumans, 750, 700));
+  humans.push_back(new Human(texhumans, 900, 700));
+  humans.push_back(new Human(texhumans, 600, 880));
+  humans.push_back(new Human(texhumans, 750, 880));
+  humans.push_back(new Human(texhumans, 900, 880));
 
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
@@ -165,8 +200,29 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   waypoints.clear();
   spawn.clear();
   
-  //============== RÉGION 5 ==============
-  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+//============== RÉGION 5 ==============
+  //POSITIONNEMENT DES OBSTACLES
+
+  for (int i = 3; i < 8; i++){
+    if(i!=5){obs.push_back(new Fence(texobs->at(2), 100 * i - 50, 700));}
+  }
+
+  obs.push_back(new Rock(texobs->at(1),450,850));
+
+  obs.push_back(new Car(texobs->at(6), 120, 350));
+  obs.push_back(new Car(texobs->at(6), 830, 700));
+
+  obs.push_back(new Bus(texobs->at(5),650,450));
+
+  obs.push_back(new Tree(texobs->at(0),150,400));
+  obs.push_back(new Tree(texobs->at(0),750,75));
+  obs.push_back(new Tree(texobs->at(0),680,720));
+
+  obs.push_back(new Building(texobs->at(8),500,50));
+  obs.push_back(new Building(texobs->at(8),50,50));
+  obs.push_back(new Building(texobs->at(7),20,700));
+
+  //POSITIONNEMENT DES HUMAINS
 
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
@@ -185,7 +241,29 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   spawn.clear();
 
   //============== RÉGION 6 ==============
-  //POSITIONNEMENT DES OBSTACLES (pour l'instant vide)
+  //POSITIONNEMENT DES OBSTACLES
+  obs.push_back(new Tree(texobs->at(8),0,700));
+  obs.push_back(new Tree(texobs->at(8),800,700));
+  obs.push_back(new Tree(texobs->at(8),600,100));
+  obs.push_back(new Tree(texobs->at(8),800,100));
+  obs.push_back(new Tree(texobs->at(8),0,300));
+
+  obs.push_back(new Rock(texobs->at(1),300,500));
+  obs.push_back(new Car(texobs->at(6),600,500));
+  obs.push_back(new Car(texobs->at(6),800,500));
+  obs.push_back(new Bus(texobs->at(5),0,50));
+  obs.push_back(new Fence(texobs->at(2),500,800));
+  obs.push_back(new Fence(texobs->at(2),250,800));
+  obs.push_back(new Fence(texobs->at(2),600,800));
+  obs.push_back(new Fence(texobs->at(2),700,800));
+
+  //POSITIONNEMENT DES HUMAINS
+  humans.push_back(new Human(texhumans,600,0));
+  humans.push_back(new Human(texhumans,350,0));
+  humans.push_back(new Human(texhumans,500,400));
+  humans.push_back(new Human(texhumans,700,600));
+  humans.push_back(new Human(texhumans,300,650));
+  humans.push_back(new Human(texhumans,500,650));
 
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
