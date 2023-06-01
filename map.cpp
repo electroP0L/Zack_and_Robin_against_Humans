@@ -123,8 +123,6 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   humans.push_back(new Human(texhumans, 400, 170));
   humans.push_back(new Human(texhumans, 50, 200));
   humans.push_back(new Human(texhumans, 450, 70));
-
-
   humans.push_back(new Human(texhumans, 900, 875));
   humans.push_back(new Human(texhumans, 700, 875));
   humans.push_back(new Human(texhumans, 800, 775));
@@ -223,6 +221,12 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   obs.push_back(new Building(texobs->at(7),20,700));
 
   //POSITIONNEMENT DES HUMAINS
+  humans.push_back(new Human(texhumans, 500, 450));
+  humans.push_back(new Human(texhumans, 75, 550));
+  humans.push_back(new Human(texhumans, 350, 800));
+  humans.push_back(new Human(texhumans, 600, 800));
+  humans.push_back(new Human(texhumans, 300, 850));
+  humans.push_back(new Human(texhumans, 650, 850));
 
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
