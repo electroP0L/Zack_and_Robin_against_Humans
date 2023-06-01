@@ -13,6 +13,8 @@
 #include "jungle_tree.hpp"
 #include "head.hpp"
 #include "temple.hpp"
+#include "house.hpp"
+#include "garden.hpp"
 
 #include "vector"
 #include "map"

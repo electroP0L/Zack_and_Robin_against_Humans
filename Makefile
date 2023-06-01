@@ -70,7 +70,11 @@ head.o: head.hpp obstacle.hpp
 
 temple.o: temple.hpp obstacle.hpp
 
-region.o: region.hpp human.hpp tree.hpp rock.hpp fence.hpp spaceship.hpp bus.hpp car.hpp building.hpp jungle_tree.hpp head.hpp temple.hpp
+house.o: house.hpp obstacle.hpp
+
+garden.o: garden.hpp obstacle.hpp
+
+region.o: region.hpp human.hpp tree.hpp rock.hpp fence.hpp spaceship.hpp bus.hpp car.hpp building.hpp jungle_tree.hpp head.hpp temple.hpp house.hpp garden.hpp
 
 map.o: map.cpp map.hpp region.hpp
 	$(CPP)	-c map.cpp	$(CPPFLAGS)
@@ -152,7 +156,7 @@ main.o: /usr/include/SFML/Graphics/Glsl.inl
 main.o: /usr/include/SFML/Graphics/Sprite.hpp
 main.o: /usr/include/SFML/Graphics/Text.hpp
 main.o: /usr/include/SFML/Graphics/VertexBuffer.hpp contexte.hpp obstacle.hpp
-main.o: region.hpp tree.hpp rock.hpp
+main.o: region.hpp tree.hpp rock.hpp fence.hpp spaceship.hpp bus.hpp car.hpp building.hpp jungle_tree.hpp head.hpp temple.hpp house.hpp garden.hpp
 zombie.o: zombie.hpp living.hpp entity.hpp /usr/include/SFML/Graphics.hpp
 zombie.o: /usr/include/SFML/Window.hpp /usr/include/SFML/System.hpp
 zombie.o: /usr/include/SFML/Config.hpp /usr/include/SFML/System/Clock.hpp
