@@ -199,6 +199,10 @@ void TextureManager::loadObstaclesTextures(String& path)
   texObstacles.push_back(tex); //Index 10
   if(!tex.loadFromFile("sprites/temple.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/temple.png"); }
   texObstacles.push_back(tex); //Index 11
+  if(!tex.loadFromFile("sprites/house.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/house.png"); }
+  texObstacles.push_back(tex); //Index 12
+  if(!tex.loadFromFile("sprites/garden.png")){  tex.loadFromFile(path + "Zack_and_Robin_against_Humans/sprites/garden.png"); }
+  texObstacles.push_back(tex); //Index 13
 }
 
 void TextureManager::loadBackgroundTextures(String& path)

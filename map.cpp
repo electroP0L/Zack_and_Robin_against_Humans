@@ -16,6 +16,8 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   //9 : jungle_tree
   //10 : head
   //11 : temple
+  //12 : house
+  //13 : garden
 
   //============== RÉGION 1 ==============
   //POSITIONNEMENT DES OBSTACLES
@@ -23,13 +25,13 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
     if((i != 4) && (i != 5) && (i != 6)){  obs.push_back(new Fence(texobs->at(2), 100 * i, 10)); } 
   }
 
-  obs.push_back(new Rock(texobs->at(1), 200, 800));
+  obs.push_back(new Rock(texobs->at(1), 100, 700));
   obs.push_back(new Rock(texobs->at(1), 650, 383));
   obs.push_back(new Rock(texobs->at(1), 850, 700));  
 
   obs.push_back(new Tree(texobs->at(0), 50, 333));
   obs.push_back(new Tree(texobs->at(0), 750, 233));
-  obs.push_back(new Tree(texobs->at(0), 600, 725));
+  obs.push_back(new Tree(texobs->at(0), 400, 725));
 
   //POSITIONNEMENT DES HUMAINS
   vector<Human*> humans;
@@ -158,9 +160,9 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   obs.push_back(new Fence(texobs->at(4),630,0));
 
   obs.push_back(new Car(texobs->at(6), 5, 780));
-  obs.push_back(new Car(texobs->at(6), 5, 830));
-  obs.push_back(new Car(texobs->at(6), 800, 580));
-  obs.push_back(new Car(texobs->at(6), 600, 580));
+  obs.push_back(new Car(texobs->at(6), 5, 850));
+  obs.push_back(new Car(texobs->at(6), 800, 600));
+  obs.push_back(new Car(texobs->at(6), 600, 600));
 
   obs.push_back(new Bus(texobs->at(5),10, 580 ));
 
@@ -169,7 +171,7 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
   obs.push_back(new Tree(texobs->at(0),150,750));
 
   obs.push_back(new Building(texobs->at(7), 570, 300));
-  obs.push_back(new Building(texobs->at(7), 755, 300));
+  obs.push_back(new Building(texobs->at(7), 770, 300));
 
 
   //POSITIONNEMENT DES HUMAINS 
@@ -246,28 +248,36 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
   //============== RÉGION 6 ==============
   //POSITIONNEMENT DES OBSTACLES
-  obs.push_back(new Tree(texobs->at(8),0,700));
-  obs.push_back(new Tree(texobs->at(8),800,700));
-  obs.push_back(new Tree(texobs->at(8),600,100));
-  obs.push_back(new Tree(texobs->at(8),800,100));
-  obs.push_back(new Tree(texobs->at(8),0,300));
+  obs.push_back(new Rock(texobs->at(1),400,535));
 
-  obs.push_back(new Rock(texobs->at(1),300,500));
-  obs.push_back(new Car(texobs->at(6),600,500));
-  obs.push_back(new Car(texobs->at(6),800,500));
+  obs.push_back(new Car(texobs->at(6),630,420 /*nice*/));
+  obs.push_back(new Car(texobs->at(6),820,530));
+
   obs.push_back(new Bus(texobs->at(5),0,50));
-  obs.push_back(new Fence(texobs->at(2),500,800));
-  obs.push_back(new Fence(texobs->at(2),250,800));
-  obs.push_back(new Fence(texobs->at(2),600,800));
-  obs.push_back(new Fence(texobs->at(2),700,800));
+
+  obs.push_back(new Tree(texobs->at(0),550,550));
+
+  obs.push_back(new Building(texobs->at(8),0,700));
+  obs.push_back(new Building(texobs->at(8),800,700));
+  obs.push_back(new Building(texobs->at(8),600,100));
+  obs.push_back(new Building(texobs->at(7),800,100));
+  obs.push_back(new Building(texobs->at(7),5,300));
+
+  obs.push_back(new Fence(texobs->at(4),250,800));
+  for (int i = 5; i < 8; i++){
+    obs.push_back(new Fence(texobs->at(4), 100 * i, 800));
+  }
 
   //POSITIONNEMENT DES HUMAINS
-  humans.push_back(new Human(texhumans,600,0));
-  humans.push_back(new Human(texhumans,350,0));
-  humans.push_back(new Human(texhumans,500,400));
-  humans.push_back(new Human(texhumans,700,600));
-  humans.push_back(new Human(texhumans,300,650));
-  humans.push_back(new Human(texhumans,500,650));
+  humans.push_back(new Human(texhumans,300,680));
+  humans.push_back(new Human(texhumans,500,680));
+  humans.push_back(new Human(texhumans,400,100));
+  humans.push_back(new Human(texhumans,500,100));
+  humans.push_back(new Human(texhumans,400,200));
+  humans.push_back(new Human(texhumans,500,200));
+  humans.push_back(new Human(texhumans,400,300));
+  humans.push_back(new Human(texhumans,500,300));
+
 
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
@@ -287,27 +297,38 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
   //============== RÉGION 7 ==============
   //POSITIONNEMENT DES OBSTACLES  
-  obs.push_back(new Rock(texobs->at(1), 150, 100)); 
+
+  obs.push_back(new Rock(texobs->at(1), 100, 100)); 
   obs.push_back(new Rock(texobs->at(1), 850, 200));
   obs.push_back(new Rock(texobs->at(1), 650, 803));
   obs.push_back(new Rock(texobs->at(1), 150, 700));
-  obs.push_back(new JungleTree(texobs->at(9), 850, 10));
+
+  obs.push_back(new Head(texobs->at(10), 800, 300));
+
   obs.push_back(new JungleTree(texobs->at(9), 800, 50));
+  obs.push_back(new JungleTree(texobs->at(9), 150, 50));
   obs.push_back(new JungleTree(texobs->at(9), 350, 70));
   obs.push_back(new JungleTree(texobs->at(9), 550, 170));
-  obs.push_back(new Head(texobs->at(10), 200, 275));
-  obs.push_back(new Fence(texobs->at(2),250,500));
-  obs.push_back(new JungleTree(texobs->at(9), 75, 350));
+  obs.push_back(new JungleTree(texobs->at(9), 300, 350));
+  obs.push_back(new JungleTree(texobs->at(9), 75, 400));
   obs.push_back(new JungleTree(texobs->at(9), 485, 600));
-  obs.push_back(new Tree(texobs->at(0), 150, 700));
   obs.push_back(new JungleTree(texobs->at(9), 850, 550));
+  obs.push_back(new JungleTree(texobs->at(9), 700, 730));
+
+  obs.push_back(new Tree(texobs->at(0), 150, 700));
+  obs.push_back(new Tree(texobs->at(0), 450, 750));
 
   //POSITIONNEMENT DES HUMAINS
-  humans.push_back(new Human(texhumans, 400, 400));
-  humans.push_back(new Human(texhumans, 400, 350));
-  humans.push_back(new Human(texhumans, 825, 425));
-  humans.push_back(new Human(texhumans, 900, 130));
-  humans.push_back(new Human(texhumans, 800, 140));
+  //On positionne 9 humains un peu partout sur l'écran :
+  humans.push_back(new Human(texhumans, 300, 600));
+  humans.push_back(new Human(texhumans, 450, 450));
+  humans.push_back(new Human(texhumans, 600, 700));
+  humans.push_back(new Human(texhumans, 750, 700));
+  humans.push_back(new Human(texhumans, 900, 700));
+  humans.push_back(new Human(texhumans, 600, 880));
+  humans.push_back(new Human(texhumans, 750, 880));
+  humans.push_back(new Human(texhumans, 900, 880));
+  humans.push_back(new Human(texhumans, 900, 880));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Right"] = new vector<float>{400, 600, 1};
@@ -326,28 +347,40 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
   //============== RÉGION 8 ==============
    //POSITIONNEMENT DES OBSTACLES
+  obs.push_back(new Temple(texobs->at(11), 400, 10));
+
   obs.push_back(new Rock(texobs->at(1), 100, 100));
   obs.push_back(new Rock(texobs->at(1), 150, 300));
-  obs.push_back(new Rock(texobs->at(1), 750, 800));
+  obs.push_back(new Rock(texobs->at(1), 650, 800));
   obs.push_back(new Rock(texobs->at(1), 50, 700));  
-  obs.push_back(new Temple(texobs->at(11), 680, 60));
-  obs.push_back(new Fence(texobs->at(2),700,350));
-  obs.push_back(new JungleTree(texobs->at(9), 10, 10));
+
+  obs.push_back(new Fence(texobs->at(2),400,400));
+  obs.push_back(new Fence(texobs->at(2),600,400));
+
+  obs.push_back(new Head(texobs->at(10), 300, 200));
+  obs.push_back(new Head(texobs->at(10), 650, 200));
+
+  obs.push_back(new JungleTree(texobs->at(9), 10, 750));
+  obs.push_back(new JungleTree(texobs->at(9), 120, 10));
   obs.push_back(new JungleTree(texobs->at(9), 30, 200));
   obs.push_back(new JungleTree(texobs->at(9), 485, 600));
-  obs.push_back(new JungleTree(texobs->at(9), 350, 70));
-  obs.push_back(new JungleTree(texobs->at(9), 750, 250));
-  obs.push_back(new JungleTree(texobs->at(9), 150, 700));
+  obs.push_back(new JungleTree(texobs->at(9), 750, 40));
+  obs.push_back(new JungleTree(texobs->at(9), 800, 250));
+  obs.push_back(new JungleTree(texobs->at(9), 250, 550));
   obs.push_back(new JungleTree(texobs->at(9), 75, 450));
-  obs.push_back(new JungleTree(texobs->at(9), 525, 170));
-  obs.push_back(new Head(texobs->at(10), 200, 750));
+  obs.push_back(new JungleTree(texobs->at(9), 640, 420 /*nice*/));
+  obs.push_back(new JungleTree(texobs->at(9), 750, 750));
 
   //POSITIONNEMENT DES HUMAINS
-  humans.push_back(new Human(texhumans, 650, 250));
-  humans.push_back(new Human(texhumans, 650, 280));
   humans.push_back(new Human(texhumans, 825, 625));
   humans.push_back(new Human(texhumans, 900, 730));
   humans.push_back(new Human(texhumans, 800, 850));
+  humans.push_back(new Human(texhumans, 475, 300));
+  humans.push_back(new Human(texhumans, 575, 300));
+  humans.push_back(new Human(texhumans, 300, 840));
+  humans.push_back(new Human(texhumans, 450, 860));
+  humans.push_back(new Human(texhumans, 590, 880));
+
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Right"] = new vector<float>{600, 800, 1};
@@ -366,14 +399,15 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
     //============== RÉGION 9 ==============
   //POSITIONNEMENT DES OBSTACLES
+    obs.push_back(new House(texobs->at(12), 340, 100));
+  obs.push_back(new Garden(texobs->at(13), 700, 350));
+
   obs.push_back(new Tree(texobs->at(0), 100, 50));
   obs.push_back(new Tree(texobs->at(0), 700, 40));
   obs.push_back(new Tree(texobs->at(0), 100, 450));
   obs.push_back(new Tree(texobs->at(0), 600, 550));
   obs.push_back(new Tree(texobs->at(0), 300, 650));
   obs.push_back(new Tree(texobs->at(0), 700, 700));
-  obs.push_back(new Temple(texobs->at(11), 340, 100));//mettre House
-  obs.push_back(new Head(texobs->at(10), 700, 350));//mettre Garden
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Top"] = new vector<float>{-1, -1, 1};
