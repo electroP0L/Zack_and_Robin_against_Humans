@@ -11,8 +11,8 @@ Un jeu multijoueur de notre imagination, pour mettre en oeuvre les notions de pr
 * Placer l'ensemble des fichiers de l'archive ou du git dans un dossier
 * S'assurer d'avoir la bibliothèque SFML, ou l'installer. Différentes méthodes sont possibles selon l'OS.
 * Ouvrir le dossier dans un terminal
-* Taper "make"
-* Taper "./ZandRVSH"
+* Taper `make`
+* Taper `./ZandRVSH`
 
 Vous êtes dans le jeu !
 
@@ -56,7 +56,7 @@ Quelques pistes d'améliorations :
 - Nous aurions aimé faire en sorte que le jeu se lance qu'on clique sur une icône sur le bureau de l'ordinateur. Cette idée n'a pas abouti car compliqué à mettre en place sur tous nos ordinateurs, mais nous avons laissé le dossier "Application" dans les fichiers du jeu.
 
 Notes :
-- L'analyse de Valgrind pour les fuites de mémoire annonce "definitely lost: 832 bytes in 2 blocks". Nous avons beaucoup cherché comment régler cette fuite qui a lieu lors de la création de la partie, et n'amène donc pas de fuite croissante dans la suite du jeu. Lors de nos recherches, nous avons trouvé plusieurs sources expliquant que cette fuite proviendrait du driver OpenGL. (https://github.com/SFML/SFML/issues/1673, https://en.sfml-dev.org/forums/index.php?topic=26951.0)
+- L'analyse de Valgrind pour les fuites de mémoire annonce `definitely lost: 832 bytes in 2 blocks`. Nous avons beaucoup cherché comment régler cette fuite qui a lieu lors de la création de la partie, et n'amène donc pas de fuite croissante dans la suite du jeu. Lors de nos recherches, nous avons trouvé plusieurs sources expliquant que cette fuite proviendrait du driver OpenGL. (https://github.com/SFML/SFML/issues/1673, https://en.sfml-dev.org/forums/index.php?topic=26951.0)
 - Le Joueur 2 (Robot) pourrait assez facilement être remplacé par une IA dont le fonctionnement se rapprocherait de celui des humains déjà implantés dans le Jeu.
 
 ## Organisation du trinôme
