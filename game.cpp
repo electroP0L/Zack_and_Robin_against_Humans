@@ -53,7 +53,6 @@ void Game::run()
     while(window.pollEvent(event)){
       if(event.type == Event::Closed){
         window.close();
-        ctxt.~Contexte();
         return;
       }
     }
@@ -177,8 +176,6 @@ void Game::manageAttacks()
               
               Sprite* backgroundSprite = currentRegion->getBackgroundSprite();
               gameOverScreen->displayGameOver(&window, backgroundSprite);
-
-              ctxt.~Contexte();
               return;
             }
           }

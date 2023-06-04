@@ -15,11 +15,10 @@ bool Living::checkCollision(vector<float>* mv, Contexte* ctxt) { //Traitement de
 
   map<String, vector<float>*>* waypoints = ctxt->getWaypoints();
   bool clearRegion;
-  //if(ctxt->getHumans()->size() == 0 && ctxt->getLimbs()->size() == 0){clearRegion = true;}
-  //else{clearRegion = false;}
+  if(ctxt->getHumans()->size() == 0 && ctxt->getLimbs()->size() == 0){clearRegion = true;}
+  else{clearRegion = false;}
 
-
-  clearRegion = true;
+  //clearRegion = true;
 
   if(newpos.x < 0) { //Si le living sort de l'écran par la gauche
     if((waypoints->count("Left")) && (pos.y >= (*waypoints)["Left"]->at(0))&&(pos.y <= (*waypoints)["Left"]->at(1))&&clearRegion){  //Si on peut sortir de la région par la gauche et que le sprite est compris dans la zone de changement

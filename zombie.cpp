@@ -13,8 +13,8 @@ Zombie::Zombie(vector<Texture>* textures, Texture* texlimb){
 
   setposition(0,0);
   hitbox = sprite.getGlobalBounds();
-  //speed = 2.5f;
-  speed = 10.0f;
+  speed = 2.5f;
+  //speed = 10.0f;
 
   HP = 6;
   attackDamage = 3;
@@ -66,7 +66,7 @@ void Zombie::bouger(Contexte* ctxt){
 
   FloatRect zombieHitbox = sprite.getGlobalBounds();
   ctxt->setZombiePos(zombieHitbox);
-  //notifymovement(ctxt);
+  notifymovement(ctxt);
 }
 
 void Zombie::notifymovement(Contexte* ctxt){

@@ -33,14 +33,19 @@ class Contexte {
 
   public:
     Contexte(){}; //Constructeur par défaut
-    Contexte(vector<Obstacle*>* obstacles, vector<Human*>* humans, map<String, vector<float>*>* waypoints, vector<vector<vector<Texture>>>* texattacks, vector<Limb*>* missingLimbs){
-      this->obstacles = obstacles; this->humans = humans; this->waypoints = waypoints;
+    Contexte(vector<Obstacle*>* obstacles, vector<Human*>* humans,
+            map<String, vector<float>*>* waypoints, vector<vector<vector<Texture>>>* texattacks,
+             vector<Limb*>* missingLimbs){
+      this->obstacles = obstacles;
+      this->humans = humans;
+      this->waypoints = waypoints;
       this->attackTextures = texattacks;
       this->limbStatus = {0, 0};
       this->limbs = missingLimbs;
       this->attacks = {};
     }
     ~Contexte(){
+      
       for (Attack* attack : attacks) {
         delete attack;
       }
