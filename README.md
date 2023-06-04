@@ -1,6 +1,39 @@
 Paul Roger-Dauvergne, Alexandre Vieu et Augustin Nguon présentent
 # Zack_and_Robin_against_Humans
 
+
+~~~c++
+#include "game.hpp"
+
+String path = "Bureau/Informatique/"; // Chemin vers le dossier contenant le projet
+
+int main(int argc, char** argv)
+{
+  Game game(path);
+
+  game.run();
+
+  return 0;
+}
+~~~
+
+~~~plantuml
+@startuml
+
+skin rose
+class Etudiant {
+nom : string
+toString() : String
+
+}
+
+class Promotion 
+
+Promotion -> "*" Etudiant
+
+@enduml
+~~~
+
 Un jeu multijoueur de notre imagination, pour mettre en oeuvre les notions de programmation orientée objet.
 ## Bibliothèques utilisées : 
 * Bibliothèque graphique SFML (SFML/Graphics)
@@ -17,7 +50,7 @@ Un jeu multijoueur de notre imagination, pour mettre en oeuvre les notions de pr
 Vous êtes dans le jeu !
 
 ## Jeu :
-Dans ce jeu coopératif le premier joueur incarne un marcheur Zack (créature morte-vivante), Zack, tandis que le second incarne son robot personnel, Robin.
+Dans ce jeu coopératif le premier joueur incarne un marcheur (créature morte-vivante), Zack, tandis que le second incarne son robot personnel, Robin.
 Il vous faudra suivre le chemin pour atteindre le bout du jeu, mais attention, de terribles dangers vous attendent !
 
 ### Commandes et rôles
@@ -36,7 +69,7 @@ Le robot inflige 1 dégât par attaque, il lui faut donc 5 coups pour éliminer 
 
 ### Carte
 La carte est divisée en 9 régions. Vous aurez l'occasion de visiter des paysages variés.
-Pour passer à la région suivante il faut éliminer l'ensemble des humains de la carte, et récupérer tous les membres perdus. Il suffit ensuite de suivre le chemin. La fin du jeu se déclenche quand vous atteignez la fin du chemin sur la dernière région.
+Pour passer à la région suivante il faut éliminer l'ensemble des humains de la carte, et récupérer tous les membres perdus. Il suffit ensuite de suivre le chemin. Le jeu se termine quand vous atteignez la fin du chemin sur la dernière région.
 
 ## Programme
 Notre code suit une logique assez simple d'interactions diverses entre les objets qu'il implémente. 
@@ -45,13 +78,18 @@ Pour permettre ces interactions, notre code s'articule beaucoup autour de la cla
 Nous sommes assez fiers des éléments suivants de notre jeu :
 - La solution trouvée pour la gestion des passages entre les régions appelés Waypoints. Il s'agit d'une map de la bibliothèque standard dans laquelle une paire d'entiers entre 0 et 1000 est associée à un coté de l'écran (String). Ces deux points marquent la délimitation de la zone de passage sur le coté spécifié.
 - Le système de suivi des humains, assez agressif, a été implémenté grâce à un observateur. Chaque humain observe la position du marcheur quand celui-ci se déplace, et s'avance vers la nouvelle position.
-- Afin d'alléger la classe Game, nous avons fait en sorte que les textures soient chargées dans le Texturemanager, et que l'écran de fin soit un objet à part entière, implémenté dans la classe GameoverScreen
+- Afin d'alléger la classe de jeu Game, nous avons fait en sorte que les textures soient chargées dans le Texturemanager, et que l'écran de fin soit un objet à part entière, implémenté dans la classe GameoverScreen
 
 Quelques pistes d'améliorations :
 - Nous avions initialement prévu de modifier le Sprite du marcheur à chaque coup qu'il recevait, pour rendre compte physiquement de la perte de ses membres. Seulement, cela nous aurait pris beaucoup de création de graphismes, et la solution de l'affichage des points de vie a été privilégiée.
-- Il serait envisageable d'ajouter un écran de début de jeu, et de rendre l'écran de Game Over plus interactif.
-- Il serait mieux de faire une grosse classe obstacle regroupant les 12 obstacles, plutôt qu'une classe pour chaque type obstacle
-- Nous aurions aimer faire en sorte que le jeu se lance qu'on clique sur une icône sur le bureau de l'ordinateur. Cette idée n'a pas abouti car ne fonctionnait pas sur tous nos ordinateurs, mais nous avons laissé le dossier "Application" dans les fichiers du jeu
+- Il serait envisageable d'ajouter des écrans de début et de fin de jeu, et de rendre l'écran de Game Over plus interactif.
+- Nous pourrions facilement ajouter de nouvelles classes d'ennemis avec plus d'HP des sprites différents ou des attaques différentes, par exemple.
+- Il serait mieux de faire une classe obstacle pus générique regroupant les 12 obstacles, plutôt qu'une classe pour chaque type obstacle
+- Nous aurions aimé faire en sorte que le jeu se lance qu'on clique sur une icône sur le bureau de l'ordinateur. Cette idée n'a pas abouti car compliqué à mettre en place sur tous nos ordinateurs, mais nous avons laissé le dossier "Application" dans les fichiers du jeu.
+
+Notes :
+- L'analyse de Valgrind pour les fuites de mémoire annonce "definitely lost: 832 bytes in 2 blocks". Nous avons beaucoup cherché comment régler cette fuite qui a lieu lors de la création de la partie, et n'amène donc pas de fuite croissante dans la suite du jeu. Lors de nos recherches, nous avons trouvé plusieurs sources expliquant que cette fuite proviendrait du driver OpenGL. (https://github.com/SFML/SFML/issues/1673, https://en.sfml-dev.org/forums/index.php?topic=26951.0)
+- Le Joueur 2 (Robot) pourrait assez facilement être remplacé par une IA dont le fonctionnement se rapprocherait de celui des humains déjà implantés dans le Jeu.
 
 
 ## Organisation du trinôme

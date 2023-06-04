@@ -33,16 +33,6 @@ Game::Game(String& path)
   ctxt = Contexte(currentRegion->getObstacles(), currentRegion->getHumans(), currentRegion->getWaypoints(), textureManager->getTexAttacks(), zombie->getMissingLimbs());
 
   attacks = ctxt.getAttacks();
-
-  /*
-  cout << "Taille tableau regions de la map : " << map->getRegions().size() << endl;
-
-  cout << "Taille tableau humans de la region : " << map->getRegion(1)->getHumans()->size() << endl;
-  cout << "Taille tableau obstacles de la region : " << map->getRegion(1)->getObstacles()->size() << endl;
-  cout << "Taille tableau waypoints de la region : " << map->getRegion(1)->getWaypoints()->size() << endl;
-  cout << "Taille tableau spawnpoints de la region : " << map->getRegion(1)->getSpawn()->size() << endl;
-  */
-
 }
 
 void Game::run()

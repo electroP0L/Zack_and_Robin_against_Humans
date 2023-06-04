@@ -32,11 +32,11 @@ class Game {
     Game(String& path);
     
     ~Game(){
-      delete textureManager; 
-      delete gameOverScreen; 
-      delete map; 
-      delete zombie; 
       delete robot;
+      delete zombie; 
+      delete map; 
+      delete gameOverScreen; 
+      delete textureManager; 
     }
     
     
