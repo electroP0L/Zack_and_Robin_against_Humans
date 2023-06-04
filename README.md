@@ -1,5 +1,5 @@
 Paul Roger-Dauvergne, Alexandre Vieu et Augustin Nguon présentent
-# Zack_and_Robin_against_Humans
+# Zack and Robin against Humans
 
 Un jeu multijoueur de notre imagination, pour mettre en oeuvre les notions de programmation orientée objet.
 ## Bibliothèques utilisées : 
@@ -49,15 +49,15 @@ Nous sommes assez fiers des éléments suivants de notre jeu :
 
 Quelques pistes d'améliorations :
 - Nous avions initialement prévu de modifier le Sprite du marcheur à chaque coup qu'il recevait, pour rendre compte physiquement de la perte de ses membres. Seulement, cela nous aurait pris beaucoup de création de graphismes, et la solution de l'affichage des points de vie a été privilégiée.
-- Il serait envisageable d'ajouter des écrans de début et de fin de jeu, et de rendre l'écran de Game Over plus interactif.
 - Nous pourrions facilement ajouter de nouvelles classes d'ennemis avec plus d'HP des sprites différents ou des attaques différentes, par exemple.
 - Il serait mieux de faire une classe obstacle pus générique regroupant les 12 obstacles, plutôt qu'une classe pour chaque type obstacle
+- Il serait envisageable d'ajouter des écrans de début et de fin de jeu, et de rendre l'écran de Game Over plus interactif.
+- Nous avons fait en sorte que les membres du marcheur ne puissent pas être placés sur un obstacle. Cependant, ils peuvent se cacher derrière ces derniers, ce qui les rend difficiles à repérer. Il aurait été intéressant de les rendre visibles dans ce cas de figure.
 - Nous aurions aimé faire en sorte que le jeu se lance qu'on clique sur une icône sur le bureau de l'ordinateur. Cette idée n'a pas abouti car compliqué à mettre en place sur tous nos ordinateurs, mais nous avons laissé le dossier "Application" dans les fichiers du jeu.
 
 Notes :
 - L'analyse de Valgrind pour les fuites de mémoire annonce "definitely lost: 832 bytes in 2 blocks". Nous avons beaucoup cherché comment régler cette fuite qui a lieu lors de la création de la partie, et n'amène donc pas de fuite croissante dans la suite du jeu. Lors de nos recherches, nous avons trouvé plusieurs sources expliquant que cette fuite proviendrait du driver OpenGL. (https://github.com/SFML/SFML/issues/1673, https://en.sfml-dev.org/forums/index.php?topic=26951.0)
 - Le Joueur 2 (Robot) pourrait assez facilement être remplacé par une IA dont le fonctionnement se rapprocherait de celui des humains déjà implantés dans le Jeu.
-
 
 ## Organisation du trinôme
 Alexandre s'est occupé de l'écriture des classes d'obstacles et de leur structure. Il s'est aussi chargé de réaliser les graphismes du jeu en créant toutes sortes d'obstacles via des pixels arts. Il a aussi pu se charger de faire l'uml du jeu. 
