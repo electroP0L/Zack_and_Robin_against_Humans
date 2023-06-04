@@ -399,15 +399,20 @@ Map::Map(vector<Texture>* texbackground, vector<Texture>* texobs, vector<Texture
 
     //============== RÉGION 9 ==============
   //POSITIONNEMENT DES OBSTACLES
-    obs.push_back(new House(texobs->at(12), 340, 100));
+  obs.push_back(new House(texobs->at(12), 310, 80));
   obs.push_back(new Garden(texobs->at(13), 700, 350));
-
+  obs.push_back(new Fence(texobs->at(2), 800, 350));
+  obs.push_back(new Fence(texobs->at(2), 350, 460));
+  obs.push_back(new Fence(texobs->at(2), 600, 460));
+  
+  obs.push_back(new Rock(texobs->at(1), 30, 800));
+  obs.push_back(new Rock(texobs->at(1), 50, 500));
   obs.push_back(new Tree(texobs->at(0), 100, 50));
-  obs.push_back(new Tree(texobs->at(0), 700, 40));
-  obs.push_back(new Tree(texobs->at(0), 100, 450));
+  obs.push_back(new Tree(texobs->at(0), 690, 40));
+  obs.push_back(new Tree(texobs->at(0), 100, 440));
   obs.push_back(new Tree(texobs->at(0), 600, 550));
   obs.push_back(new Tree(texobs->at(0), 300, 650));
-  obs.push_back(new Tree(texobs->at(0), 700, 700));
+  obs.push_back(new Tree(texobs->at(0), 750, 750));
 
   //POSITIONNEMENT DES WAYPOINTS (ENTRÉES/SORTIES)
   waypoints["Top"] = new vector<float>{-1, -1, 1};
