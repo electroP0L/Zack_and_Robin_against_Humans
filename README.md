@@ -1,39 +1,6 @@
 Paul Roger-Dauvergne, Alexandre Vieu et Augustin Nguon présentent
 # Zack_and_Robin_against_Humans
 
-
-~~~c++
-#include "game.hpp"
-
-String path = "Bureau/Informatique/"; // Chemin vers le dossier contenant le projet
-
-int main(int argc, char** argv)
-{
-  Game game(path);
-
-  game.run();
-
-  return 0;
-}
-~~~
-
-~~~plantuml
-@startuml
-
-skin rose
-class Etudiant {
-nom : string
-toString() : String
-
-}
-
-class Promotion 
-
-Promotion -> "*" Etudiant
-
-@enduml
-~~~
-
 Un jeu multijoueur de notre imagination, pour mettre en oeuvre les notions de programmation orientée objet.
 ## Bibliothèques utilisées : 
 * Bibliothèque graphique SFML (SFML/Graphics)
