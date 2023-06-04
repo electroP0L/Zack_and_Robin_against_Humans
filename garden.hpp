@@ -10,7 +10,7 @@ class Garden : public Obstacle
   public:
     Garden(Texture& texture, float x, float y){
       sprite.setTexture(texture);
-      float scale = 1.0f / 6.0f;
+      float scale = 1.0f / 9.0f;
       sprite.scale(scale, scale);
       setpos(x, y);
       hitbox = sprite.getGlobalBounds();
