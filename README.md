@@ -60,10 +60,6 @@ Notes :
 - Le Joueur 2 (Robot) pourrait assez facilement être remplacé par une IA dont le fonctionnement se rapprocherait de celui des humains déjà implantés dans le Jeu.
 
 ## Organisation du trinôme
-Alexandre s'est occupé de l'écriture des classes d'obstacles et de leur structure. Il s'est aussi chargé de réaliser les graphismes du jeu en créant toutes sortes d'obstacles via des pixels arts. Il a aussi pu se charger de faire l'uml du jeu. 
-
-Augustin s'est occupé de la structure du code, du read me et de la gestion de la mémoire du jeu en faisant attention aux fuites mémoire.
-
-Paul s'est occupé de réaliser le moteur de jeu, le fonctionnement du jeu via des classes games, de gérer les collisions dans le jeu et les interactions entre classes.
-
-
+- Paul s'est occupé de réaliser le moteur du jeu (collisions, attaques, changement de régions...), le fonctionnement global de la classe Game, et de gérer les interactions entre classes.
+- Alexandre s'est occupé de l'écriture des classes d'obstacles et de l'organisation des régions dans la map. Il s'est aussi chargé de réaliser les graphismes du jeu en créant toutes sortes d'obstacles en pixel art. Il s'est aussi chargé de faire l'UML du jeu. 
+- Augustin s'est occupé de la structure du code, de la gestion de la mémoire du jeu en faisant attention aux fuites mémoire.
