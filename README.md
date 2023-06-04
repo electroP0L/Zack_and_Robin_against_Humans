@@ -60,6 +60,10 @@ Notes :
 
 
 ## Organisation du trinôme
-*qui a fait quoi, comment vous avez travaillé ensemble, etc...*
+Alexandre s'est occupé de l'écriture des classes d'obstacles et de leur structure. Il s'est aussi chargé de réaliser les graphismes du jeu en créant toutes sortes d'obstacles via des pixels arts. Il a aussi pu se charger de faire l'uml du jeu. 
+
+Augustin s'est occupé de la structure du code, du read me et de la gestion de la mémoire du jeu en faisant attention aux fuites mémoire.
+
+Paul s'est occupé de réaliser le moteur de jeu, le fonctionnement du jeu via des classes games, de gérer les collisions dans le jeu et les interactions entre classes.
 
 
