@@ -1,7 +1,7 @@
 Paul Roger-Dauvergne, Alexandre Vieu et Augustin Nguon présentent
 # Zack and Robin against Humans
 
-Un jeu multijoueur de notre imagination, pour mettre en oeuvre les notions de programmation orientée objet.
+Un jeu multijoueur de notre imagination, pour mettre en oeuvre les notions de programmation orientée objet en c++.
 ## Bibliothèques utilisées : 
 * Bibliothèque graphique SFML (SFML/Graphics)
 * Bibliothèque standard stdlib.h
