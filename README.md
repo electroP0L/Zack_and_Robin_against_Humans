@@ -58,8 +58,3 @@ Quelques pistes d'améliorations :
 Notes :
 - L'analyse de Valgrind pour les fuites de mémoire annonce `definitely lost: 832 bytes in 2 blocks`. Nous avons beaucoup cherché comment régler cette fuite qui a lieu lors de la création de la partie, et n'amène donc pas de fuite croissante dans la suite du jeu. Lors de nos recherches, nous avons trouvé plusieurs sources expliquant que cette fuite proviendrait du driver OpenGL. (https://github.com/SFML/SFML/issues/1673, https://en.sfml-dev.org/forums/index.php?topic=26951.0)
 - Le Joueur 2 (Robot) pourrait assez facilement être remplacé par une IA dont le fonctionnement se rapprocherait de celui des humains déjà implantés dans le Jeu.
-
-## Organisation du trinôme
-- Paul s'est occupé de réaliser le moteur du jeu (collisions, attaques, changement de régions...), le fonctionnement global de la classe Game, et de gérer les interactions entre classes.
-- Alexandre s'est occupé de l'écriture des classes d'obstacles et de l'organisation des régions dans la map. Il s'est aussi chargé de réaliser les graphismes du jeu en créant toutes sortes d'obstacles en pixel art. Il s'est aussi chargé de faire l'UML du jeu. 
-- Augustin s'est occupé de la structure du code, de la gestion de la mémoire du jeu en faisant attention aux fuites mémoire.
