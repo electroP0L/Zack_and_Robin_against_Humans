@@ -9,7 +9,7 @@ Un jeu multijoueur de notre imagination, pour mettre en oeuvre les notions de pr
 
 ## Lancement du programme : 
 * Placer l'ensemble des fichiers de l'archive ou du git dans un dossier
-* S'assurer d'avoir la bibliothèque SFML, ou l'installer. Différentes méthodes sont possibles selon l'OS.
+* S'assurer d'avoir la bibliothèque SFML, ou l'installer : `sudo apt-get install libsfml-dev` . Différentes méthodes sont possibles selon l'OS.
 * Ouvrir le dossier dans un terminal
 * Taper `make`
 * Taper `./ZandRVSH`
